@@ -1,7 +1,7 @@
 {
   "license": "MIT",
   "version": "0.1.0",
-  
+
   "name": "weirdpattern.com",
   "description": "A place I call home",
   "author": "Patricio Trevino <patricio@weirdpattern.com>",
@@ -15,8 +15,10 @@
   },
 
   "dependencies": {
+    "hedron": "^0.6.1",
     "react": "^15.5.4",
-    "react-dom": "^15.5.4"
+    "react-dom": "^15.5.4",
+    "styled-components": "^2.0.0"
   },
 
   "devDependencies": {
