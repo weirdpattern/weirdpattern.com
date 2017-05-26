@@ -9,9 +9,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import './lib/css/index.css';
-import App from './lib/components/App';
-import registerServiceWorker from './registerServiceWorker';
+import App from '../../lib/components/App';
 
-ReactDOM.render(<App />, document.getElementById('root'));
-registerServiceWorker();
+it('renders without crashing', () => {
+  const div = document.createElement('div');
+  ReactDOM.render(<App />, div);
+});
