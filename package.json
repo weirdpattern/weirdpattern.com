@@ -1,19 +1,19 @@
 {
   "license": "MIT",
   "version": "0.1.0",
-
+  
   "name": "weirdpattern.com",
   "description": "A place I call home",
   "author": "Patricio Trevino <patricio@weirdpattern.com>",
-
+  
   "homepage": "https://weirdpattern.com/",
-
+  
   "private": true,
   "repository": {
     "type": "git",
     "url": "https://github.com/weirdpattern/weirdpattern.com"
   },
-
+  
   "dependencies": {
     "bootstrap": "^3.3.7",
     "redux": "^3.6.0",
@@ -26,7 +26,7 @@
     "prop-types": "^15.5.10",
     "styled-components": "^2.0.0"
   },
-
+  
   "devDependencies": {
     "autoprefixer": "^7.1.1",
     "babel-core": "^6.24.1",
@@ -69,7 +69,7 @@
     "webpack-manifest-plugin": "^1.1.0",
     "whatwg-fetch": "^2.0.3"
   },
-
+  
   "scripts": {
     "start": "node support/scripts/start.js",
     "build": "node support/scripts/build.js",
