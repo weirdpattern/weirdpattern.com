@@ -1,0 +1,75 @@
+{
+  "license": "MIT",
+  "version": "1.0.0",
+  "name": "weirdpattern.com",
+  "description": "Isn't it weird?",
+  "author": "Patricio Trevino <patricio@weirdpattern.com>",
+  "dependencies": {
+    "@types/node": "^9.4.6",
+    "@types/react": "^16.0.38",
+    "@types/react-dom": "^16.0.4",
+    "@types/react-helmet": "^5.0.4",
+    "gatsby": "^1.9.119",
+    "gatsby-link": "^1.6.28",
+    "gatsby-plugin-react-helmet": "^1.0.8",
+    "gatsby-plugin-typescript": "^1.4.10",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-helmet": "^5.2.0"
+  },
+  "scripts": {
+    "build": "gatsby build",
+    "develop": "gatsby develop",
+    "format": "prettier --parser typescript --write \"src/**/*.ts*\""
+  },
+  "devDependencies": {
+    "eslint": "^4.18.1",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-config-typescript": "^1.0.2",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-prettier": "^2.6.0",
+    "eslint-plugin-react": "^7.7.0",
+    "eslint-plugin-typescript": "^0.9.0",
+    "prettier": "^1.8.2",
+    "typescript": "^2.7.2",
+    "typescript-eslint-parser": "^14.0.0"
+  },
+  "eslintConfig": {
+    "extends": [
+      "plugin:jsx-a11y/recommended",
+      "typescript",
+      "typescript/react",
+      "typescript/prettier"
+    ],
+    "plugins": [
+      "jsx-a11y"
+    ],
+    "rules": {
+      "semi": "error",
+      "no-undef": "off",
+      "no-unused-vars": "off",
+      "no-dupe-class-members": "off",
+      "require-jsdoc": "error",
+      "valid-jsdoc": [
+        "error",
+        {
+          "preferType": {
+            "any": "*",
+            "object": "Object"
+          },
+          "requireReturnType": true,
+          "requireParamDescription": true,
+          "requireReturnDescription": true
+        }
+      ],
+      "quotes": [
+        "error",
+        "double",
+        {
+          "avoidEscape": true
+        }
+      ],
+      "no-console": "off"      
+    }
+  }
+}
