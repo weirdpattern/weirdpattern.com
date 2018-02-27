@@ -1,14 +1,14 @@
-import * as React from "react"
-import Link from "gatsby-link"
+import * as React from "react";
+import Link from "gatsby-link";
 
 interface IndexPageProps {
   data: {
     site: {
       siteMetadata: {
-        title: string
-      }
-    }
-  }
+        title: string;
+      };
+    };
+  };
 }
 
 export default class extends React.Component<IndexPageProps, {}> {
@@ -32,4 +32,4 @@ export const pageQuery = graphql`
       }
     }
   }
-`
+`;

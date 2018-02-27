@@ -1,0 +1,13 @@
+@import "_variables";
+@import "_layout";
+
+@import "~font-awesome/scss/font-awesome";
+
+.top-line {
+  border: 8px solid $accented;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+}
