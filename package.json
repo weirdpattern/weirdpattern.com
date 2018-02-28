@@ -5,11 +5,13 @@
   "description": "Isn't it weird?",
   "author": "Patricio Trevino <patricio@weirdpattern.com>",
   "dependencies": {
+    "@types/classnames": "^2.2.3",
     "@types/node": "^9.4.6",
     "@types/react": "^16.0.38",
     "@types/react-dom": "^16.0.4",
     "@types/react-helmet": "^5.0.4",
     "bulma": "^0.6.2",
+    "classnames": "^2.2.5",
     "font-awesome": "^4.7.0",
     "gatsby": "^1.9.119",
     "gatsby-link": "^1.6.28",

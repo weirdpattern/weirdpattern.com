@@ -5,7 +5,7 @@ import * as React from "react";
 import Link from "gatsby-link";
 import Helmet from "react-helmet";
 import config from "../site-config";
-import Sidebar from "../components/Sidebar";
+import Header from "../components/Header";
 
 export default class Layout extends React.PureComponent<{}, {}> {
   public render() {
@@ -15,9 +15,8 @@ export default class Layout extends React.PureComponent<{}, {}> {
         <Helmet>
           <meta name="description" content={config.site.description} />
         </Helmet>
-        <div className="top-line" />
-        <div className="container columns">
-          <Sidebar title={config.site.title} social={config.social} />
+        <div className="is-fluid">
+          <Header title={config.site.title} />
         </div>
       </React.Fragment>
     );
