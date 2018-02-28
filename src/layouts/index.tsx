@@ -1,4 +1,4 @@
-import "../scss/main.css";
+import "../scss/main.scss";
 
 import * as React from "react";
 
@@ -16,13 +16,8 @@ export default class Layout extends React.PureComponent<{}, {}> {
           <meta name="description" content={config.site.description} />
         </Helmet>
         <div className="top-line" />
-        <div className="container">
-          <Sidebar
-            title={config.site.title}
-            sotial={config.social}
-          />
-          <Content />
-          <Footer />
+        <div className="container columns">
+          <Sidebar title={config.site.title} social={config.social} />
         </div>
       </React.Fragment>
     );

@@ -6,12 +6,12 @@ export default {
   social: {
     github: {
       icon: "fa-github",
-      title: "@weirdpattern",
+      handler: "@weirdpattern",
       link: "https://github.com/weirdpattern"
     },
     twitter: {
       icon: "fa-twitter",
-      title: "@weirdpattern",
+      handler: "@weirdpattern",
       link: "https://twitter.com/weirdpattern"
     }
   }

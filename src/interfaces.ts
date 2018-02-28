@@ -25,7 +25,7 @@ export interface SocialMedia {
  */
 export interface SocialMedias {
   github?: SocialMedia;
-  tiwtter?: SocialMedia;
+  twitter?: SocialMedia;
   facebook?: SocialMedia;
   linkedIn?: SocialMedia;
   googleplus?: SocialMedia;
