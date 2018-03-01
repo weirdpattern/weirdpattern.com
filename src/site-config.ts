@@ -1,7 +1,11 @@
 export default {
   site: {
+    url: "https://weirdpattern.com",
     title: "weirdpattern.com",
-    description: "weirdpattern.com blog"
+    description: "weirdpattern personal blog"
+  },
+  paths: {
+    blog: "content/posts"
   },
   social: {
     github: {

@@ -1,34 +1,80 @@
 import * as React from "react";
-import Link from "gatsby-link";
 
-interface IndexPageProps {
+/**
+ * Index properties.
+ * @typedef {Interface} Props
+ * @property {Data} data the gatsby data.
+ *
+ * @private
+ * @interface
+ */
+interface Props {
   data: {
-    site: {
-      siteMetadata: {
-        title: string;
+    allMarkdownRemark: {
+      edges: {
+        node: {
+          fields: {
+            slug: string;
+          };
+          excerpt: string;
+          timeToRead: string;
+          frontmatter: {
+            title: string;
+            tags: string[];
+            cover: string;
+            date: Date;
+          };
+        };
       };
     };
   };
 }
 
-export default class extends React.Component<IndexPageProps, {}> {
-  constructor(props: IndexPageProps, context: any) {
-    super(props, context)
+/**
+ * Page component.
+ *
+ * @public
+ * @class
+ */
+export default class Index extends React.Component<Props, {}> {
+  /**
+   * Class constructor.
+   * @param {Props} props the properties.
+   *
+   * @public
+   * @constructor
+   */
+  public constructor(props: Props) {
+    super(props);
   }
+
+  /** @inheritdoc */
   public render() {
-    return (
-      <div>
-        <h1>{this.props.data.site.siteMetadata.title}</h1>
-      </div>
-    )
+    const postEdges = this.props.data.allMarkdownRemark.edges;
+    return null;
   }
 }
 
 export const pageQuery = graphql`
   query IndexQuery {
-    site {
-      siteMetadata {
-        title
+    allMarkdownRemark(
+      limit: 2000
+      sort: { fields: [frontmatter___date], order: DESC }
+    ) {
+      edges {
+        node {
+          fields {
+            slug
+          }
+          excerpt
+          timeToRead
+          frontmatter {
+            title
+            tags
+            cover
+            date
+          }
+        }
       }
     }
   }

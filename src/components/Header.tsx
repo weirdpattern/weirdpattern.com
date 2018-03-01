@@ -29,7 +29,7 @@ interface State {
 }
 
 /**
- * Sidebar component
+ * Sidebar component.
  *
  * @public
  * @class

@@ -1,9 +1,8 @@
 import "../scss/main.scss";
 
 import * as React from "react";
-
-import Link from "gatsby-link";
 import Helmet from "react-helmet";
+
 import config from "../site-config";
 import Header from "../components/Header";
 
