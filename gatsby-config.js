@@ -1,10 +1,10 @@
+const { siteConfig } = require("./package");
 const regexExcludeRobots = /^(?!\/(dev-404-page|404|offline-plugin-app-shell-fallback|tags|categories)).*$/;
 
 module.exports = {
-  siteMetadata: {
-    url: "https://weirdpattern.com",
-    title: "weirdpattern",
-    description: "weirdpattern personal blog"
+  siteMetadata: siteConfig,
+  mapping: {
+    "MarkdownRemark.frontmatter.author": "Patricio Trevino"
   },
   plugins: [
     "gatsby-plugin-react-helmet",
@@ -14,7 +14,7 @@ module.exports = {
       resolve: "gatsby-source-filesystem",
       options: {
         name: "posts",
-        path: `${__dirname}/${config.paths.blog}`
+        path: `${__dirname}/${siteConfig.paths.posts}`
       }
     },
     {
@@ -50,6 +50,9 @@ module.exports = {
         color: "#55B4D4"
       }
     },
+    "gatsby-transformer-json",
+    "gatsby-transformer-sharp",
+    "gatsby-plugin-sharp",
     "gatsby-plugin-catch-links",
     "gatsby-plugin-twitter",
     {
@@ -60,7 +63,7 @@ module.exports = {
           {
             site {
               siteMetadata {
-                siteUrl
+                url
               }
             }
             allSitePage(
@@ -82,9 +85,9 @@ module.exports = {
     {
       resolve: "gatsby-plugin-manifest",
       options: {
-        name: config.site.title,
-        short_name: config.site.title,
-        description: config.site.description,
+        name: siteConfig.title,
+        short_name: siteConfig.title,
+        description: siteConfig.description,
         start_url: "",
         background_color: "#FAFAFA",
         theme_color: "#FF6A00",

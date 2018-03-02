@@ -7,5 +7,5 @@
  * @function
  */
 export function isMobile(width: number): boolean {
-  return width < 769;
+  return width < 640;
 }

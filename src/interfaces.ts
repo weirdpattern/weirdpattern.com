@@ -1,4 +1,47 @@
 /**
+ * The data object from a graphql query.
+ * @typedef {Interface} GraphResult
+ * @property {T} data the data item.
+ *
+ * @public
+ * @interface
+ */
+export interface GraphResult<T> {
+  data: T;
+  children: any;
+}
+
+/**
+ * The site information.
+ * @typedef {Interface} Site
+ * @property {string} url the url of the site.
+ * @property {string} title the title of the site.
+ * @property {string} description the description of the site.
+ *
+ * @public
+ * @interface
+ */
+export interface Site {
+  url: string;
+  title: string;
+  description: string;
+}
+
+/**
+ * The path information.
+ * @typedef {Interface} Paths
+ * @property {Object} paths the important paths of the site.
+ *
+ * @public
+ * @interface
+ */
+export interface Paths {
+  paths: {
+    posts: string;
+  };
+}
+
+/**
  * The social media information.
  * @typedef {Interface} SocialMedia
  * @property {string} icon the icon of the social media.
@@ -17,16 +60,76 @@ export interface SocialMedia {
 /**
  * The social media available channels,
  * @typedef {Interface} SocialMedias
- * @property {SocialMedia} [github] the github channel.
- * @property {SocialMedia} [twitter] the twitter channel.
- * @property {SocialMedia} [facebook] the facebook channel.
- * @property {SocialMedia} [linkedIn] the linkedIn channel.
- * @property {SocialMedia} [googleplus] the google+ channel.
+ * @property {Object} social the available social media networks.
+ *
+ * @public
+ * @interface
  */
-export interface SocialMedias {
-  github?: SocialMedia;
-  twitter?: SocialMedia;
-  facebook?: SocialMedia;
-  linkedIn?: SocialMedia;
-  googleplus?: SocialMedia;
+export interface Social {
+  social: {
+    github?: SocialMedia;
+    twitter?: SocialMedia;
+    facebook?: SocialMedia;
+    linkedIn?: SocialMedia;
+    googleplus?: SocialMedia;
+  };
+}
+
+/**
+ * The site metadata.
+ * @typedef {Interface} SiteMetadata
+ * @property {} site the site metadata.
+ *
+ * @public
+ * @interface
+ */
+export interface SiteMetadata {
+  site: {
+    metadata: Site & Paths & Social;
+  };
+}
+
+export interface Post {
+  post: {
+    html: string;
+    excerpt: string;
+    timeToRead: string;
+    content: {
+      title: string;
+      tags: string[];
+      category: string;
+      cover: string;
+      date: Date;
+    };
+    navigation: {
+      nextTitle: string;
+      nextSlug: string;
+      prevTitle: string;
+      prevSlug: string;
+      slug: string;
+    };
+  };
+}
+
+export interface Posts {
+  posts: {
+    edges: [
+      {
+        node: {
+          fields: {
+            slug: string;
+          };
+          excerpt: string;
+          timeToRead: string;
+          content: {
+            title: string;
+            tags: string[];
+            category: string;
+            cover: string;
+            date: Date;
+          };
+        };
+      }
+    ];
+  };
 }

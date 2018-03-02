@@ -2,7 +2,6 @@ import * as React from "react";
 import * as classNames from "classnames";
 
 import { isMobile } from "../utils";
-import { SocialMedia, SocialMedias } from "../interfaces";
 
 /**
  * Header props.
@@ -19,13 +18,13 @@ interface Props {
 /**
  * Header state.
  * @typedef {Interface} State
- * @property {number} width the width of the page.
+ * @property {boolean} mobile a flag indicating mobile is active.
  *
  * @private
  * @interface
  */
 interface State {
-  width: number;
+  mobile: boolean;
 }
 
 /**
@@ -45,24 +44,25 @@ export default class Header extends React.PureComponent<Props, State> {
   public constructor(props: Props) {
     super(props);
 
-    this.state = { width: window.innerWidth };
-    this.updateWidth = this.updateWidth.bind(this);
+    this.state = { mobile: true };
+    this.resizeHandler = this.resizeHandler.bind(this);
   }
 
   /** @inheritdoc */
   public componentDidMount() {
-    window.addEventListener("resize", this.updateWidth);
+    this.resizeHandler();
+    window.addEventListener("resize", this.resizeHandler);
   }
 
   /** @inheritdoc */
   public componentWillUnmount() {
-    window.removeEventListener("resize", this.updateWidth);
+    window.removeEventListener("resize", this.resizeHandler);
   }
 
   /** @inheritdoc */
   public render() {
     const { title } = this.props;
-    const mobile = isMobile(this.state.width);
+    const mobile = this.state.mobile;
 
     const levelRightClass = classNames("level-right", {
       "has-text-centered": mobile
@@ -107,7 +107,7 @@ export default class Header extends React.PureComponent<Props, State> {
    * @private
    * @method
    */
-  private updateWidth(): void {
-    this.setState({ width: window.outerWidth });
+  private resizeHandler(): void {
+    this.setState({ mobile: isMobile(window.innerWidth) });
   }
 }

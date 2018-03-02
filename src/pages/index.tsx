@@ -1,34 +1,15 @@
 import * as React from "react";
 
+import { GraphResult, Posts } from "../interfaces";
+
 /**
  * Index properties.
  * @typedef {Interface} Props
- * @property {Data} data the gatsby data.
  *
  * @private
  * @interface
  */
-interface Props {
-  data: {
-    allMarkdownRemark: {
-      edges: {
-        node: {
-          fields: {
-            slug: string;
-          };
-          excerpt: string;
-          timeToRead: string;
-          frontmatter: {
-            title: string;
-            tags: string[];
-            cover: string;
-            date: Date;
-          };
-        };
-      };
-    };
-  };
-}
+interface Props extends GraphResult<Posts> {}
 
 /**
  * Page component.
@@ -37,27 +18,21 @@ interface Props {
  * @class
  */
 export default class Index extends React.Component<Props, {}> {
-  /**
-   * Class constructor.
-   * @param {Props} props the properties.
-   *
-   * @public
-   * @constructor
-   */
-  public constructor(props: Props) {
-    super(props);
-  }
-
   /** @inheritdoc */
-  public render() {
-    const postEdges = this.props.data.allMarkdownRemark.edges;
-    return null;
+  public render(): React.ReactNode {
+    const postEdges = this.props.data.posts.edges;
+    return (
+      <React.Fragment>
+        <span>Here</span>
+        <span>{postEdges[0].node.fields.slug}</span>
+      </React.Fragment>
+    );
   }
 }
 
-export const pageQuery = graphql`
+export const query = graphql`
   query IndexQuery {
-    allMarkdownRemark(
+    posts: allMarkdownRemark(
       limit: 2000
       sort: { fields: [frontmatter___date], order: DESC }
     ) {
@@ -68,7 +43,7 @@ export const pageQuery = graphql`
           }
           excerpt
           timeToRead
-          frontmatter {
+          content: frontmatter {
             title
             tags
             cover
