@@ -4,7 +4,7 @@ const regexExcludeRobots = /^(?!\/(dev-404-page|404|offline-plugin-app-shell-fal
 module.exports = {
   siteMetadata: siteConfig,
   mapping: {
-    "MarkdownRemark.frontmatter.author": "Patricio Trevino"
+    "MarkdownRemark.frontmatter.author": "AuthorJson"
   },
   plugins: [
     "gatsby-plugin-react-helmet",
@@ -14,7 +14,7 @@ module.exports = {
       resolve: "gatsby-source-filesystem",
       options: {
         name: "posts",
-        path: `${__dirname}/${siteConfig.paths.posts}`
+        path: `${__dirname}/${siteConfig.paths.content}`
       }
     },
     {

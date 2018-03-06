@@ -62,7 +62,7 @@
     "title": "weirdpattern.com",
     "description": "weirdpattern personal blog",
     "paths": {
-      "posts": "posts"
+      "content": "content"
     },
     "social": {
       "github": {

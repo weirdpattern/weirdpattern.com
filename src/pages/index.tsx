@@ -20,22 +20,24 @@ interface Props extends GraphResult<Posts> {}
 export default class Index extends React.Component<Props, {}> {
   /** @inheritdoc */
   public render(): React.ReactNode {
-    const postEdges = this.props.data.posts.edges;
-    return (
-      <React.Fragment>
-        <span>Here</span>
-        <span>{postEdges[0].node.fields.slug}</span>
-      </React.Fragment>
-    );
+    const posts = this.props.data.posts.edges;
+    return posts.map((post, index) => {
+      return (
+        <span key={index} style={{ display: "block" }}>
+          {post.node.content.title} in {post.node.content.category}
+        </span>
+      );
+    });
   }
 }
 
 export const query = graphql`
   query IndexQuery {
     posts: allMarkdownRemark(
-      limit: 2000
       sort: { fields: [frontmatter___date], order: DESC }
+      filter: { frontmatter: { category: { eq: "blog" } } }
     ) {
+      totalCount
       edges {
         node {
           fields {
@@ -46,7 +48,28 @@ export const query = graphql`
           content: frontmatter {
             title
             tags
+            category
             cover
+            date
+          }
+        }
+      }
+    }
+    tips: allMarkdownRemark(
+      sort: { fields: [frontmatter___date], order: DESC }
+      filter: { frontmatter: { category: { eq: "tip" } } }
+    ) {
+      totalCount
+      edges {
+        node {
+          fields {
+            slug
+          }
+          excerpt
+          content: frontmatter {
+            title
+            tags
+            category
             date
           }
         }

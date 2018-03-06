@@ -37,7 +37,7 @@ export interface Site {
  */
 export interface Paths {
   paths: {
-    posts: string;
+    content: string;
   };
 }
 
@@ -102,11 +102,13 @@ export interface Post {
       date: Date;
     };
     navigation: {
-      nextTitle: string;
-      nextSlug: string;
-      prevTitle: string;
-      prevSlug: string;
       slug: string;
+      suggestions: [
+        {
+          slug: string;
+          title: string;
+        }
+      ];
     };
   };
 }

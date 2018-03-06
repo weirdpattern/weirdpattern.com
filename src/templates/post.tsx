@@ -6,9 +6,8 @@ interface Props extends GraphResult<Post> {}
 
 export default class PostTemplate extends React.Component<Props, {}> {
   /** @inheritdoc */
-  public render() {
-    const post = this.props.data.post.content;
-    return <span>{post.title}</span>;
+  public render(): React.ReactNode {
+    return null;
   }
 }
 
@@ -26,10 +25,10 @@ export const query = graphql`
         tags
       }
       navigation: fields {
-        nextTitle
-        nextSlug
-        prevTitle
-        prevSlug
+        suggestions {
+          slug
+          title
+        }
         slug
       }
     }

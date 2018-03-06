@@ -1,6 +1,7 @@
 import * as React from "react";
 import * as classNames from "classnames";
 
+import Link from "gatsby-link";
 import { isMobile } from "../utils";
 
 /**
@@ -84,15 +85,15 @@ export default class Header extends React.PureComponent<Props, State> {
               </h1>
             </div>
             <div className={levelRightClass}>
-              <a href="https://weirdpattern.com" className="page">
-                Home
-              </a>
-              <a href="https://weirdpattern.com/Blog" className="page">
+              <Link to="Blog" className="page">
                 Blog
-              </a>
-              <a href="https://weirdpattern.com/About" className="page">
+              </Link>
+              <Link to="Blog" className="page">
+                Tips & Tricks
+              </Link>
+              <Link to="About" className="page">
                 About
-              </a>
+              </Link>
             </div>
           </div>
         </div>

@@ -4,7 +4,7 @@ import * as React from "react";
 import Helmet from "react-helmet";
 
 import Header from "../components/Header";
-import { GraphResult, SiteMetadata } from "../interfaces";
+import { GraphResult, Posts, SiteMetadata } from "../interfaces";
 
 /**
  * Layout props.
@@ -13,7 +13,7 @@ import { GraphResult, SiteMetadata } from "../interfaces";
  * @private
  * @interface
  */
-interface Props extends GraphResult<SiteMetadata> {}
+interface Props extends GraphResult<SiteMetadata & Posts> {}
 
 /**
  * The layout of the site.
@@ -29,6 +29,7 @@ export default function Layout({ data, children }: Props): React.ReactNode {
       </Helmet>
       <div className="is-fluid">
         <Header title={data.site.metadata.title} />
+        {children()}
       </div>
     </React.Fragment>
   );

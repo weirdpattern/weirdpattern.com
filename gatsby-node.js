@@ -2,7 +2,6 @@ const path = require("path");
 const { has, kebabCase } = require("lodash");
 const webpackLodashPlugin = require("lodash-webpack-plugin");
 
-const postNodes = [];
 const extractQueryPlugin = path.resolve(
   __dirname,
   "node_modules/gatsby/dist/utils/babel-plugin-extract-graphql.js"
@@ -10,48 +9,49 @@ const extractQueryPlugin = path.resolve(
 
 /**
  * Adds related sibling nodes.
+ * @param {Array} nodes the nodes to be linked.
  * @param {Function} createNodeField the factory method to be used.
  * @returns {void}
  *
  * @private
  * @function
  */
-function addSiblingNodes(createNodeField) {
-  postNodes.sort(
-    ({ frontmatter: { date: date1 } }, { frontmatter: { date: date2 } }) =>
-      new Date(date1) - new Date(date2)
+function addSiblingNodes(nodes, createNodeField) {
+  nodes.sort(
+    (left, right) =>
+      new Date(left.frontmatter.date) - new Date(right.frontmatter.date)
   );
 
-  for (let i = 0; i < postNodes.length; i += 1) {
-    const nextID = i + 1 < postNodes.length ? i + 1 : 0;
-    const prevID = i - 1 > 0 ? i - 1 : postNodes.length - 1;
+  for (let i = 0; i < nodes.length; i++) {
+    const current = nodes[i];
+    const suggestions = nodes
+      .filter(node => {
+        if (
+          !node.frontmatter.tags ||
+          !current.frontmatter.tags ||
+          node.fields.slug === current.fields.slug
+        ) {
+          return false;
+        }
 
-    const currNode = postNodes[i];
-    const nextNode = postNodes[nextID];
-    const prevNode = postNodes[prevID];
+        return (
+          current.frontmatter.tags.filter(
+            tag => node.frontmatter.tags.indexOf(tag) > -1
+          ).length > 0
+        );
+      })
+      .slice(0, 3)
+      .map(node => {
+        return {
+          slug: node.fields.slug,
+          title: node.frontmatter.title
+        };
+      });
 
     createNodeField({
-      node: currNode,
-      name: "nextTitle",
-      value: nextNode.frontmatter.title
-    });
-
-    createNodeField({
-      node: currNode,
-      name: "nextSlug",
-      value: nextNode.fields.slug
-    });
-
-    createNodeField({
-      node: currNode,
-      name: "prevTitle",
-      value: prevNode.frontmatter.title
-    });
-
-    createNodeField({
-      node: currNode,
-      name: "prevSlug",
-      value: prevNode.fields.slug
+      node: current,
+      name: "suggestions",
+      value: suggestions
     });
   }
 }
@@ -80,17 +80,16 @@ exports.onCreateNode = ({ node, boundActionCreators, getNode }) => {
     }
 
     createNodeField({ node, name: "slug", value: slug });
-    postNodes.push(node);
   }
 };
 
 /** @inheritdoc */
 exports.setFieldsOnGraphQLNodeType = ({ type, boundActionCreators }) => {
-  const { name } = type;
+  const { name, nodes } = type;
   const { createNodeField } = boundActionCreators;
 
   if (name === "MarkdownRemark") {
-    addSiblingNodes(createNodeField);
+    addSiblingNodes(nodes, createNodeField);
   }
 };
 
@@ -100,6 +99,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
 
   return new Promise((resolve, reject) => {
     const postPage = path.resolve("src/templates/post.tsx");
+    const tipPage = path.resolve("src/templates/tip.tsx");
     const tagPage = path.resolve("src/templates/tag.tsx");
     const categoryPage = path.resolve("src/templates/category.tsx");
 
@@ -107,7 +107,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
       graphql(
         `
           {
-            posts: allMarkdownRemark {
+            all: allMarkdownRemark {
               edges {
                 node {
                   frontmatter {
@@ -129,22 +129,25 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
 
         const tagSet = new Set();
         const categorySet = new Set();
-        result.data.posts.edges.forEach(edge => {
-          if (edge.node.frontmatter.tags) {
-            edge.node.frontmatter.tags.forEach(tag => {
+
+        const all = result.data.all.edges.map(p => p.node);
+
+        all.forEach(node => {
+          if (node.frontmatter.tags) {
+            node.frontmatter.tags.forEach(tag => {
               tagSet.add(tag);
             });
           }
 
-          if (edge.node.frontmatter.category) {
-            categorySet.add(edge.node.frontmatter.category);
+          if (node.frontmatter.category) {
+            categorySet.add(node.frontmatter.category);
           }
 
           createPage({
-            path: edge.node.fields.slug,
+            path: node.fields.slug,
             component: postPage,
             context: {
-              slug: edge.node.fields.slug
+              slug: node.fields.slug
             }
           });
         });
