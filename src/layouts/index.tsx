@@ -3,51 +3,44 @@ import "../scss/main.scss";
 import * as React from "react";
 import Helmet from "react-helmet";
 
+import * as data from "../../content/data.json";
 import Header from "../components/Header";
-import { GraphResult, Posts, SiteMetadata } from "../interfaces";
+import Footer from "../components/Footer";
+import { GraphResult, SiteMetadata } from "../interfaces";
+
+const config = data as any;
 
 /**
  * Layout props.
- * @typedef {GraphResult<SiteMetadata>} Props
+ * @typedef {Interface} Props
+ * @property {*} children the children function renderer.
  *
  * @private
  * @interface
  */
-interface Props extends GraphResult<SiteMetadata & Posts> {}
+interface Props {
+  children: any;
+}
 
 /**
- * The layout of the site.
+ * Layout of the site.
+ * @param {Function} children the children.
+ * @returns {React.ReactNode} the react node that represents the layout.
  *
  * @public
- * @class
+ * @function
  */
-export default function Layout({ data, children }: Props): React.ReactNode {
+export default function Layout({ children }: Props): React.ReactNode {
   return (
     <React.Fragment>
       <Helmet>
-        <meta name="description" content={data.site.metadata.description} />
+        <meta name="description" content={config.description} />
       </Helmet>
       <div className="is-fluid">
-        <Header title={data.site.metadata.title} />
+        <Header title={config.title} />
         {children()}
+        <Footer profile={config.profile} />
       </div>
     </React.Fragment>
   );
 }
-
-/**
- * The query to be used to populate the properties.
- *
- * @public
- * @const
- */
-export const query = graphql`
-  query LayoutQuery {
-    site {
-      metadata: siteMetadata {
-        title
-        description
-      }
-    }
-  }
-`;

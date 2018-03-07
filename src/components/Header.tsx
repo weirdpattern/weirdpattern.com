@@ -29,7 +29,7 @@ interface State {
 }
 
 /**
- * Sidebar component.
+ * Header component.
  *
  * @public
  * @class
@@ -65,39 +65,44 @@ export default class Header extends React.PureComponent<Props, State> {
     const { title } = this.props;
     const mobile = this.state.mobile;
 
-    const levelRightClass = classNames("level-right", {
-      "has-text-centered": mobile
+    const columnRightClass = classNames("column", {
+      "has-text-right": !mobile,
+      "has-text-centered": mobile,
+      "no-padding": mobile
     });
 
-    const titleClass = classNames("title", {
+    const columnLeftClass = classNames("column", {
       "has-text-left": !mobile,
-      "has-text-centered": mobile
+      "has-text-centered": mobile,
+      "no-padding": mobile
     });
 
     return (
-      <React.Fragment>
+      <section>
         <div className="top-border is-fixed-top" />
         <div className="header">
-          <div className="container level">
-            <div className="level-left">
-              <h1 className={titleClass}>
-                <a href="https://weirdpattern.com">{title}</a>
-              </h1>
-            </div>
-            <div className={levelRightClass}>
-              <Link to="Blog" className="page">
-                Blog
-              </Link>
-              <Link to="Blog" className="page">
-                Tips & Tricks
-              </Link>
-              <Link to="About" className="page">
-                About
-              </Link>
+          <div className="container">
+            <div className="columns">
+              <div className={columnLeftClass}>
+                <h1 className="title">
+                  <a href="https://weirdpattern.com">{title}</a>
+                </h1>
+              </div>
+              <nav className={columnRightClass}>
+                <Link to="Blog" className="page">
+                  Blog
+                </Link>
+                <Link to="Blog" className="page">
+                  Tips
+                </Link>
+                <Link to="About" className="page">
+                  About
+                </Link>
+              </nav>
             </div>
           </div>
         </div>
-      </React.Fragment>
+      </section>
     );
   }
 
@@ -109,6 +114,6 @@ export default class Header extends React.PureComponent<Props, State> {
    * @method
    */
   private resizeHandler(): void {
-    this.setState({ mobile: isMobile(window.innerWidth) });
+    this.setState({ mobile: isMobile(window.outerWidth) });
   }
 }

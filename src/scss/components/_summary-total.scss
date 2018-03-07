@@ -1,0 +1,21 @@
+.summary-box {
+  min-width: 100px;
+  display: block;
+  line-height: 1;
+  padding: 14px 15px 7px;
+
+  .title {
+    color: $foreground;
+    font-size: 12px;
+    display: block;
+    margin-right: 2px;
+    margin-bottom: 0 !important;
+  }
+
+  .total {
+    color: #399EE6;
+    font-size: 23px;
+    font-weight: bold;
+    margin-bottom: 0 !important;
+  }
+}

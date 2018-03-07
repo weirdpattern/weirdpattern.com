@@ -1,0 +1,26 @@
+{
+  "url": "https://weirdpattern.com",
+  "title": "weirdpattern.com",
+  "description": "weirdpattern personal blog",
+  "paths": {
+    "content": "content"
+  },
+  "profile": {
+    "name": "Patricio Trevino",
+    "email": "patricio@weirdpattern.com",
+    "credentials": "Husband . Father . Developer",
+    "biography": "",
+    "social": {
+      "github": {
+        "icon": "fa-github",
+        "handler": "@weirdpattern",
+        "link": "https://github.com/weirdpattern"
+      },
+      "twitter": {
+        "icon": "fa-twitter",
+        "handler": "@weirdpattern",
+        "link": "https://twitter.com/weirdpattern"
+      }
+    }
+  }
+}

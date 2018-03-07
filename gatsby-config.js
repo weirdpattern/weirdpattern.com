@@ -1,10 +1,11 @@
-const { siteConfig } = require("./package");
+const siteConfig = require("./content/data.json");
 const regexExcludeRobots = /^(?!\/(dev-404-page|404|offline-plugin-app-shell-fallback|tags|categories)).*$/;
 
 module.exports = {
-  siteMetadata: siteConfig,
-  mapping: {
-    "MarkdownRemark.frontmatter.author": "AuthorJson"
+  siteMetadata: {
+    url: siteConfig.url,
+    name: siteConfig.name,
+    description: siteConfig.description
   },
   plugins: [
     "gatsby-plugin-react-helmet",

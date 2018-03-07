@@ -40,18 +40,29 @@ function addSiblingNodes(nodes, createNodeField) {
           ).length > 0
         );
       })
-      .slice(0, 3)
       .map(node => {
         return {
           slug: node.fields.slug,
-          title: node.frontmatter.title
+          date: node.frontmatter.date,
+          title: node.frontmatter.title,
+          description: node.frontmatter.description
         };
       });
+
+    const randomized = [];
+
+    let index = -1;
+    const length = suggestions.length;
+    while (++index < length) {
+      randomized.push(
+        suggestions.splice(Math.floor(Math.random() * length, 1)[0])
+      );
+    }
 
     createNodeField({
       node: current,
       name: "suggestions",
-      value: suggestions
+      value: randomized
     });
   }
 }

@@ -57,26 +57,6 @@
     "typescript": "^2.7.2",
     "typescript-eslint-parser": "^14.0.0"
   },
-  "siteConfig": {
-    "url": "https://weirdpattern.com",
-    "title": "weirdpattern.com",
-    "description": "weirdpattern personal blog",
-    "paths": {
-      "content": "content"
-    },
-    "social": {
-      "github": {
-        "icon": "fa-github",
-        "handler": "@weirdpattern",
-        "link": "https://github.com/weirdpattern"
-      },
-      "twitter": {
-        "icon": "fa-twitter",
-        "handler": "@weirdpattern",
-        "link": "https://twitter.com/weirdpattern"
-      }
-    }
-  },
   "eslintConfig": {
     "extends": [
       "plugin:jsx-a11y/recommended",
