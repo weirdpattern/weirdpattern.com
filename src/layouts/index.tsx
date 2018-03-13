@@ -6,7 +6,7 @@ import Helmet from "react-helmet";
 import * as data from "../../content/data.json";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import { GraphResult, SiteMetadata } from "../interfaces";
+import { GraphResult, Metadata } from "../interfaces";
 
 const config = data as any;
 
@@ -37,7 +37,7 @@ export default function Layout({ children }: Props): React.ReactNode {
         <meta name="description" content={config.description} />
       </Helmet>
       <div className="is-fluid">
-        <Header title={config.title} />
+        <Header url={config.url} title={config.title} />
         {children()}
         <Footer profile={config.profile} />
       </div>

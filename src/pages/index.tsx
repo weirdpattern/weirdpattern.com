@@ -2,7 +2,7 @@ import * as React from "react";
 
 import Summary from "../components/Summary";
 import LatestEntries from "../components/LatestEntries";
-import { GraphResult, Posts, Tips } from "../interfaces";
+import { GraphResult, Posts, Snippets } from "../interfaces";
 
 /**
  * Index properties.
@@ -11,7 +11,7 @@ import { GraphResult, Posts, Tips } from "../interfaces";
  * @private
  * @interface
  */
-interface Props extends GraphResult<Posts & Tips> {}
+interface Props extends GraphResult<Posts & Snippets> {}
 
 /**
  * Page component.
@@ -22,11 +22,11 @@ interface Props extends GraphResult<Posts & Tips> {}
 export default class Index extends React.Component<Props, {}> {
   /** @inheritdoc */
   public render(): React.ReactNode {
-    const { posts, tips } = this.props.data;
+    const { posts, snippets } = this.props.data;
     return (
       <section className="body">
-        <Summary posts={posts.totalCount} tips={tips.totalCount} />
-        <LatestEntries posts={posts} tips={tips} />
+        <Summary posts={posts.totalCount} snippets={snippets.totalCount} />
+        <LatestEntries posts={posts} snippets={snippets} />
       </section>
     );
   }
@@ -54,9 +54,9 @@ export const query = graphql`
         }
       }
     }
-    tips: allMarkdownRemark(
+    snippets: allMarkdownRemark(
       sort: { fields: [frontmatter___date], order: DESC }
-      filter: { frontmatter: { category: { eq: "tip" } } }
+      filter: { frontmatter: { category: { eq: "snippet" } } }
     ) {
       totalCount
       edges {

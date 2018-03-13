@@ -2,7 +2,7 @@
 title: "Sitecore training"
 cover: "https://unsplash.it/400/300/?random?BoldMage"
 date: "01/01/2018"
-category: "tip"
+category: "snippet"
 tags:
     - programming
     - sitecore

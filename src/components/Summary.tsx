@@ -6,14 +6,14 @@ import SummaryTotal from "./SummaryTotal";
  * Summary props.
  * @typedef {Interface} Props
  * @property {number} posts the total number of posts.
- * @property {number} tips the total number of tips.
+ * @property {number} snippets the total number of snippets.
  *
  * @private
  * @interface
  */
 interface Props {
   posts: number;
-  tips: number;
+  snippets: number;
 }
 
 /**
@@ -26,20 +26,20 @@ interface Props {
  */
 export default function Summary({
   posts,
-  tips
+  snippets
 }: Props): React.ReactElement<Props> {
   return (
     <div className="summary">
       <div className="container">
         <ul>
           <li>
-            <SummaryTotal title="Total" value={posts + tips} />
+            <SummaryTotal title="Total" value={posts + snippets} />
           </li>
           <li>
             <SummaryTotal title="Posts" value={posts} />
           </li>
           <li>
-            <SummaryTotal title="Tips" value={tips} />
+            <SummaryTotal title="Snippets" value={snippets} />
           </li>
         </ul>
       </div>

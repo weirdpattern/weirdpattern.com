@@ -189,14 +189,14 @@ export interface Entries extends Countable {
 export interface Posts extends Record<"posts", Entries> {}
 
 /**
- * A set of tips.
- * @typedef {Interface} Tips
- * @property {Entries} tips the tips.
+ * A set of snippets.
+ * @typedef {Interface} Snippets
+ * @property {Entries} snippets the snippets.
  *
  * @public
  * @interface
  */
-export interface Tips extends Record<"tips", Entries> {}
+export interface Snippets extends Record<"snippets", Entries> {}
 
 /**
  * The data object from a graphql query.

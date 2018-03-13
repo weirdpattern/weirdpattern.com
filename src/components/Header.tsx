@@ -7,12 +7,14 @@ import { isMobile } from "../utils";
 /**
  * Header props.
  * @typedef {Interface} Props
+ * @property {string} url the url of the website.
  * @property {string} title the title of the website.
  *
  * @private
  * @interface
  */
 interface Props {
+  url: string;
   title: string;
 }
 
@@ -62,7 +64,7 @@ export default class Header extends React.PureComponent<Props, State> {
 
   /** @inheritdoc */
   public render() {
-    const { title } = this.props;
+    const { url, title } = this.props;
     const mobile = this.state.mobile;
 
     const columnRightClass = classNames("column", {
@@ -85,15 +87,15 @@ export default class Header extends React.PureComponent<Props, State> {
             <div className="columns">
               <div className={columnLeftClass}>
                 <h1 className="title">
-                  <a href="https://weirdpattern.com">{title}</a>
+                  <a href={url}>{title}</a>
                 </h1>
               </div>
               <nav className={columnRightClass}>
                 <Link to="Blog" className="page">
                   Blog
                 </Link>
-                <Link to="Blog" className="page">
-                  Tips
+                <Link to="Snippets" className="page">
+                  Snippets
                 </Link>
                 <Link to="About" className="page">
                   About
