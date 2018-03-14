@@ -1,0 +1,33 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 999;
+  background-color: rgba(0, 0, 0, 0.5);
+
+  .search-box {
+    @include centerer;
+
+    width: 60%;
+    height: 60px;
+    outline: none;
+    font-size: 30px;
+    padding: 0px 5px;
+    border: 5px solid transparent;
+  }
+
+  .error {
+    animation: borderBlink 1s step-end 3;
+  }
+}
+
+@keyframes borderBlink {
+  from, to {
+    border-color: white;
+  }
+  50% {
+    border-color: red;
+  }
+}
