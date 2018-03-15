@@ -122,7 +122,7 @@ export default class Layout extends React.PureComponent<Props, State> {
    * @private
    * @method
    */
-  private keydownHandler(event: React.KeyboardEvent<HTMLElement>): void {
+  private keydownHandler(event: KeyboardEvent): void {
     if (
       event.altKey &&
       event.shiftKey &&

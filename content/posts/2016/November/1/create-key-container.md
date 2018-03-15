@@ -6,6 +6,7 @@ category: "snippet"
 tags:
     - security
     - encryption
+    - decryption
     - aspnet
     - c#
 ---
@@ -32,7 +33,7 @@ aspnet_regiis -pc <container> [-size <keySize>][-csp <provider>][-pku][-exp]
 
 ```powershell
 $ cd "$env.WINDIR/Microsoft.NET/Framework64/v4.0.30319"
-$ .\aspnet_regiis -pc MyContainer -exp
+$ .\aspnet_regiis -pc MyKeyContainer -exp
   
   Microsoft (R) ASP.NET RegIIS version 4.0.30319.18408
   Administration utility to install and uninstall ASP.NET on the local machine.

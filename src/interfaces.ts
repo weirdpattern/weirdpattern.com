@@ -95,18 +95,6 @@ export interface Paths extends Record<"paths", { content: string }> {}
 export type Metadata = Site & Paths & Profile;
 
 /**
- * An object that has a total count.
- * @typedef {Interface} Countable
- * @property {number} totalCount the total count of elements.
- *
- * @public
- * @interface
- */
-export interface Countable {
-  totalCount: number;
-}
-
-/**
  * @typedef {Object} Content
  * @property {Date} date the date of the post/tip.
  * @property {string} title the title of the post/tip.
@@ -168,15 +156,25 @@ export interface Entry {
 
 /**
  * A set of entries (posts or tips)
- * @typedef {Countable} Entries
+ * @typedef {Interface} Entries
  * @property {Array<{ entry: Entry }>} entries the entries.
  *
  * @public
  * @interface
  */
-export interface Entries extends Countable {
+export interface Entries {
   entries: Array<Record<"entry", Entry>>;
 }
+
+/**
+ * A set of markdowns.
+ * @typedef {Interface} Markdown.
+ * @property {Markdowns} entries the entries.
+ *
+ * @public
+ * @interface
+ */
+export interface Markdowns extends Record<"markdowns", Entries> {}
 
 /**
  * A set of posts.
