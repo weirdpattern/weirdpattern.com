@@ -96,7 +96,7 @@ export default class Layout extends React.PureComponent<Props, State> {
             mobile={mobile}
             openSearch={this.openSearchHandler}
           />
-          {this.props.children()}
+          {this.props.children({ ...this.props, mobile })}
           <Footer profile={config.profile} />
         </div>
       </React.Fragment>

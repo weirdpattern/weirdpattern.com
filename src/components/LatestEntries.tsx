@@ -30,12 +30,8 @@ export default function LatestEntries({
 }: Props): React.ReactElement<Props> {
   return (
     <div className="latest-news">
-      <div className="container">
-        <div className="columns">
-          <div className="column">Latest Posts</div>
-          <div className="column">Latest Snippets</div>
-        </div>
-      </div>
+      <div>Latest Posts</div>
+      <div>Latest Snippets</div>
     </div>
   );
 }

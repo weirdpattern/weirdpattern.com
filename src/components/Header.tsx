@@ -74,8 +74,8 @@ export default function Header({
               </h1>
             </div>
             <nav className={columnRightClass}>
-              <Link to="Blog" className="page">
-                Blog
+              <Link to="Posts" className="page">
+                Posts
               </Link>
               <Link to="Snippets" className="page">
                 Snippets

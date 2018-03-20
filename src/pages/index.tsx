@@ -2,7 +2,20 @@ import * as React from "react";
 
 import Summary from "../components/Summary";
 import LatestEntries from "../components/LatestEntries";
-import { GraphResult, Markdowns } from "../interfaces";
+import { GraphResult, Markdowns, Entry } from "../interfaces";
+
+const hasOwnProperty = Object.prototype.hasOwnProperty;
+
+/**
+ * Count by tag.
+ * @typedef {Interface} TagCount
+ *
+ * @private
+ * @interface
+ */
+interface TagCount {
+  [key: string]: number;
+}
 
 /**
  * Index properties.
@@ -32,13 +45,36 @@ export default class Index extends React.Component<Props, {}> {
       e => e.entry.content.category === "snippet"
     );
 
+    var tags = markdowns.entries.reduce(
+      (reductor: TagCount, record: Record<"entry", Entry>): TagCount => {
+        for (const tag in record.entry.content.tags) {
+          if (hasOwnProperty.call(reductor, tag)) {
+            reductor[tag]++;
+          } else {
+            reductor[tag] = 1;
+          }
+        }
+        return reductor;
+      },
+      {}
+    );
+
     return (
       <section className="body">
         <Summary posts={posts.length} snippets={snippets.length} />
-        <LatestEntries
-          posts={{ entries: posts }}
-          snippets={{ entries: snippets }}
-        />
+        <div className="container">
+          <div className="columns">
+            <div className="column is-three-quarters">
+              <LatestEntries
+                posts={{ entries: posts }}
+                snippets={{ entries: snippets }}
+              />
+            </div>
+            <div className="column is-one-quarter">
+              <Tags tags={tags} />
+            </div>
+          </div>
+        </div>
       </section>
     );
   }
