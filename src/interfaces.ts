@@ -208,3 +208,14 @@ export interface GraphResult<T> {
   data: T;
   children: any;
 }
+
+/**
+ * Count by tag.
+ * @typedef {Interface} TagCount
+ *
+ * @public
+ * @interface
+ */
+export interface TagCount {
+  [key: string]: number;
+}

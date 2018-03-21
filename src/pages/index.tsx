@@ -1,21 +1,11 @@
 import * as React from "react";
 
+import Tags from "../components/Tags";
 import Summary from "../components/Summary";
 import LatestEntries from "../components/LatestEntries";
-import { GraphResult, Markdowns, Entry } from "../interfaces";
+import { GraphResult, Markdowns, Entry, TagCount } from "../interfaces";
 
 const hasOwnProperty = Object.prototype.hasOwnProperty;
-
-/**
- * Count by tag.
- * @typedef {Interface} TagCount
- *
- * @private
- * @interface
- */
-interface TagCount {
-  [key: string]: number;
-}
 
 /**
  * Index properties.
@@ -45,7 +35,7 @@ export default class Index extends React.Component<Props, {}> {
       e => e.entry.content.category === "snippet"
     );
 
-    var tags = markdowns.entries.reduce(
+    const tags: TagCount = markdowns.entries.reduce(
       (reductor: TagCount, record: Record<"entry", Entry>): TagCount => {
         for (const tag in record.entry.content.tags) {
           if (hasOwnProperty.call(reductor, tag)) {
