@@ -2,15 +2,16 @@
   width: 100%;
   margin: 0;
   padding: 10px;
-  background-color: $black;
+  background-color: $enclosing-background;
 
   .copyright {
     display: block;
-    color: $white;
+    color: $foreground;
     text-align: center;
+    font-family: "Lato";
 
     a {
-      color: $white;
+      color: $enclosing-foreground;
     }
 
     a:hover {

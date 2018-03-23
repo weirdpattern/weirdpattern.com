@@ -4,6 +4,7 @@ import * as React from "react";
 import Helmet from "react-helmet";
 
 import * as data from "../../content/data.json";
+import Menu from "../components/Menu";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Search from "../components/Search";
@@ -83,19 +84,15 @@ export default class Layout extends React.PureComponent<Props, State> {
         <Helmet>
           <meta name="description" content={config.description} />
         </Helmet>
-        <div className="is-fluid">
+        <div>
           {searching ? (
             <Search
               performSearch={this.search}
               closeSearch={this.closeSearchHandler}
             />
           ) : null}
-          <Header
-            url={config.url}
-            title={config.title}
-            mobile={mobile}
-            openSearch={this.openSearchHandler}
-          />
+          <Header title={config.title} mobile={mobile} />
+          <Menu openSearch={this.openSearchHandler} />
           {this.props.children({ ...this.props, mobile })}
           <Footer profile={config.profile} />
         </div>

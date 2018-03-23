@@ -1,7 +1,5 @@
 import * as React from "react";
 
-import Tags from "../components/Tags";
-import Summary from "../components/Summary";
 import LatestEntries from "../components/LatestEntries";
 import { GraphResult, Markdowns, Entry, TagCount } from "../interfaces";
 
@@ -27,14 +25,6 @@ export default class Index extends React.Component<Props, {}> {
   public render(): React.ReactNode {
     const { markdowns = { entries: [] } } = this.props.data;
 
-    const posts = markdowns.entries.filter(
-      e => e.entry.content.category === "post"
-    );
-
-    const snippets = markdowns.entries.filter(
-      e => e.entry.content.category === "snippet"
-    );
-
     const tags: TagCount = markdowns.entries.reduce(
       (reductor: TagCount, record: Record<"entry", Entry>): TagCount => {
         for (const tag in record.entry.content.tags) {
@@ -51,18 +41,12 @@ export default class Index extends React.Component<Props, {}> {
 
     return (
       <section className="body">
-        <Summary posts={posts.length} snippets={snippets.length} />
         <div className="container">
           <div className="columns">
             <div className="column is-three-quarters">
-              <LatestEntries
-                posts={{ entries: posts }}
-                snippets={{ entries: snippets }}
-              />
+              <LatestEntries entries={markdowns.entries.map(e => e.entry)} />
             </div>
-            <div className="column is-one-quarter">
-              <Tags tags={tags} />
-            </div>
+            <div className="column is-one-quarter" />
           </div>
         </div>
       </section>

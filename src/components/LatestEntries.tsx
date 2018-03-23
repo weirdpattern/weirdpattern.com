@@ -1,37 +1,40 @@
 import * as React from "react";
 
-import { Entries } from "../interfaces";
+import { Entry } from "../interfaces";
 
 /**
- * LatestEntries props
+ * Index properties.
  * @typedef {Interface} Props
- * @property {Entries} posts the latest posts.
- * @property {Entries} snippets the latest snippets.
+ * @param {Array<Entry>} entries the entries.
  *
  * @private
  * @interface
  */
 interface Props {
-  posts: Entries;
-  snippets: Entries;
+  entries: Entry[];
 }
 
 /**
- * LatestEntries component
- * @returns {React.ReactElement<Props>}
- *    the react node that represents the latest entries.
+ * Page component.
  *
  * @public
- * @function
+ * @class
  */
 export default function LatestEntries({
-  posts,
-  snippets
+  entries
 }: Props): React.ReactElement<Props> {
   return (
-    <div className="latest-news">
-      <div>Latest Posts</div>
-      <div>Latest Snippets</div>
+    <div className="latest-entries">
+      {entries.slice(0, 5).map((entry: Entry, index: number) => {
+        return (
+          <div key={index} className={"entry " + entry.content.category}>
+            <div>
+              <h2>{entry.content.title}</h2>
+            </div>
+
+          </div>
+        );
+      })}
     </div>
   );
 }

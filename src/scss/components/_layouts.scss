@@ -4,4 +4,9 @@
 
 .body {
   text-align: center;
+  clear: both;
+
+  .columns {
+    padding: 30px 10px 0;
+  }
 }

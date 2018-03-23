@@ -10,20 +10,16 @@ const codes = [13, 32];
 /**
  * Header props.
  * @typedef {Interface} Props
- * @property {string} url the url of the website.
  * @property {string} title the title of the website.
  * @property {boolean} mobile
  *    a flag indicating the components is being rendered in mobile view.
- * @property {Function} openSearch opens the search dialog.
  *
  * @private
  * @interface
  */
 interface Props {
-  url: string;
   title: string;
   mobile: boolean;
-  openSearch: Function;
 }
 
 /**
@@ -35,31 +31,12 @@ interface Props {
  * @function
  */
 export default function Header({
-  url,
   title,
-  mobile,
-  openSearch
+  mobile
 }: Props): React.ReactElement<Props> {
-  const openSearchKeydownHandler = (
-    event: React.KeyboardEvent<HTMLSpanElement>
-  ): void => {
-    if (keys.indexOf(event.key) > -1 || codes.indexOf(event.keyCode) > -1) {
-      openSearch();
-    }
-
-    event.preventDefault();
-  };
-
-  const columnRightClass = classNames("column", {
-    "has-text-right": !mobile,
-    "has-text-centered": mobile,
-    "no-padding": mobile
-  });
-
-  const columnLeftClass = classNames("column", {
-    "has-text-left": !mobile,
-    "has-text-centered": mobile,
-    "no-padding": mobile
+  const bannerClass = classNames("banner", {
+    "banner-mobile": mobile,
+    "banner-desktop": !mobile
   });
 
   return (
@@ -67,30 +44,17 @@ export default function Header({
       <div className="top-border is-fixed-top" />
       <div className="header">
         <div className="container">
-          <div className="columns">
-            <div className={columnLeftClass}>
-              <h1 className="title">
-                <a href={url}>{title}</a>
-              </h1>
+          <div className={bannerClass}>
+            <div>
+              <span>
+                <Link to="/" className="title">
+                  {title}
+                </Link>
+              </span>
+              <span className="subtitle">
+                Architecting in the weirdest possible way
+              </span>
             </div>
-            <nav className={columnRightClass}>
-              <Link to="Posts" className="page">
-                Posts
-              </Link>
-              <Link to="Snippets" className="page">
-                Snippets
-              </Link>
-              <Link to="About" className="page">
-                About
-              </Link>
-              <span
-                role="button"
-                tabIndex={0}
-                className="search fa fa-search"
-                onClick={() => openSearch()}
-                onKeyDown={e => openSearchKeydownHandler(e)}
-              />
-            </nav>
           </div>
         </div>
       </div>
