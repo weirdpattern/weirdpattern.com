@@ -1,9 +1,12 @@
 import * as React from "react";
+import * as data from "../../content/data.json";
 
+import Totals from "../components/Totals";
+import Social from "../components/Social";
 import LatestEntries from "../components/LatestEntries";
-import { GraphResult, Markdowns, Entry, TagCount } from "../interfaces";
+import { GraphResult, Markdowns, Entry } from "../interfaces";
 
-const hasOwnProperty = Object.prototype.hasOwnProperty;
+const config = data as any;
 
 /**
  * Index properties.
@@ -25,20 +28,6 @@ export default class Index extends React.Component<Props, {}> {
   public render(): React.ReactNode {
     const { markdowns = { entries: [] } } = this.props.data;
 
-    const tags: TagCount = markdowns.entries.reduce(
-      (reductor: TagCount, record: Record<"entry", Entry>): TagCount => {
-        for (const tag in record.entry.content.tags) {
-          if (hasOwnProperty.call(reductor, tag)) {
-            reductor[tag]++;
-          } else {
-            reductor[tag] = 1;
-          }
-        }
-        return reductor;
-      },
-      {}
-    );
-
     return (
       <section className="body">
         <div className="container">
@@ -46,7 +35,12 @@ export default class Index extends React.Component<Props, {}> {
             <div className="column is-three-quarters">
               <LatestEntries entries={markdowns.entries.map(e => e.entry)} />
             </div>
-            <div className="column is-one-quarter" />
+            <div className="column is-one-quarter">
+              <Totals entries={markdowns.entries.map(e => e.entry)} />
+              <Social />
+              <Archive entries={markdowns.entries.map(e => e.entry)} />
+              <Tags entries={markdowns.entries.map(e => e.entry)} />
+            </div>
           </div>
         </div>
       </section>

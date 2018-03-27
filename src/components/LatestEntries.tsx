@@ -3,7 +3,7 @@ import * as React from "react";
 import { Entry } from "../interfaces";
 
 /**
- * Index properties.
+ * LatestEntries properties.
  * @typedef {Interface} Props
  * @param {Array<Entry>} entries the entries.
  *
@@ -15,10 +15,12 @@ interface Props {
 }
 
 /**
- * Page component.
+ * LatestEntries component.
+ * @returns {React.ReactElement<Props>}
+ *    the react node that represents the latest entries.
  *
  * @public
- * @class
+ * @function
  */
 export default function LatestEntries({
   entries
@@ -31,7 +33,6 @@ export default function LatestEntries({
             <div>
               <h2>{entry.content.title}</h2>
             </div>
-
           </div>
         );
       })}

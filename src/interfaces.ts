@@ -5,12 +5,7 @@
  * @private
  * @type
  */
-type SocialMedias =
-  | "github"
-  | "twitter"
-  | "facebook"
-  | "linkedIn"
-  | "googleplus";
+export type SocialMedias = "github" | "twitter" | "linkedIn";
 
 /**
  * The social media information.
@@ -207,15 +202,4 @@ export interface Snippets extends Record<"snippets", Entries> {}
 export interface GraphResult<T> {
   data: T;
   children: any;
-}
-
-/**
- * Count by tag.
- * @typedef {Interface} TagCount
- *
- * @public
- * @interface
- */
-export interface TagCount {
-  [key: string]: number;
 }

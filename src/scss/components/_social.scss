@@ -1,0 +1,35 @@
+.social {
+  width: 100%;
+
+  .network {
+    width: 25%;
+    height: 70px;
+    padding: 10px;
+    margin-top: 6px;
+    border-width: 0 3px;
+    border-style: solid;
+    border-color: #FFF;
+    display: inline-block;
+    cursor: pointer;
+
+    &:hover {
+      opacity: 0.7;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    span {
+      padding-top: 5px;
+      font-size: 40px;
+    }
+  }
+
+  #email {
+    span {
+      font-size: 30px;
+      margin-top: 8px;
+    }
+  }
+}

@@ -1,8 +1,8 @@
 ---
 title: "Encrypt a configuration section in a file system path"
 cover: "/images/encryption.jpg"
-date: "11/01/2016"
-category: "snippet"
+date: "11/01/2016 00:04"
+category: "snippets"
 tags:
     - security
     - encryption

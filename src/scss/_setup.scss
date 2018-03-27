@@ -8,11 +8,16 @@ $fa-font-path: '~font-awesome/fonts';
 @import "~bulma/sass/utilities/functions";
 
 $tag: #55B4D4;
+$entity: #399EE6;
 $accented: #FF6A00;
 $enclosing-foreground: #FAFAFA;
 $enclosing-background: #2A2A2A;
 
 $foreground: #ABB0B6;
 $background: #212723;
+
+body {
+  font-family: "Lato" !important;
+}
 
 @import "~bulma";
