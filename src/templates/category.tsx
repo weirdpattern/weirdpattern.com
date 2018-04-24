@@ -3,7 +3,7 @@ import * as React from "react";
 export default class CategoryTemplate extends React.Component<{}, {}> {
   /** @inheritdoc */
   public render(): React.ReactNode {
-    return <span>test</span>;
+    return null;
   }
 }
 

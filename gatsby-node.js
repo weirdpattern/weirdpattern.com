@@ -49,20 +49,10 @@ function addSiblingNodes(nodes, createNodeField) {
         };
       });
 
-    const randomized = [];
-
-    let index = -1;
-    const length = suggestions.length;
-    while (++index < length) {
-      randomized.push(
-        suggestions.splice(Math.floor(Math.random() * length, 1)[0])
-      );
-    }
-
     createNodeField({
       node: current,
       name: "suggestions",
-      value: randomized
+      value: suggestions.sort(() => Math.random() - 0.5)
     });
   }
 }

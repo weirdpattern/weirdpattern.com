@@ -4,12 +4,8 @@ import * as React from "react";
 import Helmet from "react-helmet";
 
 import * as data from "../../content/data.json";
-import Menu from "../components/Menu";
 import Header from "../components/Header";
-import Footer from "../components/Footer";
-import Search from "../components/Search";
 import { isMobile } from "../utils";
-import { GraphResult, Metadata } from "../interfaces";
 
 const config = data as any;
 
@@ -28,14 +24,12 @@ interface Props {
 /**
  * Header state.
  * @typedef {Interface} State
- * @property {boolean} mobile a flag indicating mobile is active.
  * @property {bolean} searching a flag indicating search is active.
  *
  * @private
  * @interface
  */
 interface State {
-  mobile: boolean;
   searching: boolean;
 }
 
@@ -55,60 +49,28 @@ export default class Layout extends React.PureComponent<Props, State> {
   public constructor(props: Props) {
     super(props);
 
-    this.state = { mobile: true, searching: false };
-    this.resizeHandler = this.resizeHandler.bind(this);
-    this.keydownHandler = this.keydownHandler.bind(this);
+    this.state = { searching: false };
     this.openSearchHandler = this.openSearchHandler.bind(this);
     this.closeSearchHandler = this.closeSearchHandler.bind(this);
   }
 
   /** @inheritdoc */
-  public componentDidMount() {
-    this.resizeHandler();
-    window.addEventListener("resize", this.resizeHandler);
-    window.addEventListener("keydown", this.keydownHandler);
-  }
-
-  /** @inheritdoc */
-  public componentWillUnmount() {
-    window.removeEventListener("resize", this.resizeHandler);
-    window.removeEventListener("keydown", this.keydownHandler);
-  }
-
-  /** @inheritdoc */
   public render(): React.ReactNode {
-    const { mobile, searching } = this.state;
+    const { children } = this.props;
+    const { searching } = this.state;
 
     return (
-      <React.Fragment>
-        <Helmet>
-          <meta name="description" content={config.description} />
-        </Helmet>
-        <div>
-          {searching ? (
-            <Search
-              performSearch={this.search}
-              closeSearch={this.closeSearchHandler}
-            />
-          ) : null}
-          <Header title={config.title} mobile={mobile} />
-          <Menu openSearch={this.openSearchHandler} />
-          {this.props.children({ ...this.props, mobile })}
-          <Footer profile={config.profile} />
+      <div className="container-fluid">
+        <div className="row">
+          <Helmet>
+            <title>{config.title}</title>
+            <meta name="description" content={config.description} />
+          </Helmet>
+          <Header />
+          {children()}
         </div>
-      </React.Fragment>
+      </div>
     );
-  }
-
-  /**
-   * Updates the mobile state of the component.
-   * @returns {void}
-   *
-   * @private
-   * @method
-   */
-  private resizeHandler(): void {
-    this.setState({ mobile: isMobile(window.outerWidth) });
   }
 
   /**

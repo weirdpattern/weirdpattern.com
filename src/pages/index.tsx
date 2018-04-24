@@ -26,25 +26,7 @@ interface Props extends GraphResult<Markdowns> {}
 export default class Index extends React.Component<Props, {}> {
   /** @inheritdoc */
   public render(): React.ReactNode {
-    const { markdowns = { entries: [] } } = this.props.data;
-
-    return (
-      <section className="body">
-        <div className="container">
-          <div className="columns">
-            <div className="column is-three-quarters">
-              <LatestEntries entries={markdowns.entries.map(e => e.entry)} />
-            </div>
-            <div className="column is-one-quarter">
-              <Totals entries={markdowns.entries.map(e => e.entry)} />
-              <Social />
-              <Archive entries={markdowns.entries.map(e => e.entry)} />
-              <Tags entries={markdowns.entries.map(e => e.entry)} />
-            </div>
-          </div>
-        </div>
-      </section>
-    );
+    return null;
   }
 }
 

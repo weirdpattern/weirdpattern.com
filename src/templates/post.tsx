@@ -1,10 +1,6 @@
 import * as React from "react";
 
-import { GraphResult, Post } from "../interfaces";
-
-interface Props extends GraphResult<Post> {}
-
-export default class PostTemplate extends React.Component<Props, {}> {
+export default class PostTemplate extends React.Component<{}, {}> {
   /** @inheritdoc */
   public render(): React.ReactNode {
     return null;
