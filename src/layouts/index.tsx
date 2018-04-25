@@ -5,6 +5,8 @@ import Helmet from "react-helmet";
 
 import * as data from "../../content/data.json";
 import Header from "../components/Header";
+import Footer from "../components/Footer";
+
 import { isMobile } from "../utils";
 
 const config = data as any;
@@ -61,20 +63,26 @@ export default class Layout extends React.PureComponent<Props, State> {
 
     return (
       <div className="container-fluid h-100">
-        <div className="row h-100">
+        <div className="page row h-100">
           <Helmet>
             <title>{config.title}</title>
             <meta name="description" content={config.description} />
           </Helmet>
-          <Header
-            title={config.title}
-            description={config.description}
-            name={config.profile.name}
-            email={config.profile.email}
-            credentials={config.profile.credentials}
-            avatar={config.profile.avatar}
-          />
-          {children()}
+          <div className="sidepanel">
+            <Header
+              title={config.title}
+              description={config.description}
+              name={config.profile.name}
+              email={config.profile.email}
+              credentials={config.profile.credentials}
+              avatar={config.profile.avatar}
+            />
+            <Footer
+              networks={config.profile.networks}
+              copyright={config.copyright}
+            />
+          </div>
+          <div className="mainpanel">This is just a test</div>
         </div>
       </div>
     );

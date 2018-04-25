@@ -1,5 +1,8 @@
 import * as React from "react";
 
+import Avatar from "./Avatar";
+import Intro from "./Intro";
+
 /**
  * Properties for the Header component.
  * @typedef {Interface} Props
@@ -7,8 +10,9 @@ import * as React from "react";
  * @property {string} description the description of the blog.
  * @property {string} name the name of the author.
  * @property {string} email the email of the author.
- * @property {string} credentials the credentials of the author.
  * @property {string} avatar the avatar of the author.
+ * @property {string} [biography] the biography of the author.
+ * @property {string} [credentials] the credentials of the author.
  *
  * @private
  * @interface
@@ -18,8 +22,8 @@ interface Props {
   description: string;
   name: string;
   email: string;
-  credentials: string;
   avatar: string;
+  credentials?: string;
 }
 
 /**
@@ -33,10 +37,9 @@ interface Props {
  */
 export default function Header(props: Props): React.ReactElement<Props> {
   return (
-    <header className="col-sm-4">
-      <a href="/about" className="avatar">
-        <img src={props.avatar} alt={props.name} />
-      </a>
+    <header className="header">
+      <Avatar image={props.avatar} description={props.name} link="/about" />
+      <Intro name={props.name} credentials={props.credentials} />
     </header>
   );
 }

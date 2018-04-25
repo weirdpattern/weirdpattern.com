@@ -1,0 +1,54 @@
+.social {
+  cursor: default;
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: 0;
+  vertical-align: baseline;
+
+  li {
+    display: inline-block;
+    padding: 0 1em 0 0;
+
+    a {
+      color: hsla(0,0%,100%,.4);
+
+      &:hover {
+        color: #399EE6;
+        transition: color .2s ease-in-out, border-color .2s ease-in-out
+      }
+    }
+
+    &:last-child {
+      padding-right: 0;
+    }
+  }
+
+  .icon {
+    @extend .fa;
+    font-size: 20px;
+    position: relative;
+    border-bottom: none;
+    text-decoration: none;
+    box-sizing: border-box;
+
+    .label {
+      display: none;
+    }
+  }
+
+  .github {
+    @extend .icon, .fa-github;
+  }
+
+  .twitter {
+    @extend .icon, .fa-twitter;
+  }
+
+  .linkedin {
+    @extend .icon, .fa-linkedin;
+  }
+
+  .email {
+    @extend .icon, .fa-envelope-o;
+  }
+}

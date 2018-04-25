@@ -1,0 +1,15 @@
+.page {
+  padding: 0 !important;
+  background-color: $white-background;
+}
+
+.sidepanel {
+  @extend .col-sm-4;
+  padding: 0 !important;
+  background-color: $black-background;
+}
+
+.mainpanel {
+  @extend .col-sm-8;
+  background-color: $white-background;
+}
