@@ -60,13 +60,20 @@ export default class Layout extends React.PureComponent<Props, State> {
     const { searching } = this.state;
 
     return (
-      <div className="container-fluid">
-        <div className="row">
+      <div className="container-fluid h-100">
+        <div className="row h-100">
           <Helmet>
             <title>{config.title}</title>
             <meta name="description" content={config.description} />
           </Helmet>
-          <Header />
+          <Header
+            title={config.title}
+            description={config.description}
+            name={config.profile.name}
+            email={config.profile.email}
+            credentials={config.profile.credentials}
+            avatar={config.profile.avatar}
+          />
           {children()}
         </div>
       </div>

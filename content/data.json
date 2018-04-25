@@ -7,41 +7,22 @@
   },
   "profile": {
     "name": "Patricio Trevino",
-    "email": "patricio@weirdpattern.com",
+    "email": "patricio.trevino@weirdpattern.com",
     "credentials": "Husband . Father . Developer",
-    "biography": "",
+    "avatar": "/static/images/weirdpattern.png",
     "social": {
       "github": {
-        "icon": "fa-github",
         "handler": "@weirdpattern",
         "link": "https://github.com/weirdpattern"
       },
       "twitter": {
-        "icon": "fa-twitter",
         "handler": "@weirdpattern",
         "link": "https://twitter.com/weirdpattern"
       },
       "linkedin": {
-        "icon": "fa-linkedin",
         "handler": "patricio-treviño-19985833",
         "link": "https://www.linkedin.com/in/patricio-trevi%C3%B1o-19985833/"
       }
     }
-  },
-  "colors": {
-    "total-bg": "#399EE6",
-    "total-fg": "#FFF",
-    "posts-bg": "#86B300",
-    "posts-fg": "#FFF",
-    "snippets-bg": "#E6B673",
-    "snippets-fg": "#FFF",
-    "github-bg": "#000",
-    "github-fg": "#FFF",
-    "twitter-bg": "#1DA1F2",
-    "twitter-fg": "#FFF",
-    "linkedin-bg": "#0077B5",
-    "linkedin-fg": "#FFF",
-    "email-bg": "#F51818",
-    "email-fg": "#FFF"
   }
 }

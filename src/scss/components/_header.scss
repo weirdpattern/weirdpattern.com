@@ -1,3 +1,18 @@
 header {
+  color: #FFFFFF;
+  padding: 8em 0em;
+  text-align: right;
   background-color: #212733;
+
+  .avatar {
+    margin: 0 0 1em;
+    width: 6.25em;
+    border-radius: 100%;
+
+    img {
+      width: 100px;
+      height: 100px;
+      border-radius: 100%;
+    }
+  }
 }
