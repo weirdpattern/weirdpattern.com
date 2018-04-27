@@ -1,12 +1,4 @@
 import * as React from "react";
-import * as data from "../../content/data.json";
-
-import Totals from "../components/Totals";
-import Social from "../components/Social";
-import LatestEntries from "../components/LatestEntries";
-import { GraphResult, Markdowns, Entry } from "../interfaces";
-
-const config = data as any;
 
 /**
  * Index properties.
@@ -15,7 +7,7 @@ const config = data as any;
  * @private
  * @interface
  */
-interface Props extends GraphResult<Markdowns> {}
+interface Props {}
 
 /**
  * Page component.
@@ -26,7 +18,7 @@ interface Props extends GraphResult<Markdowns> {}
 export default class Index extends React.Component<Props, {}> {
   /** @inheritdoc */
   public render(): React.ReactNode {
-    return null;
+    return <span>Hello</span>;
   }
 }
 

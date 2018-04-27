@@ -1,12 +1,12 @@
 {
   "url": "https://weirdpattern.com",
   "title": "weirdpattern.com",
-  "description": "weirdpattern personal blog",
+  "description": "Patricio Treviño's personal blog",
   "paths": {
     "content": "content"
   },
   "profile": {
-    "name": "Patricio Trevino",
+    "name": "Patricio Treviño",
     "email": "patricio.trevino@weirdpattern.com",
     "credentials": "Husband . Father . Developer",
     "avatar": "/static/images/profile.jpg",
@@ -34,7 +34,7 @@
     }
   },
   "copyright": {
-    "text": "Patricio Trevino",
+    "text": "Patricio Treviño",
     "year": "2017-2018"
   }
 }

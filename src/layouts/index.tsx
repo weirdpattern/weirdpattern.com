@@ -54,7 +54,12 @@ export default class Layout extends React.PureComponent<Props, State> {
 
     this.state = { searching: false };
     this.searchHandler = this.searchHandler.bind(this);
-    this.closeSearchHandler = this.closeSearchHandler.bind(this);
+    this.keydownHandler = this.keydownHandler.bind(this);
+  }
+
+  /** @inheritdoc */
+  public componentDidMount(): void {
+    window.addEventListener("keydown", this.keydownHandler);
   }
 
   /** @inheritdoc */
@@ -88,6 +93,7 @@ export default class Layout extends React.PureComponent<Props, State> {
               searching={this.state.searching}
               search={this.searchHandler}
             />
+            {children()}
           </div>
         </div>
       </div>
@@ -122,16 +128,5 @@ export default class Layout extends React.PureComponent<Props, State> {
    */
   private searchHandler(term: string): void {
     this.setState({ searching: true });
-  }
-
-  /**
-   * Cancels the searching state of the component.
-   * @returns {void}
-   *
-   * @private
-   * @method
-   */
-  private closeSearchHandler(): void {
-    this.setState({ searching: false });
   }
 }

@@ -54,6 +54,13 @@ export default class Search extends React.Component<Props, State> {
   }
 
   /** @inheritdoc */
+  public componentDidUpdate() {
+    if (this.props.searching) {
+      this.input.current.focus();
+    }
+  }
+
+  /** @inheritdoc */
   public render(): React.ReactNode {
     const error = { error: this.state.requiredError };
     const focused = { focused: this.state.focused };

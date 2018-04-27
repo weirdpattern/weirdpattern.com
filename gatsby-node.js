@@ -100,7 +100,6 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
 
   return new Promise((resolve, reject) => {
     const postPage = path.resolve("src/templates/post.tsx");
-    const tipPage = path.resolve("src/templates/tip.tsx");
     const tagPage = path.resolve("src/templates/tag.tsx");
     const categoryPage = path.resolve("src/templates/category.tsx");
 
