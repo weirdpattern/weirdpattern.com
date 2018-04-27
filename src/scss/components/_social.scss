@@ -13,7 +13,7 @@
       color: hsla(0,0%,100%,.4);
 
       &:hover {
-        color: #399EE6;
+        color: $accented-color;
         transition: color .2s ease-in-out, border-color .2s ease-in-out
       }
     }

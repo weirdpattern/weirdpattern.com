@@ -23,7 +23,7 @@ interface Props {
  * @public
  * @function
  */
-export default function Intro({ networks }: Props): React.ReactElement<Props> {
+export default function Social({ networks }: Props): React.ReactElement<Props> {
   return (
     <ul className="social">
       {Object.keys(networks).map((name: string, index: number) => {

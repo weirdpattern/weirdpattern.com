@@ -6,6 +6,7 @@ import Helmet from "react-helmet";
 import * as data from "../../content/data.json";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import Search from "../components/Search";
 
 import { isMobile } from "../utils";
 
@@ -52,7 +53,7 @@ export default class Layout extends React.PureComponent<Props, State> {
     super(props);
 
     this.state = { searching: false };
-    this.openSearchHandler = this.openSearchHandler.bind(this);
+    this.searchHandler = this.searchHandler.bind(this);
     this.closeSearchHandler = this.closeSearchHandler.bind(this);
   }
 
@@ -62,8 +63,8 @@ export default class Layout extends React.PureComponent<Props, State> {
     const { searching } = this.state;
 
     return (
-      <div className="container-fluid h-100">
-        <div className="page row h-100">
+      <div className="container-fluid">
+        <div className="page">
           <Helmet>
             <title>{config.title}</title>
             <meta name="description" content={config.description} />
@@ -82,7 +83,12 @@ export default class Layout extends React.PureComponent<Props, State> {
               copyright={config.copyright}
             />
           </div>
-          <div className="mainpanel">This is just a test</div>
+          <div className="mainpanel">
+            <Search
+              searching={this.state.searching}
+              search={this.searchHandler}
+            />
+          </div>
         </div>
       </div>
     );
@@ -114,16 +120,7 @@ export default class Layout extends React.PureComponent<Props, State> {
    * @private
    * @method
    */
-  private search(term: string): void {}
-
-  /**
-   * Activates the searching state of the component.
-   * @returns {void}
-   *
-   * @private
-   * @method
-   */
-  private openSearchHandler(): void {
+  private searchHandler(term: string): void {
     this.setState({ searching: true });
   }
 

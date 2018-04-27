@@ -1,15 +1,11 @@
 .header {
-  color: #F5F5F5;
-  text-align: right;
-  border-bottom: none;
-  background-color: $black-background;
+  @extend .sidepanel-item;
 
-  margin: 0;
-  padding: 11em 4em !important;
-
-  @media screen and (max-width: $break-small) {
-    min-height: 300px;
-    text-align: center;
-    padding: 4em 1em !important;
+  .intro {
+    h1 {
+      @media screen and (max-width: 320px) {
+        font-size: 2em;
+      }
+    }
   }
 }

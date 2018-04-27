@@ -1,5 +1,12 @@
-$fa-font-path: "~font-awesome/fonts";
+$break-xs: map-get($grid-breakpoints, "xs");
+$break-sm: map-get($grid-breakpoints, "sm");
+$break-md: map-get($grid-breakpoints, "md");
+$break-lg: map-get($grid-breakpoints, "lg");
+$break-xl: map-get($grid-breakpoints, "xl");
 
-$break-small: 575px;
+$error-color: #F51818;
+$accented-color: #FF6A00;
+$focus-color: #399EE6;
 $black-background: #212733;
 $white-background: #F5F5F5;
+$search-background: #FFFFFF;

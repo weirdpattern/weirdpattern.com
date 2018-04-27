@@ -1,15 +1,3 @@
 .footer {
-  color: #F5F5F5;
-  text-align: right;
-  border-bottom: none;
-  background-color: $black-background;
-
-  margin: 0;
-  padding: 8em 4em !important;
-
-  @media screen and (max-width: $break-small) {
-    height: 100px;
-    text-align: center;
-    padding: 1em 1em !important;
-  }
+  @extend .sidepanel-item
 }
