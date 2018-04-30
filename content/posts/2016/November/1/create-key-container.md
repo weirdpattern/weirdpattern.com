@@ -1,7 +1,7 @@
 ---
 title: "Create a key container"
 cover: "/images/encryption.jpg"
-date: "11/01/2016 00:00"
+date: "2016-01-11"
 category: "snippets"
 tags:
     - security

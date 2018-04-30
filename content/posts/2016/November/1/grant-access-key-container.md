@@ -1,7 +1,7 @@
 ---
 title: "Grant access to a key container"
 cover: "/images/encryption.jpg"
-date: "11/01/2016 00:01"
+date: "2016-11-01"
 category: "snippets"
 tags:
     - security

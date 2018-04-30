@@ -35,3 +35,43 @@ export interface SocialNetwork {
 export interface SocialNetworks {
   [key: string]: SocialNetwork;
 }
+
+/**
+ * A post entry.
+ * @typedef {Interface} QueryPost
+ *
+ * @public
+ * @interface
+ */
+export interface QueryPost {
+  fields: {
+    slug: string;
+  };
+  excerpt: string;
+  timeToRead: string;
+  content: {
+    title: string;
+    tags: string[];
+    category: string;
+    cover: string;
+    date: Date;
+  };
+}
+
+/**
+ * The post query results.
+ * @typedef {Interface} MarkdownPost
+ *
+ * @public
+ * @interface
+ */
+export interface MarkdownPost {
+  markdown: {
+    posts: Array<{ post: QueryPost }>;
+  };
+}
+
+export interface Query<T> {
+  data: T;
+  children: any;
+}

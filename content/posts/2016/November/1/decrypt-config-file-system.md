@@ -1,7 +1,7 @@
 ---
 title: "Decrypt a configuration section in a file system path"
 cover: "/images/encryption.jpg"
-date: "11/01/2016 00:02"
+date: "2016-11-01"
 category: "snippets"
 tags:
     - security

@@ -1,7 +1,7 @@
 ---
 title: "My first post"
 cover: "/images/encryption.jpg"
-date: "03/23/2018"
+date: "2018-03-23"
 category: "posts"
 tags:
     - security
