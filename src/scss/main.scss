@@ -1,7 +1,7 @@
+$fa-font-path: "~font-awesome/fonts";
+
 @import "_reset";
 @import "_fonts";
-
-$fa-font-path: "~font-awesome/fonts";
 
 @import "~bootstrap/scss/bootstrap";
 @import "~font-awesome/scss/font-awesome";
@@ -16,6 +16,6 @@ $fa-font-path: "~font-awesome/fonts";
 @import "components/_social";
 @import "components/_copyright";
 @import "components/_search";
-@import "components/_post";
+@import "components/_post-preview";
 
 @import "pages/_index";

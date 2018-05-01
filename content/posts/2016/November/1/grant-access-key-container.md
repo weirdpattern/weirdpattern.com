@@ -1,6 +1,6 @@
 ---
 title: "Grant access to a key container"
-description: "Learn how to grant access to a key container"
+abstract: "Learn how to grant access to a key container"
 cover: "/images/encryption.jpg"
 date: "2016-11-01"
 category: "snippets"
@@ -12,15 +12,11 @@ tags:
     - c#
 ---
 
-# Grant access to a key container
-
 ## Syntax
 
 ```
 aspnet_regiis -pa <container> <account> [-csp <provider>][-pku][-full]
 ```
-
-## Arguments 
 
 |   Required?   | Option    | Description                                   |
 | :-----------: | --------- | --------------------------------------------- |

@@ -1,6 +1,6 @@
 ---
 title: "Encrypt a configuration section in a file system path"
-description: "Learn how to create encrypt a configuration section"
+abstract: "Learn how to create encrypt a configuration section"
 cover: "/images/encryption.jpg"
 date: "2016-11-01"
 category: "snippets"
@@ -12,15 +12,11 @@ tags:
     - c#
 ---
 
-# Encrypt a configuration section in a file system path
-
 ## Syntax
 
 ```
 aspnet_regiis -pef <section> <directory> -prov <provider> [-pkm]
 ```
-
-## Arguments 
 
 |   Required?   | Option    | Description                                                           |
 | :-----------: | --------- | --------------------------------------------------------------------- |

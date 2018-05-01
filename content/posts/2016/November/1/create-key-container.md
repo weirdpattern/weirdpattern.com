@@ -1,6 +1,6 @@
 ---
 title: "Create a key container"
-description: "Learn how to create a new key container for your applications"
+abstract: "Learn how to use ASP.NET IIS Registration Tool to create an RSA public/private key pair in the specified container."
 cover: "/images/encryption.jpg"
 date: "2016-01-11"
 category: "snippets"
@@ -12,15 +12,11 @@ tags:
     - c#
 ---
 
-# Create a key container
-
 ## Syntax
 
 ```
 aspnet_regiis -pc <container> [-size <keySize>][-csp <provider>][-pku][-exp]
 ```
-
-## Arguments 
 
 |   Required?   | Option    | Description                                   |
 | :-----------: | --------- | --------------------------------------------- |

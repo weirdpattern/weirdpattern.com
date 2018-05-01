@@ -47,11 +47,12 @@ export interface QueryPost {
   fields: {
     slug: string;
   };
+  html: string;
   excerpt: string;
   timeToRead: string;
   content: {
     title: string;
-    description: string;
+    abstract: string;
     tags: string[];
     category: string;
     cover: string;

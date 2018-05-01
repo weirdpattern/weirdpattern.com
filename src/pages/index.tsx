@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import Post from "../components/Post";
+import PostPreview from "../components/PostPreview";
 import { QueryPost, MarkdownPost, Query } from "../interfaces";
 
 /**
@@ -69,7 +69,7 @@ export default class Index extends React.Component<Props, State> {
     return (
       <div className="post-list">
         {posts.map((data: { post: QueryPost }, index: number) => {
-          return <Post key={index} post={data.post} />;
+          return <PostPreview key={index} data={data.post} />;
         })}
       </div>
     );
@@ -117,10 +117,11 @@ export const query = graphql`
     ) {
       posts: edges {
         post: node {
+          html
           excerpt
           content: frontmatter {
             title
-            description
+            abstract
             tags
             category
             date(formatString: "DD MMMM, YYYY")

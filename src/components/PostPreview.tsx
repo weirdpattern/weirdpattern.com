@@ -1,5 +1,7 @@
 import * as React from "react";
 
+import Link from "gatsby-link";
+
 import { QueryPost } from "../interfaces";
 
 /**
@@ -11,7 +13,7 @@ import { QueryPost } from "../interfaces";
  * @interface
  */
 interface Props {
-  post: QueryPost;
+  data: QueryPost;
 }
 
 /**
@@ -23,13 +25,18 @@ interface Props {
  * @public
  * @function
  */
-export default function Post({ post }: Props): React.ReactElement<Props> {
+export default function Post({ data }: Props): React.ReactElement<Props> {
   return (
     <div className="post">
       <h1>
-        <a href={post.fields.slug}>{post.content.title}</a>
+        <Link to={data.fields.slug}>{data.content.title}</Link>
       </h1>
-      <p>{post.content.description}</p>
+      <div
+        dangerouslySetInnerHTML={{
+          __html:
+            data.content.category === "snippets" ? data.html : data.excerpt
+        }}
+      />
     </div>
   );
 }

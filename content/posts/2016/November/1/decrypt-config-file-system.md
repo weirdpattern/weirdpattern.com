@@ -1,6 +1,6 @@
 ---
 title: "Decrypt a configuration section in a file system path"
-description: "Learn how to create decrypt a configuration section"
+abstract: "Learn how to create decrypt a configuration section"
 cover: "/images/encryption.jpg"
 date: "2016-11-01"
 category: "snippets"
@@ -12,15 +12,11 @@ tags:
     - c#
 ---
 
-# Decrypt a configuration section in a file system path
-
 ## Syntax
 
 ```
 aspnet_regiis -pdf <section> <directory> [-location <subPath>] [-pkm]
 ```
-
-## Arguments 
 
 |   Required?   | Option    |  Description                                             |
 | :-----------: | --------- | -------------------------------------------------------- |

@@ -1,4 +1,8 @@
+import "prismjs/themes/prism-solarizedlight.css";
+import "prismjs/plugins/line-numbers/prism-line-numbers.min.js";
+
 import "../scss/main.scss";
+import "../scss/themes/prism-ayu-light.scss";
 
 import * as React from "react";
 import Helmet from "react-helmet";
