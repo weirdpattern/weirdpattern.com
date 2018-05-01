@@ -1,5 +1,6 @@
 ---
 title: "Create a key container"
+description: "Learn how to create a new key container for your applications"
 cover: "/images/encryption.jpg"
 date: "2016-01-11"
 category: "snippets"

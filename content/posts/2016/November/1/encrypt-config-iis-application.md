@@ -1,5 +1,6 @@
 ---
 title: "Encrypt a configuration section in an IIS application"
+description: "Learn how to create encrypt a configuration section hosted in a IIS site"
 cover: "/images/encryption.jpg"
 date: "2016-11-01"
 category: "snippets"

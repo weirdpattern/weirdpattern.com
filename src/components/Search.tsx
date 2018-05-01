@@ -64,6 +64,7 @@ export default class Search extends React.Component<Props, State> {
   public render(): React.ReactNode {
     const error = { error: this.state.requiredError };
     const focused = { focused: this.state.focused };
+    const searchBoxClasses = classNames("search-box", focused, error);
     const searchPanelClasses = classNames("search-panel", focused, error);
     const searchIndicatorClasses = classNames(
       "search-indicator",
@@ -75,7 +76,7 @@ export default class Search extends React.Component<Props, State> {
       <div className={searchPanelClasses}>
         <input
           placeholder="Looking for something?"
-          className="search-box"
+          className={searchBoxClasses}
           onBlur={() => this.focusHandler(false)}
           onFocus={() => this.focusHandler(true)}
           onKeyDown={e => this.searchKeydownHandler(e)}
@@ -100,7 +101,7 @@ export default class Search extends React.Component<Props, State> {
     if (event.key === "Enter" || event.keyCode === 13) {
       if (!this.input.current.value) {
         this.setState({ requiredError: true }, () => {
-          setTimeout(() => this.setState({ requiredError: false }), 2000);
+          setTimeout(() => this.setState({ requiredError: false }), 1000);
         });
       } else {
         this.setState({ requiredError: false });

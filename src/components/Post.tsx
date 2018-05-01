@@ -25,8 +25,11 @@ interface Props {
  */
 export default function Post({ post }: Props): React.ReactElement<Props> {
   return (
-    <div>
-      {post.content.title} - {post.content.date}
+    <div className="post">
+      <h1>
+        <a href={post.fields.slug}>{post.content.title}</a>
+      </h1>
+      <p>{post.content.description}</p>
     </div>
   );
 }

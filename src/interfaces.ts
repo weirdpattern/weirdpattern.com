@@ -51,6 +51,7 @@ export interface QueryPost {
   timeToRead: string;
   content: {
     title: string;
+    description: string;
     tags: string[];
     category: string;
     cover: string;

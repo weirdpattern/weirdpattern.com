@@ -120,6 +120,7 @@ export const query = graphql`
           excerpt
           content: frontmatter {
             title
+            description
             tags
             category
             date(formatString: "DD MMMM, YYYY")

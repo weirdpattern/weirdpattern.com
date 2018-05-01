@@ -1,4 +1,5 @@
 @import "_reset";
+@import "_fonts";
 
 $fa-font-path: "~font-awesome/fonts";
 
@@ -11,11 +12,10 @@ $fa-font-path: "~font-awesome/fonts";
 @import "components/_header";
 @import "components/_avatar";
 @import "components/_intro";
-
 @import "components/_footer";
 @import "components/_social";
 @import "components/_copyright";
-
 @import "components/_search";
+@import "components/_post";
 
 @import "pages/_index";

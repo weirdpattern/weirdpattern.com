@@ -1,5 +1,6 @@
 ---
 title: "Grant access to a key container"
+description: "Learn how to grant access to a key container"
 cover: "/images/encryption.jpg"
 date: "2016-11-01"
 category: "snippets"

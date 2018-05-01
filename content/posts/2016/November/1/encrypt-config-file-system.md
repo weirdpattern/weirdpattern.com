@@ -1,5 +1,6 @@
 ---
 title: "Encrypt a configuration section in a file system path"
+description: "Learn how to create encrypt a configuration section"
 cover: "/images/encryption.jpg"
 date: "2016-11-01"
 category: "snippets"
