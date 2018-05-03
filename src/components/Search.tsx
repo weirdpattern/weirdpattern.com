@@ -75,7 +75,7 @@ export default class Search extends React.Component<Props, State> {
     return (
       <div className={searchPanelClasses}>
         <input
-          placeholder="Looking for something?"
+          placeholder="Show me..."
           className={searchBoxClasses}
           onBlur={() => this.focusHandler(false)}
           onFocus={() => this.focusHandler(true)}

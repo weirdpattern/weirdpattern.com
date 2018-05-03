@@ -3,7 +3,7 @@ title: "Decrypt a configuration section in an IIS application"
 abstract: "Learn how to create decrypt a configuration section hosted in a IIS site"
 cover: "/images/encryption.jpg"
 date: "2016-11-01"
-category: "snippets"
+category: "snippet"
 tags:
     - security
     - encryption

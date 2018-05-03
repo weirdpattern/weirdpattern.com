@@ -119,6 +119,7 @@ export const query = graphql`
         post: node {
           html
           excerpt
+          timeToRead
           content: frontmatter {
             title
             abstract

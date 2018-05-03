@@ -3,7 +3,7 @@ title: "Encrypt a configuration section in a file system path"
 abstract: "Learn how to create encrypt a configuration section"
 cover: "/images/encryption.jpg"
 date: "2016-11-01"
-category: "snippets"
+category: "snippet"
 tags:
     - security
     - encryption

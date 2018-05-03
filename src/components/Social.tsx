@@ -3,7 +3,7 @@ import * as React from "react";
 import { SocialNetwork, SocialNetworks } from "../interfaces";
 
 /**
- * Properties for the Header component.
+ * Properties for the Social component.
  * @typedef {Interface} Props
  * @property {string} networks the networks of the author.
  *

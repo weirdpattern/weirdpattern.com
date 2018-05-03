@@ -1,12 +1,8 @@
-$fa-font-path: "~font-awesome/fonts";
-
-@import "_reset";
-@import "_fonts";
-
-@import "~bootstrap/scss/bootstrap";
-@import "~font-awesome/scss/font-awesome";
+@import "_imports";
 
 @import "_variables";
+
+@import "_reset";
 @import "_layout";
 
 @import "components/_header";

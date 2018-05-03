@@ -1,3 +1,13 @@
+.gatsby-highlight:before {
+  display: block;
+  content: attr(data-language);
+  background-color: #E2E4E7;
+  font-size: 0.7em;
+  padding: 10px 5px 5px 5px;
+  text-align: right;
+  color: #414347;
+}
+
 pre[class*="language-"] {
   border: 1px solid #E2E4E7;
 }
@@ -29,10 +39,9 @@ code[class*="language-"]::selection, code[class*="language-"] ::selection {
   background: #F0EEE4;
 }
 
-/* Code blocks */
 pre[class*="language-"] {
 	padding: 1em;
-	margin: .5em 0;
+	margin: 0 0 .5em 0;
 	overflow: auto;
 }
 
@@ -41,7 +50,6 @@ pre[class*="language-"] {
 	background: #FAFAFA;
 }
 
-/* Inline code */
 :not(pre) > code[class*="language-"] {
 	padding: .1em;
 }

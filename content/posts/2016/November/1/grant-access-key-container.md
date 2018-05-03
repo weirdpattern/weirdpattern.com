@@ -3,7 +3,7 @@ title: "Grant access to a key container"
 abstract: "Learn how to grant access to a key container"
 cover: "/images/encryption.jpg"
 date: "2016-11-01"
-category: "snippets"
+category: "snippet"
 tags:
     - security
     - encryption
