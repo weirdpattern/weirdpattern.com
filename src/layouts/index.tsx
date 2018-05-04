@@ -1,6 +1,3 @@
-import "prismjs/themes/prism-solarizedlight.css";
-import "prismjs/plugins/line-numbers/prism-line-numbers.min.js";
-
 import "../scss/main.scss";
 import "../scss/themes/prism-ayu-light.scss";
 
@@ -12,7 +9,7 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Search from "../components/Search";
 
-import { isMobile } from "../utils";
+import { copyToClipboard } from "../utils";
 
 const config = data as any;
 
@@ -64,6 +61,38 @@ export default class Layout extends React.PureComponent<Props, State> {
   /** @inheritdoc */
   public componentDidMount(): void {
     window.addEventListener("keydown", this.keydownHandler);
+
+    const elements = document.querySelectorAll(".gatsby-highlight");
+
+    let index = -1;
+    const length = elements.length;
+    while (++index < length) {
+      const element = elements[index];
+      const pre = element.querySelector("pre[class*='language-']");
+      const language = pre.getAttribute("class").split("-")[1];
+
+      const container = document.createElement("div");
+      container.setAttribute("class", "code-header");
+
+      const title = document.createElement("span");
+      title.innerText = language !== "text" ? language : "";
+      container.appendChild(title);
+
+      const copy = document.createElement("div");
+      copy.setAttribute("class", "copy");
+      container.appendChild(copy);
+      copy.addEventListener("click", () => {
+        const text = pre.querySelector("code").innerText;
+        copyToClipboard(text);
+
+        copy.classList.add("success");
+        setTimeout(() => {
+          copy.classList.remove("success");
+        }, 1000);
+      });
+
+      pre.parentElement.insertBefore(container, pre);
+    }
   }
 
   /** @inheritdoc */

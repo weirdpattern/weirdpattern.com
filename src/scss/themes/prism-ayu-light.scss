@@ -1,11 +1,62 @@
-.gatsby-highlight:before {
-  display: block;
-  content: attr(data-language);
-  background-color: #E2E4E7;
-  font-size: 0.7em;
-  padding: 10px 5px 5px 5px;
-  text-align: right;
-  color: #414347;
+@keyframes blink {
+  10%, 90% {
+    color: #86B300;
+  }
+
+  20%, 80% {
+    color: #414347;
+  }
+
+  30%, 50%, 70% {
+    color: #86B300;
+  }
+
+  40%, 60% {
+    color: #414347;
+  }
+}
+
+.gatsby-highlight {
+  .code-header {
+    display: block;
+    background-color: #E2E4E7;
+    font-size: 1em;
+    padding: 1px 10px;
+    color: #414347;
+    text-align: left;
+
+    > * {
+      display: inline-block;
+    }
+
+    span {
+      font-size: 0.75em;
+      text-transform: uppercase;
+    }
+
+    .copy {
+      float: right;
+      cursor: pointer;
+      font-family: "FontAwesome" !important;
+      border-left: 1px solid #E2E4E7;
+
+      &.copy:before {
+        content: "\F0C5";
+      }
+
+      &:hover {
+        color: #FF6A00;
+      }
+
+      &.success {
+        animation: blink 2s cubic-bezier(.36,.07,.19,.97) both;
+      }
+    }
+  }
+}
+
+.gatsby-highlight.clear:before {
+  content: none;
 }
 
 pre[class*="language-"] {

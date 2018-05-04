@@ -28,19 +28,14 @@ interface Props {
  * @function
  */
 export default function Post({ data }: Props): React.ReactElement<Props> {
-  const postClasses = classNames("post", {
+  const postClasses = classNames("post-preview", {
     post: data.content.category === "post",
     snippet: data.content.category === "snippet"
   });
 
   return (
     <React.Fragment>
-      <div className={data.content.category}>
-        <Link to={"/categories/" + kebabCase(data.content.category)}>
-          {data.content.category}
-        </Link>
-      </div>
-      <div className="post">
+      <div className={postClasses}>
         <h1>
           <Link to={data.fields.slug}>{data.content.title}</Link>
         </h1>
@@ -52,6 +47,14 @@ export default function Post({ data }: Props): React.ReactElement<Props> {
           <div className="reading-time">
             <i />
             <span>{data.timeToRead} min read</span>
+          </div>
+          <div className="category">
+            <i />
+            <span>
+              <Link to={"/categories/" + kebabCase(data.content.category)}>
+                {data.content.category}
+              </Link>
+            </span>
           </div>
           <div className="tags">
             <i />

@@ -1,13 +1,12 @@
 ---
-title: "Encrypt a configuration section in an IIS application"
-abstract: "Learn how to create encrypt a configuration section hosted in a IIS site"
+title: "Encrypt a configuration section in a configuration file hosted in IIS"
+abstract: "Learn how to encrypt a configuration section in a configuration file hosted in IIS"
 cover: "/images/encryption.jpg"
 date: "2016-11-01"
 category: "snippet"
 tags:
     - security
     - encryption
-    - decryption
     - aspnet
     - c#
 ---

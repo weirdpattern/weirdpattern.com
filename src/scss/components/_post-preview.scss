@@ -1,20 +1,4 @@
-.snippet {
-  height: 25px;
-  text-align: right;
-  padding-right: 10px;
-  background-color: #86B300;
-
-  a {
-    color: #FAFAFA;
-    text-decoration: none;
-  }
-
-  a:hover {
-    color: #B30086;
-  }
-}
-
-.post {
+.post-preview {
   padding: 30px;
   margin-bottom: 20px;
   background-color: $post-background;
@@ -26,6 +10,50 @@
 
   h2 {
     font-size: 20px;
+  }
+
+  table {
+    padding: 0;
+  }
+
+  table tr {
+    border-top: 1px solid #CCCCCC;
+    background-color: #FFFFFF;
+    margin: 0;
+    padding: 0;
+  }
+
+  table tr:nth-child(2n) {
+    background-color: #F8F8F8;
+  }
+
+  table tr th {
+    font-weight: bold;
+    border: 1px solid #CCCCCC;
+    margin: 0;
+    padding: 6px 13px;
+  }
+
+  table tr td {
+    border: 1px solid #CCCCCC;
+    margin: 0;
+    padding: 6px 13px;
+  }
+
+  table tr th :first-child, table tr td :first-child {
+    margin-top: 0;
+  }
+
+  table tr th :last-child, table tr td :last-child {
+    margin-bottom: 0;
+  }
+
+  &.snippet {
+    border-top: 10px solid #86B300;
+  }
+
+  &.post {
+    border-top: 10px solid #A37ACC;
   }
 
   .metadata {
