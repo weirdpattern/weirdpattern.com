@@ -5,6 +5,7 @@
   "description": "Isn't it weird?",
   "author": "Patricio Trevino <patricio@weirdpattern.com>",
   "dependencies": {
+    "@andrew-codes/gatsby-plugin-elasticlunr-search": "^1.0.4",
     "@types/classnames": "^2.2.3",
     "@types/lodash": "^4.14.108",
     "@types/node": "^10.0.3",
@@ -13,6 +14,7 @@
     "@types/react-helmet": "^5.0.6",
     "bootstrap": "^4.1.0",
     "classnames": "^2.2.5",
+    "elasticlunr": "^0.9.5",
     "font-awesome": "^4.7.0",
     "gatsby": "^1.9.256",
     "gatsby-link": "^1.6.41",

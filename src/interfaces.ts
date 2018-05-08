@@ -73,6 +73,26 @@ export interface MarkdownPost {
   };
 }
 
+/**
+ * The search index.
+ * @typedef {Interface} SearchIndex
+ *
+ * @public
+ * @interface
+ */
+export interface SearchIndex {
+  search: {
+    index: any;
+  }
+}
+
+/**
+ * The query result container.
+ * @typedef {Interface} Query
+ *
+ * @public
+ * @interface
+ */
 export interface Query<T> {
   data: T;
   children: any;

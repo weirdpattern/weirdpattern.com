@@ -4,37 +4,40 @@ import "../scss/themes/prism-ayu-light.scss";
 import * as React from "react";
 import Helmet from "react-helmet";
 
+import { Index } from "elasticlunr";
+
 import * as data from "../../content/data.json";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Search from "../components/Search";
 
 import { copyToClipboard } from "../utils";
+import { Query, SearchIndex } from "../interfaces";
 
 const config = data as any;
 
 /**
  * Layout props.
- * @typedef {Interface} Props
+ * @typedef {Query<SearchIndex>} Props
  * @property {*} children the children function renderer.
  *
  * @private
  * @interface
  */
-interface Props {
-  children: any;
-}
+interface Props extends Query<SearchIndex> {}
 
 /**
  * Header state.
  * @typedef {Interface} State
- * @property {bolean} searching a flag indicating search is active.
+ * @property {boolean} searchIntent a flag indicating the user intents to search.
+ * @property {Array<any>} results the results from the search.
  *
  * @private
  * @interface
  */
 interface State {
-  searching: boolean;
+  searchIntent: boolean;
+  results: Array<any>;
 }
 
 /**
@@ -46,6 +49,8 @@ interface State {
  * @function
  */
 export default class Layout extends React.PureComponent<Props, State> {
+  private index: any;
+
   /**
    * Class constructor.
    * @param {Props} props the properties of the layout.
@@ -53,7 +58,7 @@ export default class Layout extends React.PureComponent<Props, State> {
   public constructor(props: Props) {
     super(props);
 
-    this.state = { searching: false };
+    this.state = { searchIntent: false, results: [] };
     this.searchHandler = this.searchHandler.bind(this);
     this.keydownHandler = this.keydownHandler.bind(this);
   }
@@ -62,43 +67,42 @@ export default class Layout extends React.PureComponent<Props, State> {
   public componentDidMount(): void {
     window.addEventListener("keydown", this.keydownHandler);
 
-    const elements = document.querySelectorAll(".gatsby-highlight");
+    Array.from(document.querySelectorAll(".gatsby-highlight")).forEach(
+      (element: Element) => {
+        const pre = element.querySelector("pre[class*='language-']");
+        const language = pre.getAttribute("class").split("-")[1];
 
-    let index = -1;
-    const length = elements.length;
-    while (++index < length) {
-      const element = elements[index];
-      const pre = element.querySelector("pre[class*='language-']");
-      const language = pre.getAttribute("class").split("-")[1];
+        const container = document.createElement("div");
+        container.setAttribute("class", "code-header");
 
-      const container = document.createElement("div");
-      container.setAttribute("class", "code-header");
+        const title = document.createElement("span");
+        title.innerText =
+          language.trim().toLowerCase() !== "text" ? language : "";
 
-      const title = document.createElement("span");
-      title.innerText = language !== "text" ? language : "";
-      container.appendChild(title);
+        const copy = document.createElement("div");
+        copy.setAttribute("class", "copy");
+        copy.addEventListener("click", () => {
+          const text = pre.querySelector("code").innerText;
+          copyToClipboard(text);
 
-      const copy = document.createElement("div");
-      copy.setAttribute("class", "copy");
-      container.appendChild(copy);
-      copy.addEventListener("click", () => {
-        const text = pre.querySelector("code").innerText;
-        copyToClipboard(text);
+          copy.classList.add("success");
+          setTimeout(() => {
+            copy.classList.remove("success");
+          }, 1000);
+        });
 
-        copy.classList.add("success");
-        setTimeout(() => {
-          copy.classList.remove("success");
-        }, 1000);
-      });
+        container.appendChild(title);
+        container.appendChild(copy);
 
-      pre.parentElement.insertBefore(container, pre);
-    }
+        pre.parentElement.insertBefore(container, pre);
+      }
+    );
   }
 
   /** @inheritdoc */
   public render(): React.ReactNode {
     const { children } = this.props;
-    const { searching } = this.state;
+    const { results } = this.state;
 
     return (
       <div className="container-fluid">
@@ -123,7 +127,8 @@ export default class Layout extends React.PureComponent<Props, State> {
           </div>
           <div className="mainpanel">
             <Search
-              searching={this.state.searching}
+              searchIntent={this.state.searchIntent}
+              results={this.state.results}
               search={this.searchHandler}
             />
             {children()}
@@ -147,7 +152,7 @@ export default class Layout extends React.PureComponent<Props, State> {
       event.shiftKey &&
       (event.key === "S" || event.keyCode === 83)
     ) {
-      this.setState({ searching: true });
+      this.setState({ searchIntent: true });
     }
   }
 
@@ -160,6 +165,22 @@ export default class Layout extends React.PureComponent<Props, State> {
    * @method
    */
   private searchHandler(term: string): void {
-    this.setState({ searching: true });
+    this.index = this.index || Index.load(
+      this.props.data.search.index
+    );
+
+    this.setState({
+      results: this.index.search(term).map(
+        ({ ref }: any) => this.index.documentStore.getDoc(ref)
+      )
+    });
   }
 }
+
+export const query = graphql`
+  query SearchIndexQuery {
+    search: siteSearchIndex {
+      index
+    }
+  }
+`;

@@ -1,3 +1,4 @@
+declare module "elasticlunr";
 declare const graphql: (query: TemplateStringsArray) => void;
 declare module "*.json" {
   const value: any;

@@ -4,14 +4,16 @@ import * as classNames from "classnames";
 /**
  * Properties for the Search component.
  * @typedef {Interface} Props
- * @property {boolean} searching a flag indicating the search active state.
+ * @property {boolean} searchIntent a flag indicating the user intents to search.
+ * @property {Array<any>} results the results from the search.
  * @property {Function} search the open handler.
  *
  * @private
  * @interface
  */
 interface Props {
-  searching: boolean;
+  searchIntent: boolean;
+  results: Array<any>;
   search: (term: string) => void;
 }
 
@@ -48,14 +50,16 @@ export default class Search extends React.Component<Props, State> {
    */
   public constructor(props: Props) {
     super(props);
-    this.state = { requiredError: false, focused: false };
+
     this.input = React.createRef();
+
+    this.state = { requiredError: false, focused: false };
     this.searchKeydownHandler = this.searchKeydownHandler.bind(this);
   }
 
   /** @inheritdoc */
   public componentDidUpdate() {
-    if (this.props.searching) {
+    if (this.props.searchIntent) {
       this.input.current.focus();
     }
   }
@@ -73,17 +77,20 @@ export default class Search extends React.Component<Props, State> {
     );
 
     return (
-      <div className={searchPanelClasses}>
-        <input
-          placeholder="Show me..."
-          className={searchBoxClasses}
-          onBlur={() => this.focusHandler(false)}
-          onFocus={() => this.focusHandler(true)}
-          onKeyDown={e => this.searchKeydownHandler(e)}
-          ref={this.input}
-        />
-        <i className={searchIndicatorClasses} />
-      </div>
+      <React.Fragment>
+        <div className={searchPanelClasses}>
+          <input
+            placeholder="Show me..."
+            className={searchBoxClasses}
+            onBlur={() => this.focusHandler(false)}
+            onFocus={() => this.focusHandler(true)}
+            onKeyDown={e => this.searchKeydownHandler(e)}
+            ref={this.input}
+          />
+          <i className={searchIndicatorClasses} />
+        </div>
+        {this.props.results.length > 0 ? <div>Hello</div> : null}
+      </React.Fragment>
     );
   }
 
