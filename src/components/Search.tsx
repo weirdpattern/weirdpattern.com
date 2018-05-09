@@ -1,20 +1,20 @@
 import * as React from "react";
 import * as classNames from "classnames";
 
+import Overlay from "./Overlay";
+
 /**
  * Properties for the Search component.
  * @typedef {Interface} Props
- * @property {boolean} searchIntent a flag indicating the user intents to search.
- * @property {Array<any>} results the results from the search.
- * @property {Function} search the open handler.
+ * @property {any} index the index to be used.
+ * @property {boolean} searching a flag indicating the user is searching.
  *
  * @private
  * @interface
  */
 interface Props {
-  searchIntent: boolean;
-  results: Array<any>;
-  search: (term: string) => void;
+  index: any;
+  searching: boolean;
 }
 
 /**
@@ -23,6 +23,7 @@ interface Props {
  * @property {boolean} focused a flag indicating the search box is focused.
  * @property {string} requiredError
  *   a flag indicating the search box is missing a required value.
+ * @property {Array<any>} results the results of the search.
  *
  * @private
  * @interface
@@ -30,6 +31,7 @@ interface Props {
 interface State {
   focused: boolean;
   requiredError: boolean;
+  results: Array<any>;
 }
 
 /**
@@ -41,7 +43,8 @@ interface State {
  * @public
  * @function
  */
-export default class Search extends React.Component<Props, State> {
+export default class Search extends React.PureComponent<Props, State> {
+  private index: any;
   private input: React.RefObject<HTMLInputElement>;
 
   /**
@@ -53,19 +56,21 @@ export default class Search extends React.Component<Props, State> {
 
     this.input = React.createRef();
 
-    this.state = { requiredError: false, focused: false };
+    this.state = { requiredError: false, focused: false, results: [] };
     this.searchKeydownHandler = this.searchKeydownHandler.bind(this);
   }
 
   /** @inheritdoc */
   public componentDidUpdate() {
-    if (this.props.searchIntent) {
+    if (this.props.searching) {
       this.input.current.focus();
     }
   }
 
   /** @inheritdoc */
   public render(): React.ReactNode {
+    const { searching } = this.props;
+
     const error = { error: this.state.requiredError };
     const focused = { focused: this.state.focused };
     const searchBoxClasses = classNames("search-box", focused, error);
@@ -76,8 +81,8 @@ export default class Search extends React.Component<Props, State> {
       error
     );
 
-    return (
-      <React.Fragment>
+    return searching ? (
+      <Overlay>
         <div className={searchPanelClasses}>
           <input
             placeholder="Show me..."
@@ -89,9 +94,8 @@ export default class Search extends React.Component<Props, State> {
           />
           <i className={searchIndicatorClasses} />
         </div>
-        {this.props.results.length > 0 ? <div>Hello</div> : null}
-      </React.Fragment>
-    );
+      </Overlay>
+    ) : null;
   }
 
   /**
@@ -112,7 +116,7 @@ export default class Search extends React.Component<Props, State> {
         });
       } else {
         this.setState({ requiredError: false });
-        this.props.search(this.input.current.value);
+        this.search(this.input.current.value);
       }
 
       event.preventDefault();
@@ -129,5 +133,21 @@ export default class Search extends React.Component<Props, State> {
    */
   private focusHandler(focused: boolean): void {
     this.setState({ focused });
+  }
+
+  /**
+   * Performs a search.
+   * @param {string} term the term to be searched.
+   * @returns {void}
+   *
+   * @private
+   * @method
+   */
+  private search(term: string): void {
+    this.setState({
+      results: this.props.index
+        .search(term)
+        .map(({ ref }: any) => this.index.documentStore.getDoc(ref))
+    });
   }
 }

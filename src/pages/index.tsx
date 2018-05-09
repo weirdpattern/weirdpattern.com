@@ -1,16 +1,24 @@
 import * as React from "react";
 
+import Helmet from "react-helmet";
+
+import * as data from "../../content/data.json";
 import PostPreview from "../components/PostPreview";
 import { QueryPost, MarkdownPost, Query } from "../interfaces";
+
+const config = data as any;
 
 /**
  * Index properties.
  * @typedef {Query<MarkdownPost>} Props
+ * @property {Function} onScroll a callback for scroll events.
  *
  * @private
  * @interface
  */
-interface Props extends Query<MarkdownPost> {}
+interface Props extends Query<MarkdownPost> {
+  onScroll: (scrolled: boolean) => void;
+}
 
 /**
  * Index state.
@@ -34,7 +42,7 @@ interface State {
  * @public
  * @class
  */
-export default class Index extends React.Component<Props, State> {
+export default class Index extends React.PureComponent<Props, State> {
   private ticking: boolean = false;
 
   /**
@@ -67,11 +75,17 @@ export default class Index extends React.Component<Props, State> {
     const posts = this.props.data.markdown.posts;
 
     return (
-      <div className="post-list">
-        {posts.map((data: { post: QueryPost }, index: number) => {
-          return <PostPreview key={index} data={data.post} />;
-        })}
-      </div>
+      <React.Fragment>
+        <Helmet>
+          <title>Dashboard | {config.title}</title>
+          <meta name="description" content={config.description} />
+        </Helmet>
+        <div className="post-list">
+          {posts.map((data: { post: QueryPost }, index: number) => {
+            return <PostPreview key={index} data={data.post} />;
+          })}
+        </div>
+      </React.Fragment>
     );
   }
 
@@ -92,6 +106,7 @@ export default class Index extends React.Component<Props, State> {
       this.setState({ numberOfPosts: this.state.numberOfPosts + 12 });
     }
 
+    this.props.onScroll(document.documentElement.scrollTop > 0);
     this.ticking = false;
   }
 

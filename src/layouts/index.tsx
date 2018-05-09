@@ -2,7 +2,6 @@ import "../scss/main.scss";
 import "../scss/themes/prism-ayu-light.scss";
 
 import * as React from "react";
-import Helmet from "react-helmet";
 
 import { Index } from "elasticlunr";
 
@@ -10,6 +9,7 @@ import * as data from "../../content/data.json";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Search from "../components/Search";
+import Actions from "../components/Actions";
 
 import { copyToClipboard } from "../utils";
 import { Query, SearchIndex } from "../interfaces";
@@ -19,7 +19,6 @@ const config = data as any;
 /**
  * Layout props.
  * @typedef {Query<SearchIndex>} Props
- * @property {*} children the children function renderer.
  *
  * @private
  * @interface
@@ -29,15 +28,16 @@ interface Props extends Query<SearchIndex> {}
 /**
  * Header state.
  * @typedef {Interface} State
- * @property {boolean} searchIntent a flag indicating the user intents to search.
- * @property {Array<any>} results the results from the search.
+ * @property {boolean} backToTop
+ *    a flag indicating the back to top button should be enabled.
+ * @property {boolean} searching a flag indicating the user is searching.
  *
  * @private
  * @interface
  */
 interface State {
-  searchIntent: boolean;
-  results: Array<any>;
+  backToTop: boolean;
+  searching: boolean;
 }
 
 /**
@@ -58,13 +58,15 @@ export default class Layout extends React.PureComponent<Props, State> {
   public constructor(props: Props) {
     super(props);
 
-    this.state = { searchIntent: false, results: [] };
-    this.searchHandler = this.searchHandler.bind(this);
+    this.state = { backToTop: false, searching: false };
+    this.scrollHandler = this.scrollHandler.bind(this);
     this.keydownHandler = this.keydownHandler.bind(this);
   }
 
   /** @inheritdoc */
   public componentDidMount(): void {
+    this.index = this.index || Index.load(this.props.data.search.index);
+
     window.addEventListener("keydown", this.keydownHandler);
 
     Array.from(document.querySelectorAll(".gatsby-highlight")).forEach(
@@ -102,15 +104,12 @@ export default class Layout extends React.PureComponent<Props, State> {
   /** @inheritdoc */
   public render(): React.ReactNode {
     const { children } = this.props;
-    const { results } = this.state;
+    const { backToTop } = this.state;
 
     return (
       <div className="container-fluid">
         <div className="page">
-          <Helmet>
-            <title>{config.title}</title>
-            <meta name="description" content={config.description} />
-          </Helmet>
+          <Search index={this.index} searching={this.state.searching} />
           <div className="sidepanel">
             <Header
               title={config.title}
@@ -126,16 +125,24 @@ export default class Layout extends React.PureComponent<Props, State> {
             />
           </div>
           <div className="mainpanel">
-            <Search
-              searchIntent={this.state.searchIntent}
-              results={this.state.results}
-              search={this.searchHandler}
-            />
-            {children()}
+            {children({ ...this.props, onScroll: this.scrollHandler })}
           </div>
+          <Actions backToTop={backToTop} />
         </div>
       </div>
     );
+  }
+
+  /**
+   * Handles scrolling events to enable the backToTop button.
+   * @param {boolean} scrolled a flag indicating the page was scrolled.
+   * @returns {void}
+   *
+   * @private
+   * @method
+   */
+  private scrollHandler(scrolled: boolean): void {
+    this.setState({ backToTop: scrolled });
   }
 
   /**
@@ -152,28 +159,8 @@ export default class Layout extends React.PureComponent<Props, State> {
       event.shiftKey &&
       (event.key === "S" || event.keyCode === 83)
     ) {
-      this.setState({ searchIntent: true });
+      this.setState({ searching: true });
     }
-  }
-
-  /**
-   * Performs a search.
-   * @param {string} term the term to be searched.
-   * @returns {void}
-   *
-   * @private
-   * @method
-   */
-  private searchHandler(term: string): void {
-    this.index = this.index || Index.load(
-      this.props.data.search.index
-    );
-
-    this.setState({
-      results: this.index.search(term).map(
-        ({ ref }: any) => this.index.documentStore.getDoc(ref)
-      )
-    });
   }
 }
 
