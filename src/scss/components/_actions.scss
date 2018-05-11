@@ -1,0 +1,29 @@
+.actions {
+  position: fixed;
+  right: 50px;
+  bottom: 45px;
+  z-index: 999;
+  padding-top: 15px;
+
+  ul {
+    margin: 0;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 50px;
+    text-align: center;
+    visibility: hidden;
+    list-style-type: none;
+
+    li {
+      list-style: none;
+      margin-bottom: 15px;
+    }
+  }
+
+  &.active {
+    ul {
+      visibility: visible;
+    }
+  }
+}

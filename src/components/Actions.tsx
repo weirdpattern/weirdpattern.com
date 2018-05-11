@@ -1,18 +1,17 @@
 import * as React from "react";
+import * as classNames from "classnames";
 
 import ActionButton from "./ActionButton";
 
 /**
  * Properties for the Actions component.
  * @typedef {Interface} Props
- * @property {string} defaultAction the default action.
  * @property {boolean} actions an array of actions to be displayed.
  *
  * @private
  * @interface
  */
 interface Props {
-  defaultAction: string;
   actions: Array<string>;
 }
 
@@ -45,23 +44,44 @@ export default class Actions extends React.PureComponent<Props, State> {
    */
   public constructor(props: Props) {
     super(props);
+
+    this.state = { toggled: false };
+    this.mouseEnterHandler = this.mouseEnterHandler.bind(this);
+    this.mouseLeaveHandler = this.mouseLeaveHandler.bind(this);
   }
 
   /** @inheritdoc */
   public render(): React.ReactNode {
-    const { actions, defaultAction } = this.props;
+    const actions = this.props.actions.slice();
+    const { toggled } = this.state;
+
+    const actionClasses = classNames("actions", {
+      active: toggled
+    });
 
     return (
-      <div className="action">
-        <ActionButton main={true} className={defaultAction} />
+      <div
+        className={actionClasses}
+        onMouseEnter={this.mouseEnterHandler}
+        onMouseLeave={this.mouseLeaveHandler}
+      >
+        <ActionButton main={true} active={toggled} type={actions.shift()} />
         <ul>
           {actions.map((action: string, index: number) => (
             <li key={index}>
-              <ActionButton main={false} className={action} />
+              <ActionButton active={toggled} type={action} />
             </li>
           ))}
         </ul>
       </div>
     );
+  }
+
+  private mouseEnterHandler(): void {
+    this.setState({ toggled: true });
+  }
+
+  private mouseLeaveHandler(): void {
+    this.setState({ toggled: false });
   }
 }

@@ -1,0 +1,68 @@
+.action-button {
+  color: #FFFFFF;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 50%;
+  vertical-align: middle;
+  opacity: 0.3;
+  width: 40px;
+  height: 40px;
+  z-index: 1;
+  transition: transform 0.2s ease-out;
+  outline: none;
+
+  i {
+    line-height: 40px;
+    width: inherit;
+    font-size: 1.6em;
+    font-family: "FontAwesome" !important;
+  }
+
+  &:not(.main) {
+    transform: scale(0.4) translateY(40px) translateX(0px);
+  }
+
+  &:not(.main).active {
+    transform: scale(1) translateY(0) translateX(0);
+  }
+
+  &.active {
+    opacity: 1;
+  }
+
+  &.large {
+    letter-spacing: 0.5px;
+    line-height: 54px;
+    font-size: 15px;
+    width: 56px;
+    height: 56px;
+    padding: 0;
+
+    i {
+      line-height: 54px;
+      font-size: 1.6em;
+    }
+  }
+
+  &.search {
+    background-color: $accented-color;
+
+    i {
+      @extend .fa, .fa-search;
+    }
+  }
+
+  &.scroll-top {
+    background-color: $secondary-color;
+
+    i {
+      @extend .fa, .fa-arrow-up;
+    }
+  }
+
+  &:focus {
+    outline: 0;
+  }
+}

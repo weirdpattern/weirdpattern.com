@@ -28,7 +28,7 @@ interface Props extends Query<SearchIndex> {}
 /**
  * Header state.
  * @typedef {Interface} State
- * @property {boolean} backToTop
+ * @property {boolean} scrollTop
  *    a flag indicating the back to top button should be enabled.
  * @property {boolean} searching a flag indicating the user is searching.
  *
@@ -36,7 +36,7 @@ interface Props extends Query<SearchIndex> {}
  * @interface
  */
 interface State {
-  backToTop: boolean;
+  scrollTop: boolean;
   searching: boolean;
 }
 
@@ -58,7 +58,7 @@ export default class Layout extends React.PureComponent<Props, State> {
   public constructor(props: Props) {
     super(props);
 
-    this.state = { backToTop: false, searching: false };
+    this.state = { scrollTop: false, searching: false };
     this.scrollHandler = this.scrollHandler.bind(this);
     this.keydownHandler = this.keydownHandler.bind(this);
   }
@@ -104,7 +104,7 @@ export default class Layout extends React.PureComponent<Props, State> {
   /** @inheritdoc */
   public render(): React.ReactNode {
     const { children } = this.props;
-    const { backToTop } = this.state;
+    const { scrollTop } = this.state;
 
     return (
       <div className="container-fluid">
@@ -127,7 +127,9 @@ export default class Layout extends React.PureComponent<Props, State> {
           <div className="mainpanel">
             {children({ ...this.props, onScroll: this.scrollHandler })}
           </div>
-          <Actions backToTop={backToTop} />
+          <Actions
+            actions={scrollTop ? ["scroll-top", "search"] : ["search"]}
+          />
         </div>
       </div>
     );
@@ -142,7 +144,7 @@ export default class Layout extends React.PureComponent<Props, State> {
    * @method
    */
   private scrollHandler(scrolled: boolean): void {
-    this.setState({ backToTop: scrolled });
+    this.setState({ scrollTop: scrolled });
   }
 
   /**
