@@ -1,8 +1,24 @@
 /**
+ * The action definition.
+ * @property {string} name the name of the action.
+ * @property {Function} callback the callback to be executed.
+ *
+ * @public
+ * @interface
+ */
+export interface Action {
+  name: string;
+  callback: Function;
+}
+
+/**
  * The copyright information.
  * @typedef {Interface} Copyrights
  * @property {string} text the copyright text.
  * @property {string} year the copyright year.
+ *
+ * @public
+ * @interface
  */
 export interface Copyrights {
   text: string;

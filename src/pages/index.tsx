@@ -1,10 +1,12 @@
 import * as React from "react";
 
 import Helmet from "react-helmet";
+import { throttle } from "lodash";
 
 import * as data from "../../content/data.json";
 import PostPreview from "../components/PostPreview";
-import { QueryPost, MarkdownPost, Query } from "../interfaces";
+import { getCommonActions } from "../utils";
+import { Action, QueryPost, MarkdownPost, Query } from "../interfaces";
 
 const config = data as any;
 
@@ -17,7 +19,7 @@ const config = data as any;
  * @interface
  */
 interface Props extends Query<MarkdownPost> {
-  onScroll: (scrolled: boolean) => void;
+  onUpdateActions: (actions: Array<Action>) => void;
 }
 
 /**
@@ -106,7 +108,12 @@ export default class Index extends React.PureComponent<Props, State> {
       this.setState({ numberOfPosts: this.state.numberOfPosts + 12 });
     }
 
-    this.props.onScroll(document.documentElement.scrollTop > 0);
+    if (document.documentElement.scrollTop > 0) {
+      this.props.onUpdateActions(getCommonActions("scrollTop", "search"));
+    } else {
+      this.props.onUpdateActions(getCommonActions("search"));
+    }
+
     this.ticking = false;
   }
 

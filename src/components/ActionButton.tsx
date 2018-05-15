@@ -1,10 +1,12 @@
 import * as React from "react";
 import * as classNames from "classnames";
 
+import { Action } from "../interfaces";
+
 /**
  * Properties for the Header component.
  * @typedef {Interface} Props
- * @property {string} type the type of button to render.
+ * @property {Action} type the type of button to render.
  * @property {boolean} [main] whether this is the main action.
  * @property {boolean} [active] whether the button is active or not.
  *
@@ -12,7 +14,7 @@ import * as classNames from "classnames";
  * @interface
  */
 interface Props {
-  type: string;
+  type: Action;
   main?: boolean;
   active?: boolean;
 }
@@ -31,14 +33,14 @@ export default function ActionButton({
   active,
   main = false
 }: Props): React.ReactElement<Props> {
-  const buttonClasses = classNames("action-button", type, {
+  const buttonClasses = classNames("action-button", type.name, {
     main,
     active,
     large: main
   });
 
   return (
-    <button className={buttonClasses}>
+    <button className={buttonClasses} onClick={() => type.callback()}>
       <i />
     </button>
   );

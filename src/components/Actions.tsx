@@ -2,6 +2,7 @@ import * as React from "react";
 import * as classNames from "classnames";
 
 import ActionButton from "./ActionButton";
+import { Action } from "../interfaces";
 
 /**
  * Properties for the Actions component.
@@ -12,7 +13,7 @@ import ActionButton from "./ActionButton";
  * @interface
  */
 interface Props {
-  actions: Array<string>;
+  actions: Array<Action>;
 }
 
 /**
@@ -67,7 +68,7 @@ export default class Actions extends React.PureComponent<Props, State> {
       >
         <ActionButton main={true} active={toggled} type={actions.shift()} />
         <ul>
-          {actions.map((action: string, index: number) => (
+          {actions.map((action: Action, index: number) => (
             <li key={index}>
               <ActionButton active={toggled} type={action} />
             </li>
@@ -77,10 +78,24 @@ export default class Actions extends React.PureComponent<Props, State> {
     );
   }
 
+  /**
+   * Handles mouse enter events to enable the actions.
+   * @returns {void}
+   *
+   * @private
+   * @method
+   */
   private mouseEnterHandler(): void {
     this.setState({ toggled: true });
   }
 
+  /**
+   * Handles mouse leave events to enable the actions.
+   * @returns {void}
+   *
+   * @private
+   * @method
+   */
   private mouseLeaveHandler(): void {
     this.setState({ toggled: false });
   }

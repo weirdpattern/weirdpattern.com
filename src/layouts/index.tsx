@@ -11,8 +11,8 @@ import Footer from "../components/Footer";
 import Search from "../components/Search";
 import Actions from "../components/Actions";
 
-import { copyToClipboard } from "../utils";
-import { Query, SearchIndex } from "../interfaces";
+import { copyToClipboard, getCommonActions } from "../utils";
+import { Action, Query, SearchIndex } from "../interfaces";
 
 const config = data as any;
 
@@ -28,16 +28,15 @@ interface Props extends Query<SearchIndex> {}
 /**
  * Header state.
  * @typedef {Interface} State
- * @property {boolean} scrollTop
- *    a flag indicating the back to top button should be enabled.
  * @property {boolean} searching a flag indicating the user is searching.
+ * @property {Array<Action>} actions the actions available in the page.
  *
  * @private
  * @interface
  */
 interface State {
-  scrollTop: boolean;
   searching: boolean;
+  actions: Array<Action>;
 }
 
 /**
@@ -58,9 +57,9 @@ export default class Layout extends React.PureComponent<Props, State> {
   public constructor(props: Props) {
     super(props);
 
-    this.state = { scrollTop: false, searching: false };
-    this.scrollHandler = this.scrollHandler.bind(this);
+    this.state = { actions: getCommonActions("search"), searching: false };
     this.keydownHandler = this.keydownHandler.bind(this);
+    this.updateActions = this.updateActions.bind(this);
   }
 
   /** @inheritdoc */
@@ -102,9 +101,15 @@ export default class Layout extends React.PureComponent<Props, State> {
   }
 
   /** @inheritdoc */
+  public componentWillUnmount(): void {
+    window.addEventListener("keydown", this.keydownHandler);
+  }
+
+  /** @inheritdoc */
   public render(): React.ReactNode {
+    const instance = this;
     const { children } = this.props;
-    const { scrollTop } = this.state;
+    const { actions } = this.state;
 
     return (
       <div className="container-fluid">
@@ -125,26 +130,17 @@ export default class Layout extends React.PureComponent<Props, State> {
             />
           </div>
           <div className="mainpanel">
-            {children({ ...this.props, onScroll: this.scrollHandler })}
+            {children({ ...this.props, onUpdateActions: this.updateActions })}
           </div>
           <Actions
-            actions={scrollTop ? ["scroll-top", "search"] : ["search"]}
+            actions={actions.map((action: Action) => {
+              action.callback = action.callback.bind(instance);
+              return action;
+            })}
           />
         </div>
       </div>
     );
-  }
-
-  /**
-   * Handles scrolling events to enable the backToTop button.
-   * @param {boolean} scrolled a flag indicating the page was scrolled.
-   * @returns {void}
-   *
-   * @private
-   * @method
-   */
-  private scrollHandler(scrolled: boolean): void {
-    this.setState({ scrollTop: scrolled });
   }
 
   /**
@@ -163,6 +159,18 @@ export default class Layout extends React.PureComponent<Props, State> {
     ) {
       this.setState({ searching: true });
     }
+  }
+
+  /**
+   * Updates the actions on the page.
+   * @param {Array<Action>} actions the actions to be displayed.
+   * @returns {void}
+   *
+   * @private
+   * @method
+   */
+  private updateActions(actions: Array<Action>): void {
+    this.setState({ actions });
   }
 }
 

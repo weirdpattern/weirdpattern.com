@@ -1,3 +1,16 @@
+import { Action } from "./interfaces";
+
+// common callbacks
+// using function to facilitate binding
+const callbacks: { [key: string]: Function } = {
+  search: function() {
+    this.setState({ searching: true });
+  },
+  scrollTop: function() {
+    window.scrollTo(0, 0);
+  }
+};
+
 /**
  * Determines if the given width falls under the mobile category.
  * @param {number} width the width to be validated.
@@ -27,4 +40,27 @@ export function copyToClipboard(text: string): void {
   document.addEventListener("copy", listener);
   document.execCommand("copy");
   document.removeEventListener("copy", listener);
+}
+
+/**
+ * Gets the common actions.
+ * @param {Array<string>} candidates the types to be added.
+ * @returns {Array<Action>} the actions.
+ *
+ * @public
+ * @function
+ */
+export function getCommonActions(...candidates: Array<string>): Array<Action> {
+  const actions: Array<Action> = [];
+
+  let index = -1;
+  const length = candidates.length;
+  while (++index < length) {
+    actions.push({
+      name: candidates[index],
+      callback: callbacks[candidates[index]]
+    });
+  }
+
+  return actions;
 }
