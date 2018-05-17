@@ -158,6 +158,11 @@ export default class Layout extends React.PureComponent<Props, State> {
       (event.key === "S" || event.keyCode === 83)
     ) {
       this.setState({ searching: true });
+
+      event.preventDefault();
+      event.cancelBubble = true;
+    } else if (event.key === "Escape" || event.keyCode === 27) {
+      this.setState({ searching: false });
     }
   }
 
