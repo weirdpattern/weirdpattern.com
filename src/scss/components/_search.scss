@@ -27,13 +27,6 @@
     border-bottom: 2px solid $focus-color;
   }
 
-  &.error {
-    border-color: $error-color;
-    background-color: $error-background;
-    transform: translate3d(0, 0, 0);
-    animation: shake 1s cubic-bezier(.36,.07,.19,.97) both;
-  }
-
   .search-box {
     border: 0;
     width: calc(100% - 40px);
@@ -43,20 +36,12 @@
     color: $focus-color;
     background-color: $search-background;
 
-    &.error {
-      background-color: $error-background;
-    }
-
     &::placeholder {
       color: #EEEEEE;
     }
 
     &.focused::placeholder {
       opacity: 0;
-    }
-
-    &.error::placeholder {
-      color: $error-color;
     }
   }
 
@@ -71,10 +56,6 @@
 
     &.focused {
       color: $focus-color;
-    }
-
-    &.error {
-      color: $error-color;
     }
   }
 }

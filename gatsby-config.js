@@ -115,6 +115,8 @@ module.exports = {
         resolvers: {
           MarkdownRemark: {
             title: node => node.frontmatter.title,
+            style: node => node.frontmatter.style,
+            abstract: node => node.frontmatter.abstract,
             category: node => node.frontmatter.category,
             tags: node => node.frontmatter.tags
           }

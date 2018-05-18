@@ -1,9 +1,10 @@
 ---
 title: "Decrypt a configuration section in a configuration file not hosted in IIS"
+style: "snippet"
 abstract: "Learn how to decrypt a configuration section in a configuration file not hosted in IIS"
 cover: "/images/encryption.jpg"
 date: "2016-11-01"
-category: "snippet"
+category: "security"
 tags:
     - security
     - decryption

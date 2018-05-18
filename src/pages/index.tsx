@@ -144,6 +144,7 @@ export const query = graphql`
           timeToRead
           content: frontmatter {
             title
+            style
             abstract
             tags
             category

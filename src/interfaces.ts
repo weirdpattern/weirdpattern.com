@@ -69,6 +69,7 @@ export interface QueryPost {
   content: {
     title: string;
     abstract: string;
+    style: string;
     tags: string[];
     category: string;
     cover: string;
@@ -99,7 +100,7 @@ export interface MarkdownPost {
 export interface SearchIndex {
   search: {
     index: any;
-  }
+  };
 }
 
 /**

@@ -29,8 +29,8 @@ interface Props {
  */
 export default function Post({ data }: Props): React.ReactElement<Props> {
   const postClasses = classNames("post-preview", {
-    post: data.content.category === "post",
-    snippet: data.content.category === "snippet"
+    post: data.content.style === "post",
+    snippet: data.content.style === "snippet"
   });
 
   return (
@@ -72,7 +72,9 @@ export default function Post({ data }: Props): React.ReactElement<Props> {
         <div
           dangerouslySetInnerHTML={{
             __html:
-              data.content.category === "snippet" ? data.html : data.excerpt
+              data.content.style === "snippet"
+                ? data.html
+                : data.content.abstract || data.excerpt
           }}
         />
       </div>
