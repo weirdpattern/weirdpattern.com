@@ -114,6 +114,8 @@ module.exports = {
         fields: ["title", "category", "tags"],
         resolvers: {
           MarkdownRemark: {
+            url: node => node.fields.slug,
+            date: node => node.frontmatter.date,
             title: node => node.frontmatter.title,
             style: node => node.frontmatter.style,
             abstract: node => node.frontmatter.abstract,

@@ -12,6 +12,8 @@ tags:
     - c#
 ---
 
+<!-- start:abstract -->
+
 ## Syntax
 
 ```
@@ -24,6 +26,8 @@ aspnet_regiis -pd <section> -app <virtualPath> [-location <subPath>] [-pkm]
 |   &#10003;    | virtualPath | The IIS website that hosts the web.config.                    |
 |               | subPath     | The subpath inside the IIS website that hosts the web.config. |
 |               | pkm         | Encrypts the machine config instead of the local config.      |
+
+<!-- end:abstract -->
 
 ## Example
 

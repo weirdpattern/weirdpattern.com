@@ -3,7 +3,7 @@ title: "Create a key container"
 style: "snippet"
 abstract: "Learn how to use ASP.NET IIS Registration Tool to create an RSA public/private key pair in the specified container."
 cover: "/images/encryption.jpg"
-date: "2016-01-11"
+date: "2016-11-01"
 category: "security"
 tags:
     - security
@@ -14,6 +14,8 @@ tags:
     - aspnet
     - c#
 ---
+
+<!-- start:abstract -->
 
 ## Syntax
 
@@ -28,6 +30,8 @@ aspnet_regiis -pc <container> [-size <keySize>][-csp <provider>][-pku][-exp]
 |               | provider  | The container provide to be used (RSA/Dpapi). |
 |               | pku       | Makes the container a user level container.   |
 |               | exp       | Makes the container exportable.               |  
+
+<!-- end:abstract -->
 
 ## Example
 

@@ -2,20 +2,41 @@ import * as React from "react";
 import * as classNames from "classnames";
 
 import Link from "gatsby-link";
-import { kebabCase } from "lodash";
 
+import Metadata from "./Metadata";
 import { QueryPost } from "../interfaces";
 
 /**
- * Properties for the Header component.
+ * Properties for the PostPreview component.
  * @typedef {Interface} Props
- * @property {string} networks the networks of the author.
+ * @property {QueryPost} data the data of the post to be displayed.
  *
  * @private
  * @interface
  */
 interface Props {
   data: QueryPost;
+}
+
+/**
+ * Extracts the abstract information.
+ * @param {QueryPost} data the data to be parsed.
+ * @returns {string} the abstract information.
+ *
+ * @private
+ * @function
+ */
+function getAbstract(data: QueryPost): string {
+  let html = data.content.abstract || data.excerpt || data.html;
+
+  const startIndex = data.html.indexOf("<!-- start:abstract -->");
+  const endIndex = data.html.indexOf("<!-- end:abstract -->");
+
+  if (data.html && startIndex > -1 && endIndex > -1) {
+    html = data.html.substr(startIndex, endIndex);
+  }
+
+  return html;
 }
 
 /**
@@ -39,42 +60,10 @@ export default function Post({ data }: Props): React.ReactElement<Props> {
         <h1>
           <Link to={data.fields.slug}>{data.content.title}</Link>
         </h1>
-        <div className="metadata">
-          <div className="date">
-            <i />
-            <span>{data.content.date}</span>
-          </div>
-          <div className="reading-time">
-            <i />
-            <span>{data.timeToRead} min read</span>
-          </div>
-          <div className="category">
-            <i />
-            <span>
-              <Link to={"/categories/" + kebabCase(data.content.category)}>
-                {data.content.category}
-              </Link>
-            </span>
-          </div>
-          <div className="tags">
-            <i />
-            {data.content.tags.sort().map((tag: string, index: number) => {
-              return (
-                <React.Fragment key={index}>
-                  <span>
-                    <Link to={"/tags/" + kebabCase(tag)}>{tag}</Link>
-                  </span>
-                </React.Fragment>
-              );
-            })}
-          </div>
-        </div>
+        <Metadata data={data} />
         <div
           dangerouslySetInnerHTML={{
-            __html:
-              data.content.style === "snippet"
-                ? data.html
-                : data.content.abstract || data.excerpt
+            __html: getAbstract(data)
           }}
         />
       </div>

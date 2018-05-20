@@ -1,0 +1,43 @@
+.metadata {
+  margin-bottom: 25px;
+
+  > * {
+    display: block;
+    font-size: 13px;
+  }
+
+  .item {
+    i {
+      @extend .fa;
+      width: 20px;
+      font-family: FontAwesome !important;
+    }
+
+    span {
+      font-size: 13px;
+      color: #6E7580;
+      vertical-align: middle;
+    }
+  }
+
+  .date {
+    @extend .item;
+    i { @extend .fa-calendar; }
+  }
+
+  .reading-time {
+    @extend .item;
+    i { @extend .fa-clock-o; }
+  }
+
+  .category {
+    @extend .item;
+    i { @extend .fa-folder-o };
+  }
+
+  .tags {
+    @extend .item;
+    i { @extend .fa-tags };
+    span { margin-right: 10px; }
+  }
+}

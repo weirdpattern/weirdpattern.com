@@ -114,3 +114,17 @@ export interface Query<T> {
   data: T;
   children: any;
 }
+
+/**
+ * The search post result.
+ * @typedef {Interface} SearchPost
+ *
+ * @public
+ * @interface
+ */
+export interface SearchPost {
+  url: string;
+  date: string;
+  title: string;
+  style: string;
+}

@@ -115,7 +115,11 @@ export default class Search extends React.PureComponent<Props, State> {
    * @method
    */
   private focusHandler(focused: boolean): void {
-    this.setState({ focused });
+    if (this.input.current.value) {
+      this.setState({ focused });
+    } else {
+      this.setState({ focused, results: [] });
+    }
   }
 
   /**

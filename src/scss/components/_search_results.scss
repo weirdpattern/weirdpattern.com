@@ -1,12 +1,37 @@
 .search-results {
-  padding: 10px 20px;
+  padding: 0;
 
   ul {
+    padding: 20px 0;
     list-style-type: none;
 
     li {
       list-style: none;
-      margin-bottom: 15px;
+      background-color: $search-background;
+
+      .style {
+        border-left-width: 10px;
+        border-left-style: solid;
+
+        h3 {
+          margin: 0;
+          font-size: 1.3em;
+        }
+
+        &.snippet {
+          border-left-color: #86B300;
+        }
+
+        &.post {
+          border-left-color: #A37ACC;
+        }
+
+        & > div {
+          padding: 10px;
+          width: 100%;
+          border-bottom: 1px dashed #D9D8D7;
+        }
+      }
     }
   }
 }

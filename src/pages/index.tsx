@@ -135,7 +135,7 @@ export default class Index extends React.PureComponent<Props, State> {
 export const query = graphql`
   query IndexQuery {
     markdown: allMarkdownRemark(
-      sort: { fields: [frontmatter___date], order: DESC }
+      sort: { fields: [frontmatter___date, frontmatter___title], order: DESC }
     ) {
       posts: edges {
         post: node {

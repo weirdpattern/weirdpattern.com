@@ -12,6 +12,8 @@ tags:
     - c#
 ---
 
+<!-- start:abstract -->
+
 ## Syntax
 
 ```
@@ -26,6 +28,8 @@ aspnet_regiis -pef <section> <directory> -prov <provider> [-pkm]
 |               | pkm       | Encrypts the machine config instead of the local config.              |
 
 Note: this option looks for a web.config file, there is no way you can specify a difference name. If needed, rename your app.config to web.config, encryp/decrypt, then rename again.  
+
+<!-- end:abstract -->
 
 ## Example
 
