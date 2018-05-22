@@ -1,5 +1,7 @@
 import * as React from "react";
 
+import Link from "gatsby-link";
+
 /**
  * Properties for the Header component.
  * @typedef {Interface} Props
@@ -31,8 +33,8 @@ export default function Avatar({
   link
 }: Props): React.ReactElement<Props> {
   return (
-    <a href={link || "#"} className="avatar">
+    <Link to={link || "#"} className="avatar">
       <img src={image} alt={description} />
-    </a>
+    </Link>
   );
 }
