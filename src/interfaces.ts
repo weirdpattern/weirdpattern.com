@@ -86,6 +86,8 @@ export interface QueryPost {
  */
 export interface MarkdownPost {
   markdown: {
+    tags: Array<string>;
+    categories: Array<string>;
     posts: Array<{ post: QueryPost }>;
   };
 }

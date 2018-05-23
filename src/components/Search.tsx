@@ -9,6 +9,7 @@ import SearchResults from "./SearchResults";
  * @typedef {Interface} Props
  * @property {any} index the index to be used.
  * @property {boolean} searching a flag indicating the user is searching.
+ * @property {Function} close closes the search.
  *
  * @private
  * @interface
@@ -16,6 +17,7 @@ import SearchResults from "./SearchResults";
 interface Props {
   index: any;
   searching: boolean;
+  close: Function;
 }
 
 /**
@@ -67,7 +69,7 @@ export default class Search extends React.PureComponent<Props, State> {
 
   /** @inheritdoc */
   public render(): React.ReactNode {
-    const { searching } = this.props;
+    const { close, searching } = this.props;
 
     const focused = { focused: this.state.focused };
     const searchBoxClasses = classNames("search-box", focused);
@@ -88,7 +90,7 @@ export default class Search extends React.PureComponent<Props, State> {
           <i className={searchIndicatorClasses} />
         </div>
         {this.state.results.length > 0 ? (
-          <SearchResults results={this.state.results} />
+          <SearchResults results={this.state.results} close={close} />
         ) : null}
       </Overlay>
     ) : null;

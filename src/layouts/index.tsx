@@ -60,6 +60,7 @@ export default class Layout extends React.PureComponent<Props, State> {
     this.state = { actions: getCommonActions("search"), searching: false };
     this.keydownHandler = this.keydownHandler.bind(this);
     this.updateActions = this.updateActions.bind(this);
+    this.closeSearch = this.closeSearch.bind(this);
   }
 
   /** @inheritdoc */
@@ -114,7 +115,11 @@ export default class Layout extends React.PureComponent<Props, State> {
     return (
       <div className="container-fluid">
         <div className="page">
-          <Search index={this.index} searching={this.state.searching} />
+          <Search
+            index={this.index}
+            searching={this.state.searching}
+            close={this.closeSearch}
+          />
           <div className="sidepanel">
             <Header
               title={config.title}
@@ -130,7 +135,10 @@ export default class Layout extends React.PureComponent<Props, State> {
             />
           </div>
           <div className="mainpanel">
-            {children({ ...this.props, onUpdateActions: this.updateActions })}
+            {children({
+              ...this.props,
+              onUpdateActions: this.updateActions
+            })}
           </div>
           <Actions
             actions={actions.map((action: Action) => {
@@ -176,6 +184,17 @@ export default class Layout extends React.PureComponent<Props, State> {
    */
   private updateActions(actions: Array<Action>): void {
     this.setState({ actions });
+  }
+
+  /**
+   * Closes the search.
+   * @returns {void}
+   *
+   * @private
+   * @method
+   */
+  private closeSearch(): void {
+    this.setState({ searching: false });
   }
 }
 

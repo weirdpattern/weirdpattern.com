@@ -1,6 +1,6 @@
 ---
 title: "Encrypt a configuration section in a configuration file not hosted in IIS"
-style: "post"
+style: "snippet"
 abstract: "Learn how to encrypt a configuration section in a configuration file not hosted in IIS"
 cover: "/images/encryption.jpg"
 date: "2016-11-01"

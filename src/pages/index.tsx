@@ -4,6 +4,7 @@ import Helmet from "react-helmet";
 import { throttle } from "lodash";
 
 import * as data from "../../content/data.json";
+import Totals from "../components/Totals";
 import PostPreview from "../components/PostPreview";
 import { getCommonActions } from "../utils";
 import { Action, QueryPost, MarkdownPost, Query } from "../interfaces";
@@ -74,7 +75,7 @@ export default class Index extends React.PureComponent<Props, State> {
 
   /** @inheritdoc */
   public render(): React.ReactNode {
-    const posts = this.props.data.markdown.posts;
+    const { tags, categories, posts } = this.props.data.markdown;
 
     return (
       <React.Fragment>
@@ -82,6 +83,7 @@ export default class Index extends React.PureComponent<Props, State> {
           <title>Dashboard | {config.title}</title>
           <meta name="description" content={config.description} />
         </Helmet>
+        <Totals total={posts.length} categories={categories} tags={tags} />
         <div className="post-list">
           {posts.map((data: { post: QueryPost }, index: number) => {
             return <PostPreview key={index} data={data.post} />;
@@ -130,6 +132,30 @@ export default class Index extends React.PureComponent<Props, State> {
       requestAnimationFrame(() => this.update());
     }
   }
+
+  /**
+   * Determines if the given entry is a post.
+   * @param {QueryPost} entry the entry to be validated.
+   * @returns {boolean} true when entry is a post; false otherwise.
+   *
+   * @private
+   * @method
+   */
+  private isPost(entry: QueryPost): boolean {
+    return entry.content.style === "post";
+  }
+
+  /**
+   * Determines if the given entry is a snippet.
+   * @param {QueryPost} entry the entry to be validated.
+   * @returns {boolean} true when entry is a snippet; false otherwise.
+   *
+   * @private
+   * @method
+   */
+  private isSnippet(entry: QueryPost): boolean {
+    return entry.content.style === "snippet";
+  }
 }
 
 export const query = graphql`
@@ -137,6 +163,8 @@ export const query = graphql`
     markdown: allMarkdownRemark(
       sort: { fields: [frontmatter___date, frontmatter___title], order: DESC }
     ) {
+      tags: distinct(field: frontmatter___tags)
+      categories: distinct(field: frontmatter___category)
       posts: edges {
         post: node {
           html

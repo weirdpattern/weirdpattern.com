@@ -1,0 +1,46 @@
+.post-totals {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: calc(66% + 15px);
+  height: 53px;
+  padding: 0 30px;
+  background-color: #FFFFFF;
+  border-bottom: 1px solid #E2E4E7;
+
+  .totals {
+    float: left;
+
+    .total {
+      color: #657786;
+      font-size: 2.2em;
+      margin-right: 5px;
+    }
+
+    .total-label {
+      color: #ABB8C2;
+      font-size: 1em;
+    }
+  }
+
+  .buttons {
+    float: right;
+
+    > ul {
+      list-style: none;
+
+      > li {
+        float: left;
+      }
+    }
+  }
+
+  @media screen and (max-width: $break-sm) {
+    position: relative;
+    width: 100%;
+
+    .totals {
+      display: none;
+    }
+  }
+}
