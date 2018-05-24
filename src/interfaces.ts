@@ -42,7 +42,7 @@ export interface SocialNetwork {
 }
 
 /**
- * The available social networks
+ * The available social networks.
  * @typedef {Interface} SocialNetworks
  *
  * @public
@@ -50,6 +50,18 @@ export interface SocialNetwork {
  */
 export interface SocialNetworks {
   [key: string]: SocialNetwork;
+}
+
+/**
+ * The value count keypair.
+ * @typedef {Interface} ValueCount
+ *
+ * @public
+ * @interface
+ */
+export interface ValueCount {
+  fieldValue: string;
+  totalCount: number;
 }
 
 /**
@@ -72,8 +84,24 @@ export interface QueryPost {
     style: string;
     tags: string[];
     category: string;
+    author: string;
     cover: string;
     date: Date;
+  };
+}
+
+/**
+ * The posts query results.
+ * @typedef {Interface} MarkdownPosts
+ *
+ * @public
+ * @interface
+ */
+export interface MarkdownPosts {
+  markdown: {
+    tags: Array<ValueCount>;
+    categories: Array<ValueCount>;
+    posts: Array<{ post: QueryPost }>;
   };
 }
 
@@ -85,11 +113,7 @@ export interface QueryPost {
  * @interface
  */
 export interface MarkdownPost {
-  markdown: {
-    tags: Array<string>;
-    categories: Array<string>;
-    posts: Array<{ post: QueryPost }>;
-  };
+  post: QueryPost;
 }
 
 /**

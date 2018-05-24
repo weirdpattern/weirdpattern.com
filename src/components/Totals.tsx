@@ -1,21 +1,22 @@
 import * as React from "react";
 
 import DropdownButton from "./DropdownButton";
+import { ValueCount } from "../interfaces";
 
 /**
  * Properties for the Totals component.
  * @typedef {Interface} Props
  * @property {string} total the total number of posts.
- * @property {Array<string>} categories the categories.
- * @property {Array<string>} tags the tags.
+ * @property {Array<ValueCount>} categories the categories.
+ * @property {Array<ValueCount>} tags the tags.
  *
  * @private
  * @interface
  */
 interface Props {
   total: number;
-  categories: Array<string>;
-  tags: Array<string>;
+  categories: Array<ValueCount>;
+  tags: Array<ValueCount>;
 }
 
 /**

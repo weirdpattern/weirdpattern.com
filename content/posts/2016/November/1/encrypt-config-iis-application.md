@@ -4,12 +4,12 @@ style: "snippet"
 abstract: "Learn how to encrypt a configuration section in a configuration file hosted in IIS"
 cover: "/images/encryption.jpg"
 date: "2016-11-01"
+author: "Patricio Treviño"
 category: "security"
 tags:
     - security
     - encryption
     - aspnet
-    - c#
 ---
 
 <!-- start:abstract -->
@@ -20,13 +20,13 @@ tags:
 aspnet_regiis -pe <section> -app <virtualPath> [-location <subPath>] -prov <provider> [-pkm]
 ```
 
-|   Required?   | Option      | Description                                                           |
-| :-----------: | ----------- | --------------------------------------------------------------------- |
-|   &#10003;    | section     | The section of the web.config to be encrypted.                        |
-|   &#10003;    | virtualPath | The IIS website that hosts the web.config.                            |
-|               | subPath     | The subpath inside the IIS website that hosts the web.config.         |
-|   &#10003;    | provider    | The name of the provider to be used to encrypt (configProtectedData). |
-|               | pkm         | Encrypts the machine config instead of the local config.              |
+| Option          | Description                                                           |
+| --------------- | --------------------------------------------------------------------- |
+| **section**     | The section of the web.config to be encrypted.                        |
+| **virtualPath** | The IIS website that hosts the web.config.                            |
+| subPath         | The subpath inside the IIS website that hosts the web.config.         |
+| **provider**    | The name of the provider to be used to encrypt (configProtectedData). |
+| pkm             | Encrypts the machine config instead of the local config.              |
 
 <!-- end:abstract -->
 

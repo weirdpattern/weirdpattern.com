@@ -7,7 +7,7 @@ import * as data from "../../content/data.json";
 import Totals from "../components/Totals";
 import PostPreview from "../components/PostPreview";
 import { getCommonActions } from "../utils";
-import { Action, QueryPost, MarkdownPost, Query } from "../interfaces";
+import { Action, QueryPost, MarkdownPosts, Query } from "../interfaces";
 
 const config = data as any;
 
@@ -19,7 +19,7 @@ const config = data as any;
  * @private
  * @interface
  */
-interface Props extends Query<MarkdownPost> {
+interface Props extends Query<MarkdownPosts> {
   onUpdateActions: (actions: Array<Action>) => void;
 }
 
@@ -163,8 +163,14 @@ export const query = graphql`
     markdown: allMarkdownRemark(
       sort: { fields: [frontmatter___date, frontmatter___title], order: DESC }
     ) {
-      tags: distinct(field: frontmatter___tags)
-      categories: distinct(field: frontmatter___category)
+      tags: group(field: frontmatter___tags) {
+        fieldValue
+        totalCount
+      }
+      categories: group(field: frontmatter___category) {
+        fieldValue
+        totalCount
+      }
       posts: edges {
         post: node {
           html
@@ -174,6 +180,7 @@ export const query = graphql`
             title
             style
             abstract
+            author
             tags
             category
             date(formatString: "DD MMMM, YYYY")

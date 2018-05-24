@@ -1,9 +1,16 @@
 import * as React from "react";
 
-export default class PostTemplate extends React.Component<{}, {}> {
+import Meta from "../components/Meta";
+import { MarkdownPost, Query } from "../interfaces";
+
+interface Props extends Query<MarkdownPost> {}
+
+export default class PostTemplate extends React.Component<Props, {}> {
   /** @inheritdoc */
   public render(): React.ReactNode {
-    return null;
+    const { post } = this.props.data;
+
+    return <Meta post={post} />;
   }
 }
 
@@ -15,10 +22,13 @@ export const query = graphql`
       excerpt
       content: frontmatter {
         title
+        style
+        abstract
         cover
-        date
+        author
         category
         tags
+        date(formatString: "DD MMMM, YYYY")
       }
       navigation: fields {
         suggestions {

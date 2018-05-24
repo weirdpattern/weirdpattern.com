@@ -1,5 +1,8 @@
 .search-results {
   padding: 0;
+  height: 90%;
+  overflow: scroll;
+  overflow-x: hidden;
 
   ul {
     margin-top: 20px;

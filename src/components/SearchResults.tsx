@@ -1,7 +1,7 @@
 import * as React from "react";
 import * as classNames from "classnames";
 
-import Link from "gatsby-link";
+import Link, { navigateTo } from "gatsby-link";
 
 import { SearchPost } from "../interfaces";
 
@@ -9,14 +9,12 @@ import { SearchPost } from "../interfaces";
  * Properties for the SearchResults component.
  * @typedef {Interface} Props
  * @property {string} results the results of the search.
- * @property {Function} close closes the search.
  *
  * @private
  * @interface
  */
 interface Props {
   results: Array<SearchPost>;
-  close: Function;
 }
 
 /**
@@ -59,8 +57,7 @@ function sort(a: SearchPost, b: SearchPost): number {
  * @function
  */
 export default function SearchResults({
-  results,
-  close
+  results
 }: Props): React.ReactElement<Props> {
   const styles = results
     .reduce((aggregator: Array<string>, current: SearchPost): Array<string> => {
@@ -89,7 +86,10 @@ export default function SearchResults({
 
                 return (
                   <li key={keyResults} className={style}>
-                    <Link to={result.url} onClick={() => close()}>
+                    <Link
+                      to={result.url}
+                      onMouseDown={e => navigateTo(result.url)}
+                    >
                       {result.title}
                     </Link>
                   </li>

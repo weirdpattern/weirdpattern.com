@@ -43,4 +43,12 @@
       display: none;
     }
   }
+
+  @media screen and (min-width: $break-md) and (max-width: $break-lg) {
+    width: calc(66% + 8px);
+  }
+
+  @media screen and (min-width: $break-lg) and (max-width: $break-xl) {
+    width: calc(66% + 10px);
+  }
 }

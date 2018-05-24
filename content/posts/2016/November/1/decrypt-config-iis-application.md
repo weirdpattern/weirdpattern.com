@@ -4,12 +4,12 @@ style: "snippet"
 abstract: "Learn how to decrypt a configuration section in a configuration file hosted in IIS"
 cover: "/images/encryption.jpg"
 date: "2016-11-01"
+author: "Patricio Treviño"
 category: "security"
 tags:
     - security
     - decryption
     - aspnet
-    - c#
 ---
 
 <!-- start:abstract -->
@@ -20,12 +20,12 @@ tags:
 aspnet_regiis -pd <section> -app <virtualPath> [-location <subPath>] [-pkm]
 ```
 
-|   Required?   | Option      | Description                                                   |
-| :-----------: | ----------- | ------------------------------------------------------------- |
-|   &#10003;    | section     | The section of the web.config to be encrypted.                |
-|   &#10003;    | virtualPath | The IIS website that hosts the web.config.                    |
-|               | subPath     | The subpath inside the IIS website that hosts the web.config. |
-|               | pkm         | Encrypts the machine config instead of the local config.      |
+| Option          | Description                                                   |
+| --------------- | ------------------------------------------------------------- |
+| **section**     | The section of the web.config to be encrypted.                |
+| **virtualPath** | The IIS website that hosts the web.config.                    |
+| subPath         | The subpath inside the IIS website that hosts the web.config. |
+| pkm             | Encrypts the machine config instead of the local config.      |
 
 <!-- end:abstract -->
 

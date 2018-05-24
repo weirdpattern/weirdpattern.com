@@ -155,7 +155,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
         const tagList = Array.from(tagSet);
         tagList.forEach(tag => {
           createPage({
-            path: `/tags/${kebabCase(tag)}/`,
+            path: `/tags/${encodeURIComponent(kebabCase(tag))}/`,
             component: tagPage,
             context: {
               tag
@@ -166,7 +166,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
         const categoryList = Array.from(categorySet);
         categoryList.forEach(category => {
           createPage({
-            path: `/categories/${kebabCase(category)}/`,
+            path: `/categories/${encodeURIComponent(kebabCase(category))}/`,
             component: categoryPage,
             context: {
               category

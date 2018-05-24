@@ -40,7 +40,12 @@ export default function Metadata({ data }: Props): React.ReactElement<Props> {
       <div className="category">
         <i />
         <span>
-          <Link to={"/categories/" + kebabCase(data.content.category)}>
+          <Link
+            to={
+              "/categories/" +
+              encodeURIComponent(kebabCase(data.content.category))
+            }
+          >
             {data.content.category}
           </Link>
         </span>
@@ -51,7 +56,9 @@ export default function Metadata({ data }: Props): React.ReactElement<Props> {
           return (
             <React.Fragment key={index}>
               <span>
-                <Link to={"/tags/" + kebabCase(tag)}>{tag}</Link>
+                <Link to={"/tags/" + encodeURIComponent(kebabCase(tag))}>
+                  {tag}
+                </Link>
               </span>
             </React.Fragment>
           );

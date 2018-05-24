@@ -9,6 +9,7 @@ import * as React from "react";
  * @interface
  */
 interface Props {
+  close: Function;
   children: any;
 }
 
@@ -22,7 +23,17 @@ interface Props {
  * @function
  */
 export default function Overlay({
+  close,
   children
 }: Props): React.ReactElement<Props> {
-  return <div className="overlay">{children}</div>;
+  return (
+    <div
+      className="overlay"
+      role="presentation"
+      onClick={() => close()}
+      onMouseDown={() => close()}
+    >
+      {children}
+    </div>
+  );
 }

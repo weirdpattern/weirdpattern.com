@@ -4,6 +4,7 @@ style: "snippet"
 abstract: "Learn how to grant access to a key container"
 cover: "/images/encryption.jpg"
 date: "2016-11-01"
+author: "Patricio Treviño"
 category: "security"
 tags:
     - security
@@ -12,7 +13,6 @@ tags:
     - key container
     - container
     - aspnet
-    - c#
 ---
 
 <!-- start:abstract -->
@@ -23,13 +23,13 @@ tags:
 aspnet_regiis -pa <container> <account> [-csp <provider>][-pku][-full]
 ```
 
-|   Required?   | Option    | Description                                   |
-| :-----------: | --------- | --------------------------------------------- |
-|   &#10003;    | container | The name of the container to be used.         |
-|   &#10003;    | account   | The account to be granted permissions.        |
-|               | provider  | The container provide to be used (RSA/Dpapi). |
-|               | pku       | Makes the container a user level container.   |
-|               | full      | Gives full access to the key container.       |   
+| Option        | Description                                   |
+| ------------- | --------------------------------------------- |
+| **container** | The name of the container to be used.         |
+| **account**   | The account to be granted permissions.        |
+| provider      | The container provide to be used (RSA/Dpapi). |
+| pku           | Makes the container a user level container.   |
+| full          | Gives full access to the key container.       |   
 
 <!-- end:abstract -->
 

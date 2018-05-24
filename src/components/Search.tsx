@@ -77,7 +77,7 @@ export default class Search extends React.PureComponent<Props, State> {
     const searchIndicatorClasses = classNames("search-indicator", focused);
 
     return searching ? (
-      <Overlay>
+      <Overlay close={close}>
         <div className={searchPanelClasses}>
           <input
             placeholder="Show me..."
@@ -90,7 +90,7 @@ export default class Search extends React.PureComponent<Props, State> {
           <i className={searchIndicatorClasses} />
         </div>
         {this.state.results.length > 0 ? (
-          <SearchResults results={this.state.results} close={close} />
+          <SearchResults results={this.state.results} />
         ) : null}
       </Overlay>
     ) : null;
