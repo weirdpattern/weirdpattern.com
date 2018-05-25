@@ -2,17 +2,27 @@
   position: fixed;
   top: 0;
   right: 0;
-  width: calc(66% + 15px);
+  width: calc(66% + 17px);
   height: 53px;
   padding: 0 30px;
-  background-color: #FFFFFF;
   border-bottom: 1px solid #E2E4E7;
+
+  &.light {
+    color: #657786;
+    background-color: #FFFFFF;
+    transition: all 0.5s ease-out;
+  }
+
+  &.dark {
+    color: #FFFFFF;
+    background-color: #657786;
+    transition: all 0.5s ease-out;
+  }
 
   .totals {
     float: left;
 
     .total {
-      color: #657786;
       font-size: 2.2em;
       margin-right: 5px;
     }

@@ -3,7 +3,7 @@ import * as classNames from "classnames";
 
 import Link from "gatsby-link";
 
-import Metadata from "./Metadata";
+import PostMetadata from "./PostMetadata";
 import { QueryPost } from "../interfaces";
 
 /**
@@ -60,7 +60,7 @@ export default function Post({ data }: Props): React.ReactElement<Props> {
         <h1>
           <Link to={data.fields.slug}>{data.content.title}</Link>
         </h1>
-        <Metadata data={data} />
+        <PostMetadata data={data} />
         <div
           dangerouslySetInnerHTML={{
             __html: getAbstract(data)

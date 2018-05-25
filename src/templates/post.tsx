@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import Meta from "../components/Meta";
+import SEO from "../components/SEO";
 import { MarkdownPost, Query } from "../interfaces";
 
 interface Props extends Query<MarkdownPost> {}
@@ -10,7 +10,7 @@ export default class PostTemplate extends React.Component<Props, {}> {
   public render(): React.ReactNode {
     const { post } = this.props.data;
 
-    return <Meta post={post} />;
+    return <SEO post={post} />;
   }
 }
 

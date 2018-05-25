@@ -5,6 +5,9 @@
   "paths": {
     "content": "content"
   },
+  "posts": {
+    "postToShow": 10
+  },
   "profile": {
     "name": "Patricio Treviño",
     "email": "patricio.trevino@weirdpattern.com",

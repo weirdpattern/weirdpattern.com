@@ -6,7 +6,7 @@ import { kebabCase } from "lodash";
 import { QueryPost } from "../interfaces";
 
 /**
- * Properties for the Metadata component.
+ * Properties for the PostMetadata component.
  * @typedef {Interface} Props
  * @property {QueryPost} data the data of the post to be displayed.
  *
@@ -18,15 +18,17 @@ interface Props {
 }
 
 /**
- * Metadata component.
+ * PostMetadata component.
  * @param {Props} props the properties of the component.
  * @returns {React.ReactElement<Props>}
- *    the react node that represents the metadata.
+ *    the react node that represents the post metadata.
  *
  * @public
  * @function
  */
-export default function Metadata({ data }: Props): React.ReactElement<Props> {
+export default function PostMetadata({
+  data
+}: Props): React.ReactElement<Props> {
   return (
     <div className="metadata">
       <div className="date">
@@ -52,7 +54,7 @@ export default function Metadata({ data }: Props): React.ReactElement<Props> {
       </div>
       <div className="tags">
         <i />
-        {data.content.tags.sort().map((tag: string, index: number) => {
+        {data.content.tags.map((tag: string, index: number) => {
           return (
             <React.Fragment key={index}>
               <span>

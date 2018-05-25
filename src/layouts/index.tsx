@@ -137,6 +137,7 @@ export default class Layout extends React.PureComponent<Props, State> {
           <div className="mainpanel">
             {children({
               ...this.props,
+              postToShow: config.posts.postToShow,
               onUpdateActions: this.updateActions
             })}
           </div>

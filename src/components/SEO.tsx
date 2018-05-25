@@ -8,7 +8,7 @@ import { SocialNetwork, SocialNetworks, QueryPost } from "../interfaces";
 const config = data as any;
 
 /**
- * Properties for the Meta component.
+ * Properties for the SEO component.
  * @typedef {Interface} Props
  * @property {QueryPost} post the post information.
  *
@@ -20,15 +20,15 @@ interface Props {
 }
 
 /**
- * Meta component.
+ * SEO component.
  * @param {Props} props the properties of the component.
  * @returns {React.ReactElement<Props>}
- *    the react node that represents the meta.
+ *    the react node that represents the SEO.
  *
  * @public
  * @function
  */
-export default function Meta({ post }: Props): React.ReactElement<Props> {
+export default function SEO({ post }: Props): React.ReactElement<Props> {
   return (
     <Helmet>
       <title>

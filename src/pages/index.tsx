@@ -1,42 +1,46 @@
 import * as React from "react";
 
 import Helmet from "react-helmet";
-import { throttle } from "lodash";
+import { chunk, throttle } from "lodash";
 
 import * as data from "../../content/data.json";
 import Totals from "../components/Totals";
 import PostPreview from "../components/PostPreview";
 import { getCommonActions } from "../utils";
-import { Action, QueryPost, MarkdownPosts, Query } from "../interfaces";
+import { Action, MarkdownPosts, Query, QueryPost } from "../interfaces";
 
 const config = data as any;
 
 /**
  * Index properties.
  * @typedef {Query<MarkdownPost>} Props
- * @property {Function} onScroll a callback for scroll events.
+ * @property {number} postToShow the number of post to show.
+ * @property {Function} onUpdateActions a callback for scroll events.
  *
  * @private
  * @interface
  */
 interface Props extends Query<MarkdownPosts> {
+  postToShow: number;
   onUpdateActions: (actions: Array<Action>) => void;
 }
 
 /**
  * Index state.
  * @typedef {Interface} State
+ * @property {boolean} scrolled a flag indicating the page was scrolled.
  * @property {number} numberOfPost
  *    the number of posts to be displayed every time.
- * @property {boolean} autoScrolling
- *    a flag indicating if infinite scroll has been activated.
+ * @property {boolean} showLoadMore
+ *    a flag indicating if the load more button should be visible.
  *
  * @private
  * @interface
  */
 interface State {
+  scrolled: boolean;
   numberOfPosts: number;
-  autoScrolling: boolean;
+  showLoadMore: boolean;
 }
 
 /**
@@ -55,9 +59,12 @@ export default class Index extends React.PureComponent<Props, State> {
   public constructor(props: Props) {
     super(props);
 
+    const postToShow = this.props.postToShow || 10;
+
     this.state = {
-      numberOfPosts: 15,
-      autoScrolling: false
+      scrolled: false,
+      numberOfPosts: postToShow,
+      showLoadMore: this.props.data.markdown.posts.length > postToShow
     };
 
     this.scrollHandler = this.scrollHandler.bind(this);
@@ -83,12 +90,43 @@ export default class Index extends React.PureComponent<Props, State> {
           <title>Dashboard | {config.title}</title>
           <meta name="description" content={config.description} />
         </Helmet>
-        <Totals total={posts.length} categories={categories} tags={tags} />
+        <Totals
+          total={posts.length}
+          categories={categories}
+          tags={tags}
+          styling={this.state.scrolled ? "dark" : "light"}
+        />
         <div className="post-list">
-          {posts.map((data: { post: QueryPost }, index: number) => {
-            return <PostPreview key={index} data={data.post} />;
-          })}
+          {chunk(posts.slice(0, this.state.numberOfPosts), 5).map(
+            (chunk: Array<{ post: QueryPost }>, index: number) => {
+              return (
+                <React.Fragment key={index}>
+                  {chunk.map((data: { post: QueryPost }) => {
+                    return (
+                      <PostPreview
+                        key={data.post.fields.slug}
+                        data={data.post}
+                      />
+                    );
+                  })}
+                </React.Fragment>
+              );
+            }
+          )}
         </div>
+        {this.state.showLoadMore && (
+          <button
+            className="load-more"
+            onClick={() => {
+              this.setState({
+                numberOfPosts: this.state.numberOfPosts + 5,
+                showLoadMore: false
+              });
+            }}
+          >
+            Load More
+          </button>
+        )}
       </React.Fragment>
     );
   }
@@ -106,13 +144,15 @@ export default class Index extends React.PureComponent<Props, State> {
       window.scrollY +
       window.innerHeight;
 
-    if (this.state.autoScrolling && distanceToBottom < 100) {
-      this.setState({ numberOfPosts: this.state.numberOfPosts + 12 });
+    if (!this.state.showLoadMore && distanceToBottom < 100) {
+      this.setState({ numberOfPosts: this.state.numberOfPosts + 15 });
     }
 
     if (document.documentElement.scrollTop > 0) {
+      this.setState({ scrolled: true });
       this.props.onUpdateActions(getCommonActions("scrollTop", "search"));
     } else {
+      this.setState({ scrolled: false });
       this.props.onUpdateActions(getCommonActions("search"));
     }
 
@@ -131,30 +171,6 @@ export default class Index extends React.PureComponent<Props, State> {
       this.ticking = true;
       requestAnimationFrame(() => this.update());
     }
-  }
-
-  /**
-   * Determines if the given entry is a post.
-   * @param {QueryPost} entry the entry to be validated.
-   * @returns {boolean} true when entry is a post; false otherwise.
-   *
-   * @private
-   * @method
-   */
-  private isPost(entry: QueryPost): boolean {
-    return entry.content.style === "post";
-  }
-
-  /**
-   * Determines if the given entry is a snippet.
-   * @param {QueryPost} entry the entry to be validated.
-   * @returns {boolean} true when entry is a snippet; false otherwise.
-   *
-   * @private
-   * @method
-   */
-  private isSnippet(entry: QueryPost): boolean {
-    return entry.content.style === "snippet";
   }
 }
 

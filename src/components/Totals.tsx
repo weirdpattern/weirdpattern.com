@@ -1,4 +1,5 @@
 import * as React from "react";
+import * as classNames from "classnames";
 
 import DropdownButton from "./DropdownButton";
 import { ValueCount } from "../interfaces";
@@ -9,6 +10,7 @@ import { ValueCount } from "../interfaces";
  * @property {string} total the total number of posts.
  * @property {Array<ValueCount>} categories the categories.
  * @property {Array<ValueCount>} tags the tags.
+ * @property {string} styling the style to be used.
  *
  * @private
  * @interface
@@ -17,6 +19,7 @@ interface Props {
   total: number;
   categories: Array<ValueCount>;
   tags: Array<ValueCount>;
+  styling: string;
 }
 
 /**
@@ -29,12 +32,15 @@ interface Props {
  * @function
  */
 export default function Totals({
+  styling,
   total,
   categories,
   tags
 }: Props): React.ReactElement<Props> {
+  const postTotalsClasses = classNames("post-totals", styling);
+
   return (
-    <div className="post-totals">
+    <div className={postTotalsClasses}>
       <div className="totals">
         <span className="total">{total}</span>
         <span className="total-label">total entries</span>
