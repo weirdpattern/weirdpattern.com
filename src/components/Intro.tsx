@@ -29,7 +29,7 @@ export default function Intro({
 }: Props): React.ReactElement<Props> {
   return (
     <div className="intro">
-      <h1>{name}</h1>
+      <h3>{name}</h3>
       {credentials && <span className="credentials">{credentials}</span>}
     </div>
   );

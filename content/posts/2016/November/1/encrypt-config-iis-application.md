@@ -2,9 +2,8 @@
 title: "Encrypt a configuration section in a configuration file hosted in IIS"
 style: "snippet"
 abstract: "Learn how to encrypt a configuration section in a configuration file hosted in IIS"
-cover: "/images/encryption.jpg"
 date: "2016-11-01"
-author: "Patricio Treviño"
+author: "ptrevino"
 category: "security"
 tags:
     - security
@@ -14,7 +13,7 @@ tags:
 
 <!-- start:abstract -->
 
-## Syntax
+### Syntax
 
 ```
 aspnet_regiis -pe <section> -app <virtualPath> [-location <subPath>] -prov <provider> [-pkm]
@@ -30,7 +29,7 @@ aspnet_regiis -pe <section> -app <virtualPath> [-location <subPath>] -prov <prov
 
 <!-- end:abstract -->
 
-## Example
+### Example
 
 ```powershell
 # Given a configuration fle like

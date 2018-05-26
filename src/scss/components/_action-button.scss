@@ -62,6 +62,14 @@
     }
   }
 
+  &.back {
+    background-color: $ternary-color;
+
+    i {
+      @extend .fa, .fa-arrow-left;
+    }
+  }
+
   &:focus {
     outline: 0;
   }

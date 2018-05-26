@@ -1,8 +1,22 @@
 .post-list {
-  padding: 30px;
-  padding-top: 70px;
+  padding: 70px 30px 10px 30px;
 
   @media screen and (max-width: $break-sm) {
     padding-top: 20px;
+  }
+}
+
+.load-container {
+  width: 100%;
+  text-align: center;
+  padding-bottom: 20px;
+
+  .load-more {
+    width: 150px;
+    padding: 10px;
+    border: 0;
+    cursor: pointer;
+    color: #FFFFFF;
+    background-color: $accented-color;
   }
 }

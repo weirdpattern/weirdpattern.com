@@ -51,6 +51,7 @@ interface State {
  */
 export default class Index extends React.PureComponent<Props, State> {
   private ticking: boolean = false;
+  private chunkSize: number = 10;
 
   /**
    * Class constructor.
@@ -59,7 +60,7 @@ export default class Index extends React.PureComponent<Props, State> {
   public constructor(props: Props) {
     super(props);
 
-    const postToShow = this.props.postToShow || 10;
+    const postToShow = this.props.postToShow || this.chunkSize;
 
     this.state = {
       scrolled: false,
@@ -68,6 +69,7 @@ export default class Index extends React.PureComponent<Props, State> {
     };
 
     this.scrollHandler = this.scrollHandler.bind(this);
+    this.loadMoreHandler = this.loadMoreHandler.bind(this);
   }
 
   /** @inheritdoc */
@@ -97,7 +99,7 @@ export default class Index extends React.PureComponent<Props, State> {
           styling={this.state.scrolled ? "dark" : "light"}
         />
         <div className="post-list">
-          {chunk(posts.slice(0, this.state.numberOfPosts), 5).map(
+          {chunk(posts.slice(0, this.state.numberOfPosts), this.chunkSize).map(
             (chunk: Array<{ post: QueryPost }>, index: number) => {
               return (
                 <React.Fragment key={index}>
@@ -115,17 +117,11 @@ export default class Index extends React.PureComponent<Props, State> {
           )}
         </div>
         {this.state.showLoadMore && (
-          <button
-            className="load-more"
-            onClick={() => {
-              this.setState({
-                numberOfPosts: this.state.numberOfPosts + 5,
-                showLoadMore: false
-              });
-            }}
-          >
-            Load More
-          </button>
+          <div className="load-container">
+            <button className="load-more" onClick={this.loadMoreHandler}>
+              Load More
+            </button>
+          </div>
         )}
       </React.Fragment>
     );
@@ -145,7 +141,7 @@ export default class Index extends React.PureComponent<Props, State> {
       window.innerHeight;
 
     if (!this.state.showLoadMore && distanceToBottom < 100) {
-      this.setState({ numberOfPosts: this.state.numberOfPosts + 15 });
+      this.loadMoreHandler();
     }
 
     if (document.documentElement.scrollTop > 0) {
@@ -171,6 +167,20 @@ export default class Index extends React.PureComponent<Props, State> {
       this.ticking = true;
       requestAnimationFrame(() => this.update());
     }
+  }
+
+  /**
+   * Handles the load more events.
+   * @returns {void}
+   *
+   * @private
+   * @method
+   */
+  private loadMoreHandler(): void {
+    this.setState({
+      numberOfPosts: this.state.numberOfPosts + this.chunkSize,
+      showLoadMore: false
+    });
   }
 }
 

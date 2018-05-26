@@ -2,9 +2,8 @@
 title: "Create a key container"
 style: "snippet"
 abstract: "Learn how to use ASP.NET IIS Registration Tool to create an RSA public/private key pair in the specified container."
-cover: "/images/encryption.jpg"
 date: "2016-11-01"
-author: "Patricio Treviño"
+author: "ptrevino"
 category: "security"
 tags:
     - security
@@ -17,7 +16,7 @@ tags:
 
 <!-- start:abstract -->
 
-## Syntax
+#### Syntax
 
 ```
 aspnet_regiis -pc <container> [-size <keySize>][-csp <provider>][-pku][-exp]
@@ -33,7 +32,7 @@ aspnet_regiis -pc <container> [-size <keySize>][-csp <provider>][-pku][-exp]
 
 <!-- end:abstract -->
 
-## Example
+### Example
 
 ```powershell
 $ cd "$env.WINDIR/Microsoft.NET/Framework64/v4.0.30319"

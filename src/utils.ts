@@ -1,4 +1,7 @@
+import * as data from "../content/data.json";
 import { Action } from "./interfaces";
+
+const config = data as any;
 
 // common callbacks
 // using function to facilitate binding
@@ -8,6 +11,9 @@ const callbacks: { [key: string]: Function } = {
   },
   scrollTop: function() {
     window.scrollTo(0, 0);
+  },
+  back: function() {
+    window.location.href = config.url;
   }
 };
 

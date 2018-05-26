@@ -2,9 +2,8 @@
 title: "Grant access to a key container"
 style: "snippet"
 abstract: "Learn how to grant access to a key container"
-cover: "/images/encryption.jpg"
 date: "2016-11-01"
-author: "Patricio Treviño"
+author: "ptrevino"
 category: "security"
 tags:
     - security
@@ -17,7 +16,7 @@ tags:
 
 <!-- start:abstract -->
 
-## Syntax
+### Syntax
 
 ```
 aspnet_regiis -pa <container> <account> [-csp <provider>][-pku][-full]
@@ -33,7 +32,7 @@ aspnet_regiis -pa <container> <account> [-csp <provider>][-pku][-full]
 
 <!-- end:abstract -->
 
-## Example
+### Example
 
 ```powershell
 $ cd "$env.WINDIR/Microsoft.NET/Framework64/v4.0.30319"

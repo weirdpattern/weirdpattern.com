@@ -111,6 +111,7 @@ export default class Layout extends React.PureComponent<Props, State> {
     const instance = this;
     const { children } = this.props;
     const { actions } = this.state;
+    const author = config.authors[config.profile.author];
 
     return (
       <div className="container-fluid">
@@ -124,15 +125,12 @@ export default class Layout extends React.PureComponent<Props, State> {
             <Header
               title={config.title}
               description={config.description}
-              name={config.profile.name}
-              email={config.profile.email}
-              credentials={config.profile.credentials}
-              avatar={config.profile.avatar}
+              name={author.name}
+              email={author.email}
+              credentials={author.credentials}
+              avatar={author.avatar}
             />
-            <Footer
-              networks={config.profile.networks}
-              copyright={config.copyright}
-            />
+            <Footer networks={author.networks} copyright={config.copyright} />
           </div>
           <div className="mainpanel">
             {children({

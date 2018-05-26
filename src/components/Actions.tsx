@@ -68,7 +68,7 @@ export default class Actions extends React.PureComponent<Props, State> {
       >
         <ActionButton main={true} active={toggled} type={actions.shift()} />
         <ul>
-          {actions.map((action: Action, index: number) => (
+          {actions.reverse().map((action: Action, index: number) => (
             <li key={index}>
               <ActionButton active={toggled} type={action} />
             </li>

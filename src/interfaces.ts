@@ -74,6 +74,10 @@ export interface ValueCount {
 export interface QueryPost {
   fields: {
     slug: string;
+    suggestions?: {
+      slug: string;
+      title: string;
+    };
   };
   html: string;
   excerpt: string;
@@ -85,7 +89,6 @@ export interface QueryPost {
     tags: string[];
     category: string;
     author: string;
-    cover: string;
     date: Date;
   };
 }

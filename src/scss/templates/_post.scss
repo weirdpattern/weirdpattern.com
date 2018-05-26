@@ -1,0 +1,51 @@
+.post {
+  background-color: #FFFFFF;
+  padding: 30px 30px 10px 30px;
+
+  h1 {
+    color: $title-color;
+  }
+
+  .compact-metadata {
+    font-size: 10px;
+    line-height: 13px;
+    font-weight: 400;
+    letter-spacing: .08em;
+    color: #666666;
+    margin: 0;
+    margin-top: 40px;
+    text-transform: uppercase;
+  }
+
+  .post-preview {
+    padding: 0;
+
+    h3 {
+      margin-top: 2em;
+    }
+
+    .tldr {
+      margin-top: 2em;
+    }
+  }
+
+  .icon-header {
+    color: $title-color;
+    display: inline-block;
+    padding-right: 15px;
+    font-family: "FontAwesome" !important;
+  }
+
+  .database:before {
+    @extend .icon-header;
+    content: "\f1c0";
+    font-size: 30px;
+    vertical-align: 9%;
+  }
+
+  .security:before {
+    @extend .icon-header;
+    content: "\f023";
+    font-size: 38px;
+  }
+}

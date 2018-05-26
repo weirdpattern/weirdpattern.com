@@ -57,9 +57,9 @@ export default function Post({ data }: Props): React.ReactElement<Props> {
   return (
     <React.Fragment>
       <div className={postClasses}>
-        <h1>
+        <h2>
           <Link to={data.fields.slug}>{data.content.title}</Link>
-        </h1>
+        </h2>
         <PostMetadata data={data} />
         <div
           dangerouslySetInnerHTML={{

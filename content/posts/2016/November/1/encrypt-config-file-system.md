@@ -2,9 +2,8 @@
 title: "Encrypt a configuration section in a configuration file not hosted in IIS"
 style: "snippet"
 abstract: "Learn how to encrypt a configuration section in a configuration file not hosted in IIS"
-cover: "/images/encryption.jpg"
 date: "2016-11-01"
-author: "Patricio Treviño"
+author: "ptrevino"
 category: "security"
 tags:
     - security
@@ -14,7 +13,7 @@ tags:
 
 <!-- start:abstract -->
 
-## Syntax
+### Syntax
 
 ```
 aspnet_regiis -pef <section> <directory> -prov <provider> [-pkm]
@@ -31,7 +30,7 @@ Note: this option looks for a web.config file, there is no way you can specify a
 
 <!-- end:abstract -->
 
-## Example
+### Example
 
 ```powershell
 # Given a configuration fle like
