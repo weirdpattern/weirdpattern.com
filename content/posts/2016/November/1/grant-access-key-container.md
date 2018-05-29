@@ -1,6 +1,7 @@
 ---
 title: "Grant access to a key container"
 style: "snippet"
+image: "./images/security.png"
 abstract: "Learn how to grant access to a key container"
 date: "2016-11-01"
 author: "ptrevino"

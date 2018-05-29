@@ -65,6 +65,26 @@ export interface ValueCount {
 }
 
 /**
+ * A post suggestion
+ * @typedef {Interface} PostSuggestion
+ * @property {string} slug the url of the post.
+ * @property {string} title the title of the post.
+ * @property {string} abstract the abstract of the post.
+ * @property {string} image the image of the post.
+ * @property {string} date the date of the post.
+ *
+ * @public
+ * @interface
+ */
+export interface PostSuggestion {
+  slug: string;
+  title: string;
+  abstract: string;
+  image: any;
+  date: string;
+}
+
+/**
  * A post entry.
  * @typedef {Interface} QueryPost
  *
@@ -74,10 +94,7 @@ export interface ValueCount {
 export interface QueryPost {
   fields: {
     slug: string;
-    suggestions?: {
-      slug: string;
-      title: string;
-    };
+    suggestions?: Array<PostSuggestion>;
   };
   html: string;
   excerpt: string;
@@ -89,6 +106,7 @@ export interface QueryPost {
     tags: string[];
     category: string;
     author: string;
+    image: any;
     date: Date;
   };
 }

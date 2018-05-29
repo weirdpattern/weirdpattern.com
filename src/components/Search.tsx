@@ -76,24 +76,26 @@ export default class Search extends React.PureComponent<Props, State> {
     const searchPanelClasses = classNames("search-panel", focused);
     const searchIndicatorClasses = classNames("search-indicator", focused);
 
-    return searching ? (
-      <Overlay close={close}>
-        <div className={searchPanelClasses}>
-          <input
-            placeholder="Show me..."
-            className={searchBoxClasses}
-            onBlur={() => this.focusHandler(false)}
-            onFocus={() => this.focusHandler(true)}
-            onChange={e => this.searchHandler(e)}
-            ref={this.input}
-          />
-          <i className={searchIndicatorClasses} />
-        </div>
-        {this.state.results.length > 0 ? (
-          <SearchResults results={this.state.results} />
-        ) : null}
-      </Overlay>
-    ) : null;
+    return (
+      searching && (
+        <Overlay close={close}>
+          <div className={searchPanelClasses}>
+            <input
+              placeholder="Show me..."
+              className={searchBoxClasses}
+              onBlur={() => this.focusHandler(false)}
+              onFocus={() => this.focusHandler(true)}
+              onChange={e => this.searchHandler(e)}
+              ref={this.input}
+            />
+            <i className={searchIndicatorClasses} />
+          </div>
+          {this.state.results.length > 0 && (
+            <SearchResults results={this.state.results} />
+          )}
+        </Overlay>
+      )
+    );
   }
 
   /**

@@ -45,7 +45,8 @@ function addSiblingNodes(nodes, createNodeField) {
           slug: node.fields.slug,
           date: node.frontmatter.date,
           title: node.frontmatter.title,
-          description: node.frontmatter.description
+          image: node.frontmatter.image,
+          abstract: node.frontmatter.abstract
         };
       });
 

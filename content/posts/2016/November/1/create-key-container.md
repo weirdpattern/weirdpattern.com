@@ -1,6 +1,7 @@
 ---
 title: "Create a key container"
 style: "snippet"
+image: "./images/security.png"
 abstract: "Learn how to use ASP.NET IIS Registration Tool to create an RSA public/private key pair in the specified container."
 date: "2016-11-01"
 author: "ptrevino"

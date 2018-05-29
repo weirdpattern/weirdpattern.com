@@ -1,5 +1,4 @@
 import * as React from "react";
-import * as classNames from "classnames";
 
 import Link, { navigateTo } from "gatsby-link";
 

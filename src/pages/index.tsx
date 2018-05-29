@@ -12,7 +12,7 @@ import { Action, MarkdownPosts, Query, QueryPost } from "../interfaces";
 const config = data as any;
 
 /**
- * Index properties.
+ * Properties of the index page.
  * @typedef {Query<MarkdownPost>} Props
  * @property {number} postToShow the number of post to show.
  * @property {Function} onUpdateActions a callback for scroll events.

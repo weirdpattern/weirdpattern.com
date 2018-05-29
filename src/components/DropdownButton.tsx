@@ -1,5 +1,4 @@
 import * as React from "react";
-import * as classNames from "classnames";
 
 import Link from "gatsby-link";
 import { kebabCase } from "lodash";
@@ -58,9 +57,11 @@ export default class DropdownButton extends React.PureComponent<Props, State> {
   public render(): React.ReactNode {
     const { text, data } = this.props;
 
-    const sorted = data.sort((a: ValueCount, b: ValueCount): number => {
-      return b.totalCount - a.totalCount;
-    });
+    const sorted = data.sort(
+      (a: ValueCount, b: ValueCount): number => {
+        return b.totalCount - a.totalCount;
+      }
+    );
 
     return (
       <li className="dropdown">
@@ -102,24 +103,3 @@ export default class DropdownButton extends React.PureComponent<Props, State> {
     this.setState({ expanded: !this.state.expanded });
   }
 }
-
-/*
-<div className="dropdown">
-        <ul
-          onClick={() => this.clickHandler()}
-        >
-          <span className="total">{data.length}</span>
-          <span className="total-label">{text}</span>
-          <i className="arrow-down" />
-        </button>
-        {this.state.expanded ? (
-          <div className="dropdown-list">
-            <ul>
-              {data.map((item: string, index: number) => {
-                return <li key={index}>item</li>;
-              })}
-            </ul>
-          </div>
-        ) : null}
-      </div>
-*/

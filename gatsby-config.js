@@ -14,7 +14,7 @@ module.exports = {
     {
       resolve: "gatsby-source-filesystem",
       options: {
-        name: "posts",
+        name: "content",
         path: `${__dirname}/${siteConfig.paths.content}`
       }
     },
@@ -32,7 +32,12 @@ module.exports = {
             resolve: "gatsby-remark-responsive-iframe"
           },
           "gatsby-remark-prismjs",
-          "gatsby-remark-copy-linked-files",
+          {
+            resolve: "gatsby-remark-copy-linked-files",
+            options: {
+              destinationDir: `${__dirname}/public/static`
+            }
+          },
           "gatsby-remark-autolink-headers"
         ]
       }
@@ -123,6 +128,13 @@ module.exports = {
             tags: node => node.frontmatter.tags
           }
         }
+      }
+    },
+    {
+      resolve: "gatsby-plugin-copy-files",
+      options: {
+        source: `${__dirname}/content/public/static`,
+        destination: "/static"
       }
     }
     /*

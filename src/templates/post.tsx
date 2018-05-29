@@ -1,22 +1,29 @@
 import * as React from "react";
+import * as classNames from "classnames";
+import Img from "gatsby-image";
 
 import * as data from "../../content/data.json";
 import SEO from "../components/SEO";
+import Share from "../components/Share";
+import LikeThis from "../components/LikeThis";
 import PostMetadata from "../components/PostMetadata";
+//import PostImage from "../components/PostImage";
 import { getCommonActions } from "../utils";
 import { Action, MarkdownPost, Query } from "../interfaces";
 
 const config = data as any;
 
 /**
- * Post properties.
+ * Properties of the PostTemplate.
  * @typedef {Interface} Props
+ * @property {string} location the location of this article.
  * @property {Function} onUpdateActions a callback for scroll events.
  *
  * @private
  * @interface
  */
 interface Props extends Query<MarkdownPost> {
+  location: string;
   onUpdateActions: (actions: Array<Action>) => void;
 }
 
@@ -54,20 +61,32 @@ export default class PostTemplate extends React.Component<Props, {}> {
   public render(): React.ReactNode {
     const { post } = this.props.data;
     const author = config.authors[post.content.author];
+    const bannerClasses = classNames("banner", post.content.category);
 
     return (
       <React.Fragment>
         <SEO post={post} />
         <div className="post">
           <div className="compact-metadata">
-            <a href="#author">{author.name}</a> {" · "} {post.content.date}
+            {author.name} {" · "} {post.content.date}
             {" · "} {post.timeToRead} min read
           </div>
-          <h1 className={post.content.category}>{post.content.title}</h1>
+          <h1>{post.content.title}</h1>
+          <Share />
+          <Img
+            className="banner"
+            title="Post image"
+            alt={post.content.title}
+            sizes={this.props.data.post.content.image.childImageSharp.sizes}
+          />
           <div
             className="post-preview"
             dangerouslySetInnerHTML={{ __html: post.html }}
           />
+          {post.fields.suggestions &&
+            post.fields.suggestions.length > 0 && (
+              <LikeThis suggestions={post.fields.suggestions} />
+            )}
         </div>
       </React.Fragment>
     );
@@ -125,12 +144,28 @@ export const query = graphql`
         author
         category
         tags
+        image {
+          childImageSharp {
+            sizes(maxWidth: 670) {
+              ...GatsbyImageSharpSizes
+            }
+          }
+        }
         date(formatString: "DD MMMM, YYYY")
       }
       fields {
         suggestions {
           slug
           title
+          abstract
+          image {
+            childImageSharp {
+              sizes(maxWidth: 200) {
+                ...GatsbyImageSharpSizes
+              }
+            }
+          }
+          date(formatString: "DD MMMM, YYYY")
         }
         slug
       }

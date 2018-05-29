@@ -29,23 +29,11 @@
     }
   }
 
-  .icon-header {
-    color: $title-color;
-    display: inline-block;
-    padding-right: 15px;
-    font-family: "FontAwesome" !important;
+  .banner {
+    margin-bottom: 2em;
   }
 
-  .database:before {
-    @extend .icon-header;
-    content: "\f1c0";
-    font-size: 30px;
-    vertical-align: 9%;
-  }
-
-  .security:before {
-    @extend .icon-header;
-    content: "\f023";
-    font-size: 38px;
+  .sharethis-inline-share-buttons {
+    margin-bottom: 2em;
   }
 }

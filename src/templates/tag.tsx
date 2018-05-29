@@ -12,7 +12,7 @@ import { Action, MarkdownPosts, Query, QueryPost } from "../interfaces";
 const config = data as any;
 
 /**
- * TagTemplate properties.
+ * Properties of the TagTemplate.
  * @typedef {Query<MarkdownPost>} Props
  * @property {number} postToShow the number of post to show.
  * @property {Function} onUpdateActions a callback for scroll events.
@@ -27,7 +27,7 @@ interface Props extends Query<MarkdownPosts> {
 }
 
 /**
- * TagTemplate state.
+ * State of the TagTemplate.
  * @typedef {Interface} State
  * @property {boolean} scrolled a flag indicating the page was scrolled.
  * @property {number} numberOfPost

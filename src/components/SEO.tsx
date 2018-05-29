@@ -29,20 +29,35 @@ interface Props {
  * @function
  */
 export default function SEO({ post }: Props): React.ReactElement<Props> {
+  const url = config.url + post.fields.slug;
+  const { title, abstract, tags, category, style } = post.content;
+  const description = abstract || post.excerpt;
+  const author = config.authors[post.content.author];
+
   return (
     <Helmet>
       <title>
-        {post.content.title} | {config.title}
+        {title} | {config.title}
       </title>
-      <meta
-        name="description"
-        content={post.content.abstract || post.excerpt}
-      />
-      <meta name="keywords" content={post.content.tags.join(",")} />
-      <meta name="tags" content={post.content.tags.join(",")} />
-      <meta name="category" content={post.content.category} />
-      <meta name="style" content={post.content.style} />
-      <meta name="author" content={post.content.author} />
+      <meta name="description" content={description} />
+      <meta name="keywords" content={tags.join(",")} />
+      <meta name="tags" content={tags.join(",")} />
+      <meta name="category" content={category} />
+      <meta name="style" content={style} />
+      <meta name="author" content={author.name} />
+
+      <meta property="og:url" content={url} />
+      <meta property="og:type" content="article" />
+      <meta property="og:title" content={title} />
+      <meta property="og:description" content={description} />
+
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:creator" content={author.networks.twitter.handler} />
+      <meta name="twitter:title" content={title} />
+      <meta name="twitter:description" content={description} />
+
+      <link rel="me" href={author.networks.twitter.link} />
+      <link rel="canonical" href={url} />
     </Helmet>
   );
 }

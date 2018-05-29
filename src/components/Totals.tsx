@@ -46,20 +46,18 @@ export default function Totals({
       <div className="totals">
         <span className="total">{total}</span>
         <span className="total-label">
-          total entries {location ? `in ${location}` : null}
+          total entries {location && `in ${location}`}
         </span>
       </div>
       <div className="buttons">
-        {categories.length + tags.length > 0 ? (
+        {categories.length + tags.length > 0 && (
           <ul>
-            {categories.length > 0 ? (
+            {categories.length > 0 && (
               <DropdownButton text="categories" data={categories} />
-            ) : null}
-            {tags.length > 0 ? (
-              <DropdownButton text="tags" data={tags} />
-            ) : null}
+            )}
+            {tags.length > 0 && <DropdownButton text="tags" data={tags} />}
           </ul>
-        ) : null}
+        )}
       </div>
     </div>
   );

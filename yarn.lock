@@ -3920,7 +3920,7 @@ fs-extra@6.0.1:
     jsonfile "^4.0.0"
     universalify "^0.1.0"
 
-fs-extra@^4.0.1, fs-extra@^4.0.2:
+fs-extra@^4.0.0, fs-extra@^4.0.1, fs-extra@^4.0.2:
   version "4.0.3"
   resolved "https://registry.yarnpkg.com/fs-extra/-/fs-extra-4.0.3.tgz#0d852122e5bc5beb453fb028e9c0c9bf36340c94"
   dependencies:
@@ -4001,6 +4001,13 @@ gatsby-cli@^1.1.52:
     yargs "^11.1.0"
     yurnalist "^0.2.1"
 
+gatsby-image@^1.0.51:
+  version "1.0.51"
+  resolved "https://registry.yarnpkg.com/gatsby-image/-/gatsby-image-1.0.51.tgz#956cefcf7704b6bfacdab9b59a5d6b76d178ab24"
+  dependencies:
+    babel-runtime "^6.26.0"
+    prop-types "^15.6.0"
+
 gatsby-link@^1.6.44:
   version "1.6.44"
   resolved "https://registry.yarnpkg.com/gatsby-link/-/gatsby-link-1.6.44.tgz#31912e66d3b21632ce27e5b7310ec88d9a75eac3"
@@ -4023,6 +4030,12 @@ gatsby-plugin-catch-links@^1.0.22:
   resolved "https://registry.yarnpkg.com/gatsby-plugin-catch-links/-/gatsby-plugin-catch-links-1.0.22.tgz#a51f525afcdf9a1050e284f93f72fc33694c9789"
   dependencies:
     babel-runtime "^6.26.0"
+
+gatsby-plugin-copy-files@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-copy-files/-/gatsby-plugin-copy-files-1.0.1.tgz#844807697ae34a96d41eead68de5874a0a36c1ce"
+  dependencies:
+    fs-extra "^4.0.0"
 
 gatsby-plugin-manifest@^1.0.21:
   version "1.0.22"

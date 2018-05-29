@@ -1,6 +1,7 @@
 ---
 title: "Reset an identity column of a table in SQL Server"
 style: "snippet"
+image: "./images/database.jpeg"
 abstract: "Learn how to reset an identity column to a specific value in SQL Server."
 date: "2018-05-25"
 author: "ptrevino"
