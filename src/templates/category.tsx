@@ -107,6 +107,7 @@ export default class CategoryTemplate extends React.PureComponent<
           location={this.pathContext}
         />
         <div className="post-list">
+          <h1>Category: {this.pathContext}</h1>
           {chunk(posts.slice(0, this.state.numberOfPosts), this.chunkSize).map(
             (chunk: Array<{ post: QueryPost }>, index: number) => {
               return (
