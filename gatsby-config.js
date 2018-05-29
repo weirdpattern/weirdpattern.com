@@ -38,8 +38,7 @@ module.exports = {
             options: {
               destinationDir: `${__dirname}/public/static`
             }
-          },
-          "gatsby-remark-autolink-headers"
+          }
         ]
       }
     },
