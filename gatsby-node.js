@@ -2,11 +2,6 @@ const path = require("path");
 const { has, kebabCase } = require("lodash");
 const webpackLodashPlugin = require("lodash-webpack-plugin");
 
-const extractQueryPlugin = path.resolve(
-  __dirname,
-  "node_modules/gatsby/dist/utils/babel-plugin-extract-graphql.js"
-);
-
 /**
  * Adds related sibling nodes.
  * @param {Array} nodes the nodes to be linked.
@@ -183,15 +178,5 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
 exports.modifyWebpackConfig = ({ config, stage }) => {
   if (stage === "build-javascript") {
     config.plugin("Lodash", webpackLodashPlugin, null);
-    config.loader("typescript", {
-      test: /\.tsx?$/,
-      loaders: [
-        `babel-loader?${JSON.stringify({
-          presets: ["babel-preset-env"],
-          plugins: [extractQueryPlugin]
-        })}`,
-        "ts-loader"
-      ]
-    });
   }
 };

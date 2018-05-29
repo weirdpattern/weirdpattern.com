@@ -4,6 +4,7 @@ const regexExcludeRobots = /^(?!\/(dev-404-page|404|offline-plugin-app-shell-fal
 module.exports = {
   siteMetadata: {
     url: siteConfig.url,
+    siteUrl: siteConfig.url,
     name: siteConfig.name,
     description: siteConfig.description
   },
@@ -69,7 +70,7 @@ module.exports = {
           {
             site {
               siteMetadata {
-                url
+                siteUrl
               }
             }
             allSitePage(
