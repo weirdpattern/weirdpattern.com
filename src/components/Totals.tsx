@@ -20,6 +20,7 @@ interface Props {
   categories: Array<ValueCount>;
   tags: Array<ValueCount>;
   styling: string;
+  location?: string;
 }
 
 /**
@@ -33,6 +34,7 @@ interface Props {
  */
 export default function Totals({
   styling,
+  location,
   total,
   categories,
   tags
@@ -43,7 +45,9 @@ export default function Totals({
     <div className={postTotalsClasses}>
       <div className="totals">
         <span className="total">{total}</span>
-        <span className="total-label">total entries</span>
+        <span className="total-label">
+          total entries {location ? `in ${location}` : null}
+        </span>
       </div>
       <div className="buttons">
         {categories.length + tags.length > 0 ? (

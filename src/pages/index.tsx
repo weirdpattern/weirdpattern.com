@@ -44,7 +44,7 @@ interface State {
 }
 
 /**
- * Page component.
+ * Index component.
  *
  * @public
  * @class
