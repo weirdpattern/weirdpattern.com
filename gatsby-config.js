@@ -137,6 +137,13 @@ module.exports = {
         source: `${__dirname}/content/public/static`,
         destination: "/static"
       }
+    },
+    {
+      resolve: "gatsby-plugin-copy-files",
+      options: {
+        source: `${__dirname}/content/public`,
+        destination: "/"
+      }
     }
     /*
     {
