@@ -77,4 +77,4 @@ coverage
 # App Specifics #
 #################
 .cache/
-public/
+/public/
