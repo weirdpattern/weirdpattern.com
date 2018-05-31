@@ -40,6 +40,7 @@
     "gatsby-transformer-remark": "^1.7.41",
     "gatsby-transformer-sharp": "^1.6.24",
     "gh-pages": "^1.1.0",
+    "git-push": "^0.1.1",
     "lodash": "^4.17.10",
     "lodash-webpack-plugin": "^0.11.5",
     "prismjs": "^1.14.0",
@@ -50,7 +51,7 @@
   "scripts": {
     "build": "gatsby build",
     "develop": "gatsby develop",
-    "deploy": "gatsby build --prefix-paths && gh-pages -d public",
+    "deploy": "gatsby build --prefix-paths && node ./utils/deploy.js",
     "format": "prettier --parser typescript --write \"src/**/*.ts*\""
   },
   "devDependencies": {
