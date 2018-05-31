@@ -32,14 +32,14 @@
     opacity: 0;
     visibility: hidden;
     width: 250px;
-    max-height: 400px;
+    max-height: 500px;
     padding: 10px 0;
     color: #FFFFFF;
     background-color: $focus-color;
     border: 1px solid $focus-color;
     right: 0;
     position: absolute;
-    overflow: scroll;
+    overflow: auto;
     overflow-x: hidden;
 
     li {
