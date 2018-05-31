@@ -42,14 +42,13 @@ module.exports = {
         ]
       }
     },
-    /*
+    "gatsby-netlify-plugin",
     {
       resolve: "gatsby-plugin-google-analytics",
       options: {
-        trackingId: config.siteGATrackingID
+        trackingId: siteConfig.ids.google
       }
     },
-    */
     {
       resolve: "gatsby-plugin-nprogress",
       options: {
