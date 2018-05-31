@@ -42,7 +42,7 @@ module.exports = {
         ]
       }
     },
-    "gatsby-netlify-plugin",
+    "gatsby-plugin-netlify",
     {
       resolve: "gatsby-plugin-google-analytics",
       options: {
