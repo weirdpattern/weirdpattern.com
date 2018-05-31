@@ -9,8 +9,7 @@
         "type": "node",
         "request": "launch",
         "protocol": "inspector",
-        "program": "${workspaceRoot}/node_modules/gatsby/dist/bin/gatsby.js",
-        "args": ["develop", "-p", "7777"],
+        "program": "${workspaceRoot}/utils/deploy.js",
         "stopOnEntry": false,
         "cwd": "${workspaceRoot}",
         "preLaunchTask": null,
@@ -18,10 +17,6 @@
         "runtimeArgs": [
           "--nolazy"
         ],
-        "env": {
-          "NODE_ENV": "development",
-          "DEBUG": "gatsby:*"
-        },
         "console": "integratedTerminal",
         "sourceMaps": true,
         "outFiles": []

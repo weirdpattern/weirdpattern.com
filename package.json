@@ -50,7 +50,7 @@
   "scripts": {
     "build": "gatsby build",
     "develop": "gatsby develop",
-    "deploy": "gatsby build --prefix-paths && node ./utils/deploy.js",
+    "deploy": "gatsby build --prefix-paths && node ./utils/deploy.js -- ./public",
     "format": "prettier --parser typescript --write \"src/**/*.ts*\""
   },
   "devDependencies": {

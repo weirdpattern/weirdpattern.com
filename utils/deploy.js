@@ -15,21 +15,25 @@ var path = require("path");
 var exec = require("child_process").exec;
 var spawn = require("child_process").spawn;
 
-if (!path.isAbsolute(sourceDir) && process) {
-  sourceDir = path.join(process.cwd(), sourceDir);
-}
+const sourceDir = path.join(process.cwd(), "public");
 
-if (typeof remote === "string") {
-  remote = { name: "origin", url: remote, branch: "master" };
-}
+const remote = {
+  name: "origin",
+  url: "git@github.com:weirdpattern/weirdpattern.com",
+  branch: "live"
+};
 
-remote.branch = remote.branch || "master";
-remote.name = remote.name || "origin";
+const cb = function(err) {
+  if (err) {
+    console.error(err);
+    return;
+  }
 
-cb = cb || function() {};
+  console.info("Deploy completed");
+};
 
-var options = { cwd: sourceDir, stdio: "inherit" };
-var message = "Update " + new Date().toISOString();
+const options = { cwd: sourceDir, stdio: "inherit" };
+const message = "Update " + new Date().toISOString();
 
 // Start with an empty promise
 Promise.resolve()
@@ -105,11 +109,10 @@ Promise.resolve()
                   spawn(
                     "git",
                     ["push", remote.name, remote.branch],
-                    "exit",
-                    function() {
-                      cb();
-                    }
-                  );
+                    options
+                  ).on("exit", function(a, b, c, d) {
+                    cb(a);
+                  });
                 }
               );
             });
