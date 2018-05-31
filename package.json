@@ -48,9 +48,8 @@
     "react-helmet": "^5.2.0"
   },
   "scripts": {
-    "build": "gatsby build",
+    "build": "gatsby build --prefix-paths",
     "develop": "gatsby develop",
-    "deploy": "gatsby build --prefix-paths && node ./utils/deploy.js -- ./public",
     "format": "prettier --parser typescript --write \"src/**/*.ts*\""
   },
   "devDependencies": {
