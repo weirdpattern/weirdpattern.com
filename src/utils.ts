@@ -77,8 +77,8 @@ export function getCommonActions(
     const callback = callbacks[candidates[index]];
     actions.push({
       name: candidates[index],
-      callback: () => {
-        callback(context);
+      callback: function() {
+        callback.apply(this, context);
       }
     });
   }
