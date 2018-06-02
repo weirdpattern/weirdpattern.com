@@ -42,7 +42,7 @@ export default class PostTemplate extends React.Component<Props, {}> {
   public constructor(props: Props) {
     super(props);
 
-    this.props.onUpdateActions(getCommonActions(null, ["back", "search"]));
+    this.props.onUpdateActions(getCommonActions("back", "search"));
     this.scrollHandler = this.scrollHandler.bind(this);
   }
 
@@ -107,10 +107,10 @@ export default class PostTemplate extends React.Component<Props, {}> {
 
     if (document.documentElement.scrollTop > 0) {
       this.props.onUpdateActions(
-        getCommonActions(null, ["scrollTop", "back", "search"])
+        getCommonActions("scrollTop", "back", "search")
       );
     } else {
-      this.props.onUpdateActions(getCommonActions(null, ["back", "search"]));
+      this.props.onUpdateActions(getCommonActions("back", "search"));
     }
 
     this.ticking = false;

@@ -18,8 +18,8 @@ const callbacks: { [key: string]: Function } = {
   home: function() {
     window.location.href = config.url;
   },
-  report: function(context: any) {
-    const page = `${config.url}${context.pathname}`;
+  report: function() {
+    const page = `${config.url}${document.referrer}`;
     const mailTo = config.authors[config.profile.author].networks.email.link;
     window.location.href = `${mailTo}?subject=Page not found&body=The following page was not found: ${page}`;
   }
@@ -58,28 +58,21 @@ export function copyToClipboard(text: string): void {
 
 /**
  * Gets the common actions.
- * @param {*} context the context of the page.
  * @param {Array<string>} candidates the types to be added.
  * @returns {Array<Action>} the actions.
  *
  * @public
  * @function
  */
-export function getCommonActions(
-  context,
-  candidates: Array<string>
-): Array<Action> {
+export function getCommonActions(...candidates: Array<string>): Array<Action> {
   const actions: Array<Action> = [];
 
   let index = -1;
   const length = candidates.length;
   while (++index < length) {
-    const callback = callbacks[candidates[index]];
     actions.push({
       name: candidates[index],
-      callback: function() {
-        callback.call(this, context);
-      }
+      callback: callbacks[candidates[index]]
     });
   }
 
