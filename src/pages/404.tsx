@@ -31,9 +31,7 @@ export default class NotFoundPage extends React.PureComponent<Props, {}> {
   public constructor(props: Props) {
     super(props);
 
-    this.props.onUpdateActions(
-      getCommonActions("home", "report", "search")
-    );
+    this.props.onUpdateActions(getCommonActions("home", "report", "search"));
   }
 
   /** @inheritdoc */
