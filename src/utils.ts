@@ -19,9 +19,10 @@ const callbacks: { [key: string]: Function } = {
     window.location.href = config.url;
   },
   report: function() {
-    const page = `${config.url}${document.referrer}`;
     const mailTo = config.authors[config.profile.author].networks.email.link;
-    window.location.href = `${mailTo}?subject=Page not found&body=The following page was not found: ${page}`;
+    window.location.href = `${mailTo}?subject=Page not found&body=The following page was not found: ${
+      document.referrer
+    }`;
   }
 };
 
