@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import Helmet from "react-helmet";
-import { chunk, throttle } from "lodash";
+import { chunk } from "lodash";
 
 import * as data from "../../content/data.json";
 import Totals from "../components/Totals";
@@ -74,7 +74,7 @@ export default class CategoryTemplate extends React.PureComponent<
       showLoadMore: this.props.data.markdown.posts.length > postToShow
     };
 
-    this.props.onUpdateActions(getCommonActions("back", "search"));
+    this.props.onUpdateActions(getCommonActions(null, "back", "search"));
     this.scrollHandler = this.scrollHandler.bind(this);
     this.loadMoreHandler = this.loadMoreHandler.bind(this);
   }
@@ -157,11 +157,11 @@ export default class CategoryTemplate extends React.PureComponent<
     if (document.documentElement.scrollTop > 0) {
       this.setState({ scrolled: true });
       this.props.onUpdateActions(
-        getCommonActions("scrollTop", "back", "search")
+        getCommonActions(null, "scrollTop", "back", "search")
       );
     } else {
       this.setState({ scrolled: false });
-      this.props.onUpdateActions(getCommonActions("back", "search"));
+      this.props.onUpdateActions(getCommonActions(null, "back", "search"));
     }
 
     this.ticking = false;

@@ -1,0 +1,109 @@
+.not-found {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 33%;
+
+  & * {
+    font-family: "Walter Turncoat" !important;
+  }
+
+  .blame, .instructions {
+    position: fixed;
+
+    svg {
+      position: relative;
+      width: 30vmin;
+      height: 30vmin;
+    }
+
+    p {
+      font-size: 2em;
+      position: relative;
+      display: inline-block;
+      transform: rotate(-25deg);
+    }
+  }
+
+  .blame {
+    top: 0;
+    left: 33%;
+
+    svg {
+      top: 40px;
+      left: -50px;
+      transform: scale(-1, 1) rotate(-25deg);
+    }
+
+    p {
+      top: -40px;
+      left: -250px;
+    }
+  }
+
+  .instructions {
+    bottom: -40px;
+    right: 50px;
+
+    svg {
+      bottom: -40px;
+      right: 0;
+      transform: scale(1, -1) rotate(-50deg);
+    }
+
+    p {
+      bottom: 160px;
+      right: -200px;
+    }
+  }
+
+  .middle-center {
+    position: fixed;
+    top: 35%;
+    left: 55%;
+    text-align: center;
+
+    h1 {
+      font-size: 12em;
+    }
+
+    p {
+      margin-top: -40px;
+    }
+  }
+
+  @media screen and (max-width: $break-md) {
+    .blame, .instructions {
+      display: none;
+    }
+
+    .middle-center {
+      width: 100%;
+      top: 50%;
+      left: 0;
+
+      p {
+        margin-top: -20px;
+        font-size: 1.6em;
+      }
+    }
+  }
+
+  @media screen and (max-width: $break-sm) {
+    .middle-center {
+      width: 100%;
+      top: 60%;
+      left: 0;
+
+      h1 {
+        font-size: 6em;
+      }
+
+      p {
+        margin-top: -20px;
+        font-size: 0.9em;
+      }
+    }
+  }
+}

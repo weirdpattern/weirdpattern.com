@@ -45,3 +45,6 @@ $ .\aspnet_regiis -pa MyKeyContainer MyDomain\MyServiceAccount -full
 
 
 ```
+
+### References
+[How to: Decrypt a web.config](https://msdn.microsoft.com/en-us/library/bb986792.aspx)

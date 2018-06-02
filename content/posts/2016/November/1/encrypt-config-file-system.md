@@ -54,3 +54,6 @@ $ .\aspnet_regiis -pef "connectionStrings" "C:/inetpub/Application/" -prov "MyPr
 
 
 ```
+
+### References
+[How to: Decrypt a web.config](https://msdn.microsoft.com/en-us/library/bb986792.aspx)

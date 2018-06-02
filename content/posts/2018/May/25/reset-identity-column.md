@@ -51,3 +51,6 @@ DBCC CHECKIDENT (<table>, RESEED, <value>)
 -- resets the identity column (PK) in the Employee table to 1
 DBCC CHECKIDENT ('Employee', RESEED, 1)
 ```
+
+### References
+[DBCC CHECKIDENT \(Transact-SQL\)](https://docs.microsoft.com/en-us/sql/t-sql/database-console-commands/dbcc-checkident-transact-sql?view=sql-server-2017) 

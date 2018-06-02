@@ -165,6 +165,10 @@ export interface Query<T> {
 /**
  * The search post result.
  * @typedef {Interface} SearchPost
+ * @property {string} url the url information.
+ * @property {string} date the date information.
+ * @property {string} title the title information.
+ * @property {string} style the style information.
  *
  * @public
  * @interface

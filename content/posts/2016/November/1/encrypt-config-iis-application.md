@@ -53,3 +53,6 @@ $ .\aspnet_regiis -pe connectionStrings -app "/Default Website" -prov MyProtecte
 
 
 ```
+
+### References
+[How to: Decrypt a web.config](https://msdn.microsoft.com/en-us/library/bb986792.aspx)

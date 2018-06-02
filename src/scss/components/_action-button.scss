@@ -71,6 +71,22 @@
     }
   }
 
+  &.home {
+    background-color: $secondary-color;
+
+    i {
+      @extend .fa, .fa-home;
+    }
+  }
+
+  &.report {
+    background-color: $ternary-color;
+
+    i {
+      @extend .fa, .fa-envelope;
+    }
+  }
+
   &:focus {
     outline: 0;
   }
