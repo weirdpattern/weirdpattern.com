@@ -58,7 +58,7 @@ export default class Layout extends React.PureComponent<Props, State> {
     super(props);
 
     this.state = {
-      actions: getCommonActions(null, "search"),
+      actions: getCommonActions(null, ["search"]),
       searching: false
     };
 

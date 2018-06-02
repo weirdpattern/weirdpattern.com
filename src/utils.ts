@@ -67,7 +67,7 @@ export function copyToClipboard(text: string): void {
  */
 export function getCommonActions(
   context,
-  ...candidates: Array<string>
+  candidates: Array<string>
 ): Array<Action> {
   const actions: Array<Action> = [];
 
@@ -78,7 +78,7 @@ export function getCommonActions(
     actions.push({
       name: candidates[index],
       callback: function() {
-        callback.apply(this, context);
+        callback.call(this, context);
       }
     });
   }

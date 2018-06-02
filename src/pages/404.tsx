@@ -32,7 +32,7 @@ export default class NotFoundPage extends React.PureComponent<Props, {}> {
     super(props);
 
     this.props.onUpdateActions(
-      getCommonActions(this.props.location, "home", "report", "search")
+      getCommonActions(this.props.location, ["home", "report", "search"])
     );
   }
 

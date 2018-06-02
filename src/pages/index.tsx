@@ -147,10 +147,12 @@ export default class Index extends React.PureComponent<Props, State> {
 
     if (document.documentElement.scrollTop > 0) {
       this.setState({ scrolled: true });
-      this.props.onUpdateActions(getCommonActions(null, "scrollTop", "search"));
+      this.props.onUpdateActions(
+        getCommonActions(null, ["scrollTop", "search"])
+      );
     } else {
       this.setState({ scrolled: false });
-      this.props.onUpdateActions(getCommonActions(null, "search"));
+      this.props.onUpdateActions(getCommonActions(null, ["search"]));
     }
 
     this.ticking = false;
