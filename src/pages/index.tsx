@@ -76,6 +76,12 @@ export default class Index extends React.PureComponent<Props, State> {
   public componentDidMount(): void {
     syncPrism(document);
     window.addEventListener("scroll", this.scrollHandler);
+
+    Array.from(document.querySelectorAll(".post-list > .actions")).forEach(
+      (element: HTMLElement) => {
+        element.remove();
+      }
+    );
   }
 
   /** @inheritdoc */
