@@ -70,3 +70,44 @@ export function getCommonActions(...candidates: Array<string>): Array<Action> {
 
   return actions;
 }
+
+/**
+ * Syncs prism frames with the corresponding styles.
+ * @param {Document} document the document object.
+ * @returns {void}
+ *
+ * @public
+ * @function
+ */
+export function syncPrism(document: Document): void {
+  Array.from(document.querySelectorAll(".gatsby-highlight")).forEach(
+    (element: Element) => {
+      const pre = element.querySelector("pre[class*='language-']");
+      const language = pre.getAttribute("class").split("-")[1];
+
+      const container = document.createElement("div");
+      container.setAttribute("class", "code-header");
+
+      const title = document.createElement("span");
+      title.innerText =
+        language.trim().toLowerCase() !== "text" ? language : "";
+
+      const copy = document.createElement("div");
+      copy.setAttribute("class", "copy");
+      copy.addEventListener("click", () => {
+        const text = pre.querySelector("code").innerText;
+        copyToClipboard(text);
+
+        copy.classList.add("success");
+        setTimeout(() => {
+          copy.classList.remove("success");
+        }, 1000);
+      });
+
+      container.appendChild(title);
+      container.appendChild(copy);
+
+      pre.parentElement.insertBefore(container, pre);
+    }
+  );
+}

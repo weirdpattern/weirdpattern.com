@@ -7,8 +7,7 @@ import SEO from "../components/SEO";
 import Share from "../components/Share";
 import LikeThis from "../components/LikeThis";
 import PostMetadata from "../components/PostMetadata";
-//import PostImage from "../components/PostImage";
-import { getCommonActions } from "../utils";
+import { getCommonActions, syncPrism } from "../utils";
 import { Action, MarkdownPost, Query } from "../interfaces";
 
 const config = data as any;
@@ -49,6 +48,7 @@ export default class PostTemplate extends React.Component<Props, {}> {
 
   /** @inheritdoc */
   public componentDidMount(): void {
+    syncPrism(document);
     window.addEventListener("scroll", this.scrollHandler);
   }
 

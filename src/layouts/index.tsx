@@ -66,39 +66,7 @@ export default class Layout extends React.PureComponent<Props, State> {
   /** @inheritdoc */
   public componentDidMount(): void {
     this.index = this.index || Index.load(this.props.data.search.index);
-
     window.addEventListener("keydown", this.keydownHandler);
-
-    Array.from(document.querySelectorAll(".gatsby-highlight")).forEach(
-      (element: Element) => {
-        const pre = element.querySelector("pre[class*='language-']");
-        const language = pre.getAttribute("class").split("-")[1];
-
-        const container = document.createElement("div");
-        container.setAttribute("class", "code-header");
-
-        const title = document.createElement("span");
-        title.innerText =
-          language.trim().toLowerCase() !== "text" ? language : "";
-
-        const copy = document.createElement("div");
-        copy.setAttribute("class", "copy");
-        copy.addEventListener("click", () => {
-          const text = pre.querySelector("code").innerText;
-          copyToClipboard(text);
-
-          copy.classList.add("success");
-          setTimeout(() => {
-            copy.classList.remove("success");
-          }, 1000);
-        });
-
-        container.appendChild(title);
-        container.appendChild(copy);
-
-        pre.parentElement.insertBefore(container, pre);
-      }
-    );
   }
 
   /** @inheritdoc */

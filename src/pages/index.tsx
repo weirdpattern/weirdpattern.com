@@ -6,7 +6,7 @@ import { chunk, throttle } from "lodash";
 import * as data from "../../content/data.json";
 import Totals from "../components/Totals";
 import PostPreview from "../components/PostPreview";
-import { getCommonActions } from "../utils";
+import { getCommonActions, syncPrism } from "../utils";
 import { Action, MarkdownPosts, Query, QueryPost } from "../interfaces";
 
 const config = data as any;
@@ -74,6 +74,7 @@ export default class Index extends React.PureComponent<Props, State> {
 
   /** @inheritdoc */
   public componentDidMount(): void {
+    syncPrism(document);
     window.addEventListener("scroll", this.scrollHandler);
   }
 
