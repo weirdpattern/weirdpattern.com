@@ -87,7 +87,7 @@ export default class NotFoundPage extends React.PureComponent<Props, {}> {
           </p>
         </div>
         <div className="instructions">
-          <p>You can use these your way</p>
+          <p>...and you can use these your way</p>
           <svg xmlns="http://www.w3.org/svg/2000" viewBox="-10 -30 200 200">
             <defs>
               <filter
