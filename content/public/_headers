@@ -1,6 +1,0 @@
-/*
-  Content-Security-Policy: default-src 'none'; object-src 'self' twitter.com sharethis.com https://c.sharethis.mgr.consensu.org; img-src 'self' https://www.google-analytics.com www.google-analytics.com https://stats.g.doubleclick.net; script-src 'self' https://google-analytics.com 'unsafe-inline'; style-srs 'self'; font-src 'self' https://fonts.googleapis.com; connect-src 'self' https://www.google-analytics.com www.google-analytics.com https://stats.g.doubleclick.net;
-  X-Frame-Options: SAMEORIGIN
-  X-Xss-Protection: 1; mode=block
-  X-Content-Type-Options: nosniff
-  Referrer-Policy: origin

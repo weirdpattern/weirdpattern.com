@@ -1,0 +1,23 @@
+[build]
+  command = "yarn run build"
+  publish = "public"
+
+[build.environment]
+  NODE_VERSION = "8"
+  YARN_VERSION = "1.7.0"
+  YARN_FLAGS = "--frozen-lockfile"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "ALLOW-FROM https://platform.twitter.com"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+    Strict-Transport-Security = "max-age=31536000"
+    Content-Security-Policy = "default-src 'none'; object-src 'self' twitter.com sharethis.com https://c.sharethis.mgr.consensu.org; img-src 'self' https://www.google-analytics.com www.google-analytics.com https://stats.g.doubleclick.net; script-src 'self' https://google-analytics.com 'unsafe-inline'; style-srs 'self'; font-src 'self' https://fonts.googleapis.com; connect-src 'self' https://www.google-analytics.com www.google-analytics.com https://stats.g.doubleclick.net;"
+
+[[redirects]]
+  from = "https://weirdpattern.netlify.com/*"
+  to "https://www.weirdpattern.com/:splat"
+  status = 301
+  force = true

@@ -57,10 +57,7 @@ export default class Layout extends React.PureComponent<Props, State> {
   public constructor(props: Props) {
     super(props);
 
-    this.state = {
-      actions: getCommonActions("search"),
-      searching: false
-    };
+    this.state = { actions: getCommonActions("search"), searching: false };
 
     this.keydownHandler = this.keydownHandler.bind(this);
     this.updateActions = this.updateActions.bind(this);
