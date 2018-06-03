@@ -31,7 +31,10 @@ export default class NotFoundPage extends React.PureComponent<Props, {}> {
   public constructor(props: Props) {
     super(props);
 
-    this.props.onUpdateActions(getCommonActions("home", "report", "search"));
+    // NOTE: this is a bug in gatsbyjs (https://github.com/gatsbyjs/gatsby/issues/3504)
+    if (this.props && this.props.onUpdateActions) {
+      this.props.onUpdateActions(getCommonActions("home", "report", "search"));
+    }
   }
 
   /** @inheritdoc */
