@@ -82,7 +82,9 @@ export default class NotFoundPage extends React.PureComponent<Props, {}> {
         </div>
         <div className="middle-center">
           <h1>404</h1>
-          <p>Ooops... I can&apos;t find the page you are looking for</p>
+          <p>
+            Ooops... I can&apos;t find the page you need. I&apos;m truly sorry!
+          </p>
         </div>
         <div className="instructions">
           <p>You can use these your way</p>
