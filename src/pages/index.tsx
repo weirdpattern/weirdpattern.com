@@ -92,6 +92,7 @@ export default class Index extends React.PureComponent<Props, State> {
         <Helmet>
           <title>Dashboard | {config.title}</title>
           <meta name="description" content={config.description} />
+          <meta name="keywords" content={config.keywords.join(",")} />
         </Helmet>
         <Totals
           total={posts.length}

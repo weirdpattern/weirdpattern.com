@@ -2,6 +2,12 @@
   "url": "https://www.weirdpattern.com",
   "title": "WeirdPattern",
   "description": "Patricio Treviño's personal blog",
+  "keywords": [
+    "Blog",
+    "Sitecore",
+    "Technology",
+    "Software Development"
+  ],
   "paths": {
     "content": "content"
   },
