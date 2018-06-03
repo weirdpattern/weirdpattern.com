@@ -33,7 +33,7 @@ function getAbstract(data: QueryPost): string {
   const endIndex = data.html.indexOf("<!-- end:abstract -->");
 
   if (data.html && startIndex > -1 && endIndex > -1) {
-    html = data.html.substr(startIndex, endIndex);
+    html = data.html.substring(startIndex, endIndex);
   }
 
   return html;

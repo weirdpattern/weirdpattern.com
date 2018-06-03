@@ -16,7 +16,7 @@ tags:
     - column
 ---
 
-<div class="tldr" markdown="1">
+<div class="tldr" markdown="true">
 
   I use as a way to clean up my tables after completing development of a data-load script.  
 
@@ -43,14 +43,13 @@ DBCC CHECKIDENT (<table>, RESEED, <value>)
 | **table** | The name of the table to be reset. |
 | **value** | The new value to be used.          |
 
-<!-- end:abstract -->
+<!-- end:abstract -->  
 
 ### Example
 
 ```sql
--- resets the identity column (PK) in the Employee table to 1
 DBCC CHECKIDENT ('Employee', RESEED, 1)
 ```
 
 ### References
-[DBCC CHECKIDENT \(Transact-SQL\)](https://docs.microsoft.com/en-us/sql/t-sql/database-console-commands/dbcc-checkident-transact-sql?view=sql-server-2017) 
+[DBCC CHECKIDENT &#40;Transact-SQL&#41;](https://docs.microsoft.com/en-us/sql/t-sql/database-console-commands/dbcc-checkident-transact-sql?view=sql-server-2017) 
