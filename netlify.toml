@@ -18,6 +18,6 @@
 
 [[redirects]]
   from = "https://weirdpattern.netlify.com/*"
-  to "https://www.weirdpattern.com/:splat"
+  to = "https://www.weirdpattern.com/:splat"
   status = 301
   force = true
