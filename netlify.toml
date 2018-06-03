@@ -10,7 +10,7 @@
 [[headers]]
   for = "/*"
   [headers.values]
-    Referrer-Policy = "origin"
+    Referrer-Policy = "strict-origin-when-cross-origin"
     X-Frame-Options = "ALLOW-FROM https://platform.twitter.com"
     X-XSS-Protection = "1; mode=block"
     X-Content-Type-Options = "nosniff"

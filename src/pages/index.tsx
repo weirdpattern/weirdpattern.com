@@ -74,7 +74,7 @@ export default class Index extends React.PureComponent<Props, State> {
 
   /** @inheritdoc */
   public componentDidMount(): void {
-    syncPrism(document);
+    // syncPrism(document);
     window.addEventListener("scroll", this.scrollHandler);
   }
 
