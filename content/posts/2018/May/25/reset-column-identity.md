@@ -18,7 +18,7 @@ tags:
 
 <div class="tldr" markdown="true">
 
-  I use as a way to clean up my tables after completing development of a data-load script.  
+  I use this to clean up my tables after completing development of a data-load script.  
 
   The reason... I keep deleting data from the table and re-running the script over and over again, and 
   of course, the identity keeps getting bigger and bigger. At the end, the id of the first entry in the 
