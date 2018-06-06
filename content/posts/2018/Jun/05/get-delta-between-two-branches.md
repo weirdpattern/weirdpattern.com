@@ -8,6 +8,8 @@ author: "ptrevino"
 category: "git"
 tags:
     - git
+    - diff
+    - delta
     - branch
     - command
 ---
