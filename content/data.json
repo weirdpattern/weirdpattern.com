@@ -18,7 +18,7 @@
     "ptrevino": {
       "name": "Patricio Treviño",
       "credentials": "Husband . Father . Developer",
-      "avatar": "/static/profile.jpg",
+      "avatar": "./static/profile.jpg",
       "networks": {
         "twitter": {
           "name": "Twitter",

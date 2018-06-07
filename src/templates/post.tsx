@@ -5,8 +5,6 @@ import Img from "gatsby-image";
 import * as data from "../../content/data.json";
 import SEO from "../components/SEO";
 import Share from "../components/Share";
-import LikeThis from "../components/LikeThis";
-import PostMetadata from "../components/PostMetadata";
 import { getCommonActions, syncPrism } from "../utils";
 import { Action, MarkdownPost, Query } from "../interfaces";
 
@@ -83,10 +81,6 @@ export default class PostTemplate extends React.Component<Props, {}> {
             className="post-preview"
             dangerouslySetInnerHTML={{ __html: post.html }}
           />
-          {post.fields.suggestions &&
-            post.fields.suggestions.length > 0 && (
-              <LikeThis suggestions={post.fields.suggestions} />
-            )}
         </div>
       </React.Fragment>
     );
@@ -154,19 +148,6 @@ export const query = graphql`
         date(formatString: "DD MMMM, YYYY")
       }
       fields {
-        suggestions {
-          slug
-          title
-          abstract
-          image {
-            childImageSharp {
-              sizes(maxWidth: 200) {
-                ...GatsbyImageSharpSizes
-              }
-            }
-          }
-          date(formatString: "DD MMMM, YYYY")
-        }
         slug
       }
     }

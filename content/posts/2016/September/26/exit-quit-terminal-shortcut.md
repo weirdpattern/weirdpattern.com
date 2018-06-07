@@ -11,8 +11,6 @@ tags:
     - bash
     - profile
     - bash_profile
-    - exit
-    - quit
     - terminal
 ---
 

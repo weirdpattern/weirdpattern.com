@@ -2,57 +2,6 @@ const path = require("path");
 const { has, kebabCase } = require("lodash");
 const webpackLodashPlugin = require("lodash-webpack-plugin");
 
-/**
- * Adds related sibling nodes.
- * @param {Array} nodes the nodes to be linked.
- * @param {Function} createNodeField the factory method to be used.
- * @returns {void}
- *
- * @private
- * @function
- */
-function addSiblingNodes(nodes, createNodeField) {
-  nodes.sort(
-    (left, right) =>
-      new Date(left.frontmatter.date) - new Date(right.frontmatter.date)
-  );
-
-  for (let i = 0; i < nodes.length; i++) {
-    const current = nodes[i];
-    const suggestions = nodes
-      .filter(node => {
-        if (
-          !node.frontmatter.tags ||
-          !current.frontmatter.tags ||
-          node.fields.slug === current.fields.slug
-        ) {
-          return false;
-        }
-
-        return (
-          current.frontmatter.tags.filter(
-            tag => node.frontmatter.tags.indexOf(tag) > -1
-          ).length > 0
-        );
-      })
-      .map(node => {
-        return {
-          slug: node.fields.slug,
-          date: node.frontmatter.date,
-          title: node.frontmatter.title,
-          image: node.frontmatter.image,
-          abstract: node.frontmatter.abstract
-        };
-      });
-
-    createNodeField({
-      node: current,
-      name: "suggestions",
-      value: suggestions.sort(() => Math.random() - 0.5)
-    });
-  }
-}
-
 /** @inheritdoc */
 exports.onCreateNode = ({ node, boundActionCreators, getNode }) => {
   const { createNodeField } = boundActionCreators;
@@ -77,16 +26,6 @@ exports.onCreateNode = ({ node, boundActionCreators, getNode }) => {
     }
 
     createNodeField({ node, name: "slug", value: slug });
-  }
-};
-
-/** @inheritdoc */
-exports.setFieldsOnGraphQLNodeType = ({ type, boundActionCreators }) => {
-  const { name, nodes } = type;
-  const { createNodeField } = boundActionCreators;
-
-  if (name === "MarkdownRemark") {
-    addSiblingNodes(nodes, createNodeField);
   }
 };
 
