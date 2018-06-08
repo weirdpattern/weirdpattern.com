@@ -1,8 +1,8 @@
 ---
-title: "Grant access to a key container"
+title: "Removes access from a key container"
 style: "snippet"
 image: "./images/security.png"
-abstract: "Learn how to use ASP.NET IIS Registration Tool to grant access to a RSA key container."
+abstract: "Learn how to use ASP.NET IIS Registration Tool to remove access from a RSA key container."
 date: "2016-11-01"
 author: "ptrevino"
 category: "security"
@@ -19,15 +19,14 @@ tags:
 ### Syntax
 
 ```
-aspnet_regiis -pa <container> <account> [-pku] [-full] [-csp <provider>]
+aspnet_regiis -pr <container> <account> [-pku] [-csp <provider>]
 ```
 
 | Option         | Description                                                               |
 | -------------- | ------------------------------------------------------------------------- |
 | **container**  | The name of the container to be used.                                     |
-| **account**    | The account to be granted permissions.                                    |
+| **account**    | The account to be removed.                                                |
 | pku            | Substitutes a user-specified container for the default machine container. |
-| full           | Gives full access to the key container.                                   |   
 | csp <provider> | Specifies the container provider to use.                                  |
 
 <!-- end:abstract -->
@@ -36,12 +35,12 @@ aspnet_regiis -pa <container> <account> [-pku] [-full] [-csp <provider>]
 
 ```powershell
 $ cd "$env.WINDIR/Microsoft.NET/Framework64/v4.0.30319"
-$ .\aspnet_regiis -pa MyKeyContainer MyDomain\MyServiceAccount -full
+$ .\aspnet_regiis -pr MyKeyContainer MyDomain\MyServiceAccount
   
   Microsoft (R) ASP.NET RegIIS version 4.0.30319.18408
   Administration utility to install and uninstall ASP.NET on the local machine.
   Copyright (C) Microsoft Corporation.  All rights reserved.
-  Adding ACL for access to the RSA Key Container...
+  Removing ACL for access to the RSA Key Container...
   Succeedded!
 ```
 

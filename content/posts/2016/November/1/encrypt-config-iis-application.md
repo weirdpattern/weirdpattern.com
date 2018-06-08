@@ -2,7 +2,7 @@
 title: "Encrypt a configuration section in a configuration file hosted in IIS"
 style: "snippet"
 image: "./images/security.png"
-abstract: "Learn how to encrypt a configuration section in a configuration file hosted in IIS"
+abstract: "Learn how to use ASP.NET IIS Registration Tool to encrypt a configuration section in a configuration file hosted in IIS."
 date: "2016-11-01"
 author: "ptrevino"
 category: "security"
@@ -20,13 +20,13 @@ tags:
 aspnet_regiis -pe <section> -app <virtualPath> [-location <subPath>] -prov <provider> [-pkm]
 ```
 
-| Option          | Description                                                           |
-| --------------- | --------------------------------------------------------------------- |
-| **section**     | The section of the web.config to be encrypted.                        |
-| **virtualPath** | The IIS website that hosts the web.config.                            |
-| subPath         | The subpath inside the IIS website that hosts the web.config.         |
-| **provider**    | The name of the provider to be used to encrypt (configProtectedData). |
-| pkm             | Encrypts the machine config instead of the local config.              |
+| Option              | Description                                                           |
+| ------------------- | --------------------------------------------------------------------- |
+| **section**         | The section of the web.config to be encrypted.                        |
+| **virtualPath**     | The IIS website that hosts the web.config.                            |
+| location <subPath>  | The subpath inside the IIS website that hosts the web.config.         |
+| **prov <provider>** | The name of the provider to be used to encrypt (configProtectedData). |
+| pkm                 | Encrypts the machine config instead of the local config.              |
 
 <!-- end:abstract -->
 
@@ -50,8 +50,8 @@ $ .\aspnet_regiis -pe connectionStrings -app "/Default Website" -prov MyProtecte
   Microsoft (R) ASP.NET RegIIS version 4.0.30319.18408
   Administration utility to install and uninstall ASP.NET on the local machine.
   Copyright (C) Microsoft Corporation.  All rights reserved.
-
-
+  Decrypting configuration sections...
+  Succeeded!
 ```
 
 ### References
