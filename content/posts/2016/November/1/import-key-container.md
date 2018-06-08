@@ -17,7 +17,7 @@ tags:
 ### Syntax
 
 ```
-aspnet_regiis -px <container> <path> [-pku] [-exp] [-csp <provider>]
+aspnet_regiis -pi <container> <path> [-pku] [-exp] [-csp <provider>]
 ```
 
 | Option         | Description                                                               |
