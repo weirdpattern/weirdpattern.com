@@ -200,7 +200,7 @@ export const query = graphql`
   query CategoryTemplateQuery($category: String) {
     markdown: allMarkdownRemark(
       sort: { fields: [frontmatter___date, frontmatter___title], order: DESC }
-      filter: { frontmatter: { tags: { in: [$category] } } }
+      filter: { frontmatter: { category: { eq: $category } } }
     ) {
       tags: group(field: frontmatter___tags) {
         fieldValue
