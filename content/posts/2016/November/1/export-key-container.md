@@ -8,8 +8,6 @@ author: "ptrevino"
 category: "security"
 tags:
     - security
-    - key
-    - container
     - key container    
     - aspnet
 ---
