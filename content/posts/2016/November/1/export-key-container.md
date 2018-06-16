@@ -1,7 +1,7 @@
 ---
 title: "Export a key container"
 style: "snippet"
-image: "./images/security.png"
+image: "../../../images/security.png"
 abstract: "Learn how to use ASP.NET IIS Registration Tool to export a RSA key container."
 date: "2016-11-01"
 author: "ptrevino"

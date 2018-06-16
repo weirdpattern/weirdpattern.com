@@ -1,7 +1,7 @@
 ---
 title: "Get the delta between two git branches"
 style: "snippet"
-image: "./images/git.jpg"
+image: "../../../images/git.jpg"
 abstract: "Learn how to create a release branch and get the delta changes between release and master."
 date: "2018-06-05"
 author: "ptrevino"

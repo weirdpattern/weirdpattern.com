@@ -1,7 +1,7 @@
 ---
 title: "Decrypt a configuration section in a configuration file hosted in IIS"
 style: "snippet"
-image: "./images/security.png"
+image: "../../../images/security.png"
 abstract: "Learn how to use ASP.NET IIS Registration Tool to decrypt a configuration section in a configuration file hosted in IIS."
 date: "2016-11-01"
 author: "ptrevino"
