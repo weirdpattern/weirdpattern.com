@@ -51,7 +51,8 @@ function getAbstract(data: QueryPost): string {
 export default function Post({ data }: Props): React.ReactElement<Props> {
   const postClasses = classNames("post-preview", {
     post: data.content.style === "post",
-    snippet: data.content.style === "snippet"
+    snippet: data.content.style === "snippet",
+    guide: data.content.style === "guide"
   });
 
   return (

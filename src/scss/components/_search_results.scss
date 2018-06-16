@@ -23,12 +23,20 @@
         border-left-color: #A37ACC;
       }
 
+      &.guide {
+        border-left-color: #E6B673;
+      }
+
       &.snippet:hover {
         background-color: rgba(134, 179, 0, 0.5);
       }
 
       &.post:hover {
         background-color: rgba(163, 122, 204, 0.5);
+      }
+
+      &.guide:hover {
+        background-color: rgba(90, 71, 45, 0.5);
       }
 
       &.first {

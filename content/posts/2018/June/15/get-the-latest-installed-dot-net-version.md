@@ -1,6 +1,6 @@
 ---
 title: "Get the latest installed .Net framework version"
-style: "post"
+style: "guide"
 image: "../../../images/dotnet.jpg"
 abstract: "Learn how to get the installed .net version on a machine"
 date: "2018-06-15"
