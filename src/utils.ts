@@ -47,7 +47,7 @@ export function isMobile(width: number): boolean {
  * @function
  */
 export function copyToClipboard(text: string): void {
-  const listener = (e: ClipboardEvent) => {
+  const listener = (e: ClipboardEvent): void => {
     e.clipboardData.setData("text/plain", text);
     e.preventDefault();
   };

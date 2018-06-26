@@ -96,7 +96,12 @@ pre[class*="language-"] {
 	overflow: auto;
 }
 
-:not(pre) > code[class*="language-"],
+:not(pre) > code[class*="language-"] {
+  background: #F3F3F3;
+  font-size: 16px;
+  font-style: italic;
+}
+
 pre[class*="language-"] {
 	background: #FAFAFA;
 }
