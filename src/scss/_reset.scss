@@ -17,10 +17,7 @@ table {
 }
 
 a {
-  color: inherit;
-  text-decoration-color: $accented-color;
-  text-decoration-line: underline;
-  text-decoration-style: dotted;
+  color: $focus-color;
 
   &:hover {
     color: $accented-color;
