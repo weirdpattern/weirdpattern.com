@@ -43,9 +43,10 @@
     overflow-x: hidden;
 
     li {
+      color: #FFFFFF;
       width: 100%;
       display: block;
-      padding: 3px 0;
+      margin: 4px 0;
       text-align: right;
 
       &:hover {
@@ -54,6 +55,7 @@
       }
 
       a {
+        color: #FFFFFF;
         width: 100%;
         display: block;
         padding: 0 15px;
