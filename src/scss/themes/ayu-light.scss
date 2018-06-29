@@ -1,0 +1,80 @@
+@import url("https://assets-cdn.github.com/assets/gist-embed-87673c31a5b37b5e6556b63e1081ebbc.css");
+
+body {
+  .gist {
+    * {
+      font-family: "Fira Mono" !important;
+    }
+
+    table {
+      tr {
+        border: 0;
+        background-color: #FAFAFA !important;
+
+        td {
+          border: 0;
+          background-color: #FAFAFA !important;
+        }
+      }
+    }
+
+    .gist-meta {
+      padding: 5px 10px !important;
+
+      a {
+        color: #399EE6;
+        text-decoration: none;
+
+        &:hover {
+          color: #FF6A00;
+        }
+      }
+    }
+
+    .gist-file {
+      border-radius: 0 !important;
+    }
+
+    .highlight,
+    .gist-data {
+      color: #6E7580;
+      background: #FAFAFA;
+    }
+
+    .blob-num {
+      border-right: 1px solid #D9D8D7;
+    }
+
+    .pl-c,
+    .pl-c span,
+    .pl-smi {
+      color: #ABB0B6;
+    }
+
+    .pl-e,
+    .pl-k {
+      color: #FA6E32;
+    }
+
+    .pl-k {
+      font-style: italic;
+    }
+
+    .pl-ent,
+    .pl-c1 {
+      color: #55B4D4;
+    }
+
+    .pl-s {
+      color: #86B300;
+    }
+
+    .pl-en {
+      color: #F29718;
+    }
+
+    .pl-v {
+      color: #A37ACC;
+    }
+  }
+}

@@ -33,9 +33,7 @@ tags:
 
 ### Syntax
 
-```
-<operation> [n]> /dev/null [options]
-```
+`gist:weirdpattern/ce54fdb1e5621b5966e146026995b974#syntax.text`
 
 | Option        | Description                                    |
 | ------------- | ---------------------------------------------- |
@@ -52,31 +50,7 @@ Valid values for [n]:
 
 ### Example
 
-```bash
-# no redirection
-$ echo 'hello'
-  hello
-  
-# redirects standard error (no error in this case)
-$ echo 'hello' 2> /dev/null
-  hello
-  
-# redirects standard out to /dev/null (so no output) 
-$ echo 'hello' 1> /dev/null # no output 
-  
-# redirects everything to /dev/null (so no output)
-$ echo 'hello' &> /dev/null # no output
-
-# no redirection (causing error)    
-$ unlink unexisting-file.sh 
-  unlink: unexisting-file.sh: No such file or directory
-
-# redirects standard error to /dev/null (so no error)
-$ unlink unexisting-file.sh 2> /dev/null # no error
-
-# redirects everything to /dev/null (so no error)
-$ unlink unexisting-file.sh &> /dev/null # no error  
-```
+`gist:weirdpattern/ce54fdb1e5621b5966e146026995b974#example.sh`
 
 ### References
 [Null device](https://en.wikipedia.org/wiki/Null_device)

@@ -1,4 +1,5 @@
 import "../scss/main.scss";
+import "../scss/themes/ayu-light.scss";
 import "../scss/themes/prism-ayu-light.scss";
 
 import * as React from "react";
@@ -11,7 +12,7 @@ import Footer from "../components/Footer";
 import Search from "../components/Search";
 import Actions from "../components/Actions";
 
-import { copyToClipboard, getCommonActions } from "../utils";
+import { getCommonActions } from "../utils";
 import { Action, Query, SearchIndex } from "../interfaces";
 
 const config = data as any;

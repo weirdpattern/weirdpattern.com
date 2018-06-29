@@ -1,6 +1,5 @@
 const path = require("path");
 const { has, kebabCase } = require("lodash");
-const webpackLodashPlugin = require("lodash-webpack-plugin");
 
 /** @inheritdoc */
 exports.onCreateNode = ({ node, boundActionCreators, getNode }) => {
@@ -111,11 +110,4 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
       })
     );
   });
-};
-
-/** @inheritdoc */
-exports.modifyWebpackConfig = ({ config, stage }) => {
-  if (stage === "build-javascript") {
-    config.plugin("Lodash", webpackLodashPlugin, null);
-  }
 };
