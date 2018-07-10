@@ -39,15 +39,12 @@ tags:
 <!-- start:abstract -->
 
 ### Steps
-1. Hit '`Ctrl + R`'
-2. In the run box, type '`regexit.exe`'
-3. In the registry editor, open the following subkey:
-```
-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\NET Framework Setup\NDP
-```
+1. Hit `Ctrl + R`
+2. In the run box, type `regexit.exe`
+3. In the registry editor, open the following subkey: `HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\NET Framework Setup\NDP`  
 4. Based on the .Net Framework you want to support  
   4.1. For .Net Framework 4.5 and later  
-    &emsp;&emsp;4.1.1. Open the entry '`v4\Full`'  
+    &emsp;&emsp;4.1.1. Open the entry `v4\Full`  
     &emsp;&emsp;4.1.2. Check for a DWORD value named Release. If it exists, then 
     .NET Framework 4.5 or newer has been installed on that computer.
 

@@ -16,9 +16,7 @@ tags:
 
 ### Syntax
 
-```
-aspnet_regiis -pd <section> -app <virtualPath> [-location <subPath>] [-pkm]
-```
+`gist:7843ce03e79e9526f2b0a57c20690001#syntax.text`
 
 | Option             | Description                                                   |
 | ------------------ | ------------------------------------------------------------- |
@@ -31,27 +29,7 @@ aspnet_regiis -pd <section> -app <virtualPath> [-location <subPath>] [-pkm]
 
 ### Example
 
-```powershell
-# Given a configuration fle like
-# <configuration>
-#   <configProtectedData>
-#     <providers>
-#       <add name="MyProtectedConfigurationProvider" 
-#            type="System.Configuration.RsaProtectedConfigurationProvider, ..." 
-#            keyContainerName="MyKeyContainer" 
-#            useMachineContainer="true" />
-#     </providers>
-#   </configProtectedData>
-# </configuration>
-
-$ cd "$env.WINDIR/Microsoft.NET/Framework64/v4.0.30319"
-$ .\aspnet_regiis -pd connectionStrings -app "/Default Website"
-  Microsoft (R) ASP.NET RegIIS version 4.0.30319.18408
-  Administration utility to install and uninstall ASP.NET on the local machine.
-  Copyright (C) Microsoft Corporation.  All rights reserved.
-  Decrypting configuration sections...
-  Succeeded!
-```
+`gist:7843ce03e79e9526f2b0a57c20690001#example.ps1`
 
 ### References
 [How to: Decrypt a web.config](https://msdn.microsoft.com/en-us/library/bb986792.aspx)

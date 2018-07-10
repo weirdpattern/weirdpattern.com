@@ -24,7 +24,6 @@ module.exports = {
       resolve: "gatsby-transformer-remark",
       options: {
         plugins: [
-          "gatsby-remark-embed-gist",
           {
             resolve: "gatsby-remark-images",
             options: {
@@ -34,13 +33,19 @@ module.exports = {
           {
             resolve: "gatsby-remark-responsive-iframe"
           },
-          "gatsby-remark-prismjs",
           {
             resolve: "gatsby-remark-copy-linked-files",
             options: {
               destinationDir: `${__dirname}/public/static`
             }
-          }
+          },
+          {
+            resolve: "gatsby-remark-embed-gist",
+            options: {
+              username: "weirdpattern"
+            }
+          },
+          "gatsby-remark-prismjs"
         ]
       }
     },

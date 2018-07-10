@@ -16,9 +16,7 @@ tags:
 
 #### Syntax
 
-```
-aspnet_regiis -pc <container> [-size <keySize>] [-pku] [-exp] [-csp <provider>]
-```
+`gist:9c4e6151caa8d1da85e9b3b53c234384#syntax.text`
 
 | Option         | Description                                                               |
 | -------------- | ------------------------------------------------------------------------- |
@@ -32,16 +30,7 @@ aspnet_regiis -pc <container> [-size <keySize>] [-pku] [-exp] [-csp <provider>]
 
 ### Example
 
-```powershell
-$ cd "$env.WINDIR/Microsoft.NET/Framework64/v4.0.30319"
-$ .\aspnet_regiis -pc MyKeyContainer -exp
-  
-  Microsoft (R) ASP.NET RegIIS version 4.0.30319.18408
-  Administration utility to install and uninstall ASP.NET on the local machine.
-  Copyright (C) Microsoft Corporation.  All rights reserved.
-  Creating RSA Key container...
-  Succeeded!
-```
+`gist:9c4e6151caa8d1da85e9b3b53c234384#example.ps1`
 
 ### References
 [Walkthrough: Creating and Exporting an RSA Key Container](https://msdn.microsoft.com/en-us/library/2w117ede.aspx)

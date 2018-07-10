@@ -33,7 +33,7 @@ tags:
 
 ### Syntax
 
-`gist:weirdpattern/ce54fdb1e5621b5966e146026995b974#syntax.text`
+`gist:ce54fdb1e5621b5966e146026995b974#syntax.text`
 
 | Option        | Description                                    |
 | ------------- | ---------------------------------------------- |
@@ -50,7 +50,7 @@ Valid values for [n]:
 
 ### Example
 
-`gist:weirdpattern/ce54fdb1e5621b5966e146026995b974#example.sh`
+`gist:ce54fdb1e5621b5966e146026995b974#example.sh`
 
 ### References
 [Null device](https://en.wikipedia.org/wiki/Null_device)

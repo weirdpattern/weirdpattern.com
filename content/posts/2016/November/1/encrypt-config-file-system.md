@@ -16,9 +16,7 @@ tags:
 
 ### Syntax
 
-```
-aspnet_regiis -pef <section> <directory> -prov <provider> [-pkm]
-```
+`gist:62d4565f1288362ae87f355fb0e1802d#syntax.text`
 
 | Option              | Description                                                           |
 | ------------------- | --------------------------------------------------------------------- |
@@ -33,27 +31,7 @@ Note: this option looks for a web.config file, there is no way you can specify a
 
 ### Example
 
-```powershell
-# Given a configuration fle like
-# <configuration>
-#   <configProtectedData>
-#     <providers>
-#       <add name="MyProtectedConfigurationProvider" 
-#            type="System.Configuration.RsaProtectedConfigurationProvider, ..." 
-#            keyContainerName="MyKeyContainer" 
-#            useMachineContainer="true" />
-#     </providers>
-#   </configProtectedData>
-# </configuration>
-
-$ cd "$env.WINDIR/Microsoft.NET/Framework64/v4.0.30319"
-$ .\aspnet_regiis -pef "connectionStrings" "C:/inetpub/Application/" -prov "MyProtectedConfigurationProvider"
-  Microsoft (R) ASP.NET RegIIS version 4.0.30319.18408
-  Administration utility to install and uninstall ASP.NET on the local machine.
-  Copyright (C) Microsoft Corporation.  All rights reserved.
-  Encrypting configuration sections...
-  Succeeded!
-```
+`gist:62d4565f1288362ae87f355fb0e1802d#example.ps1`
 
 ### References
 [How to: Decrypt a web.config](https://msdn.microsoft.com/en-us/library/bb986792.aspx)

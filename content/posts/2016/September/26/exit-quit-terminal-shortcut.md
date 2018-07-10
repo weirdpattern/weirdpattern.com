@@ -18,10 +18,7 @@ tags:
 
 ### Syntax
 
-```bash
-export TERMINAL=<TERMINAL>
-alias quit='/usr/bin/osascript -e "tell application \"$TERMINAL\" to quit"; exit'
-```
+`gist:b1c67aab24cb07c2d071654bbfa4253c#syntax.sh`
 
 | Option       | Description                                                                                       |
 | ------------ | ------------------------------------------------------------------------------------------------- |
@@ -31,10 +28,7 @@ alias quit='/usr/bin/osascript -e "tell application \"$TERMINAL\" to quit"; exit
 
 ### Example
 
-```bash
-$ quit 
-  # This will exit the terminal process and then close the terminal window (no more ⌘ + Q)
-```
+`gist:b1c67aab24cb07c2d071654bbfa4253c#example.sh`
 
 ### References
 [Automatically quit Terminal when typing exit](http://apple.stackexchange.com/questions/3066/automatically-quit-terminal-when-typing-exit/15002#15002)

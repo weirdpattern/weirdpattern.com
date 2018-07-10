@@ -18,9 +18,7 @@ tags:
 
 ### Syntax
 
-```
-git diff [options] <commit>[..<commit>] [--] [<path>...]
-```
+`gist:52fd8d58c665806af5d3c18c74c11935#syntax.text`
 
 | Option     | Description                                                                                         |
 | ---------- | --------------------------------------------------------------------------------------------------- |
@@ -49,13 +47,7 @@ Note: common options are
 
 ### Example
 
-```bash
-# get delta between HEAD and origin/master displaying status and name of the files
-git diff --name-status origin/master
-
-# get delta between HEAd and origin/master displaying status and name of the files and showing only added files
-git diff --name-status --diff-filter A origin/master
-```
+`gist:52fd8d58c665806af5d3c18c74c11935#example.sh`
 
 ### References
 [git-diff](https://git-scm.com/docs/git-diff) 

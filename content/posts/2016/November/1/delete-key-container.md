@@ -16,9 +16,7 @@ tags:
 
 ### Syntax
 
-```
-aspnet_regiis -pz <container> [-pku]
-```
+`gist:97c3991da5fd1c6362665cc37d2dda7a#syntax.text`
 
 | Option         | Description                                                               |
 | -------------- | ------------------------------------------------------------------------- |
@@ -29,16 +27,7 @@ aspnet_regiis -pz <container> [-pku]
 
 ### Example
 
-```powershell
-$ cd "$env.WINDIR/Microsoft.NET/Framework64/v4.0.30319"
-$ .\aspnet_regiis -pz MyKeyContainer
-  
-  Microsoft (R) ASP.NET RegIIS version 4.0.30319.18408
-  Administration utility to install and uninstall ASP.NET on the local machine.
-  Copyright (C) Microsoft Corporation.  All rights reserved.
-  Deleting RSA Keys from file...
-  Succeedded!
-```
+`gist:97c3991da5fd1c6362665cc37d2dda7a#example.ps1`
 
 ### References
 [Importing and Exporting Protected Configuration RSA Key Containers](https://msdn.microsoft.com/en-us/library/yxw286t2.aspx)
