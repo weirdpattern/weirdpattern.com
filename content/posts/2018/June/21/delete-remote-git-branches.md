@@ -19,9 +19,7 @@ tags:
 
 ### Syntax
 
-```
-git push <remote> --delete <branch> 
-```
+`gist:f449239f369d279b24ee42c002509312#syntax.text`
 
 | Option     | Description                      |
 | ---------- | -------------------------------- |
@@ -32,10 +30,7 @@ git push <remote> --delete <branch>
 
 ### Example
 
-```bash
-# deletes remote branch "my-branch"
-git -push origin --delete my-branch
-```
+`gist:f449239f369d279b24ee42c002509312#example.sh`
 
 ### References
 [git-branch](https://git-scm.com/docs/git-branch) 

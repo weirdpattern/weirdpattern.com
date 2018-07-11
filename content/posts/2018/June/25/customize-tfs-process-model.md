@@ -95,14 +95,10 @@ With this, you are basically cherry picking the artifacts you want to change.
 
 1. Open a PowerShell prompt.
 2. Load the required tooling (`witadmin`) by adding the Team Explorer folder to your `Path`.
-```powershell
-$env:Path += "$env:Path;${env:ProgramFiles(x86)}\Microsoft Visual Studio\2017\Enterprise\Common7\IDE\CommonExtensions\Microsoft\TeamFoundation\Team Explorer"
-```
+`gist:ffd0888ec3067dbde6d49fc0ee05a885#1.ps1`
 
 1. Export the type definition you want to update.
-```powershell
-witadmin exportwitd /collection:"<your_collection>" /p:"<your_project>" /n:"<type_definition>" /f:"<you_local_path_to_file>"
-```
+`gist:ffd0888ec3067dbde6d49fc0ee05a885#2.ps1`
 
 ### Customizing type definitions
 
@@ -110,28 +106,7 @@ Type definitions are located in the `<Process_Model>\WorkItem Tracking\TypeDefin
 folder (in case you have downloaded the entire process model) and they all have the same 
 structure.  
 
-```xml
-<Witd:WITD>
-
-  <!-- Identifies the work item -->
-  <WORKITEMTYPE>
-
-    <!-- Describes the work item  -->
-    <DESCRIPTION></DESCRIPTION>
-
-    <!-- Defines the work item fields -->
-    <FIELDS></FIELDS>
-
-    <!-- Defines the workflows followed by the work item -->
-    <WORKFLOW></WORKFLOW>
-
-    <!-- Defines the UI of the work item -->
-    <FORM></FORM>
-
-  </WORKITEMTYPE>
-
-</Witd:WITD>
-```
+`gist:ffd0888ec3067dbde6d49fc0ee05a885#3.xml`
 
 #### Updating the fields
 
@@ -146,60 +121,20 @@ explaining this, instead I will show how to accomplish some common tasks related
 
 - Add help text.  
 Use `<HELPTEXT>` to provide a nice tool tip.  
-```xml
-...
-  <FIELDS>
-    <FIELD name="Priority" refname="Microsoft.VSTS.Common.Priority" type="Integer" reportable="dimension">
-      <HELPTEXT>Importance to business</HELPTEXT>
-    </FIELD>
-  </FIELDS>
-...
-```
+`gist:ffd0888ec3067dbde6d49fc0ee05a885#4.xml`
 
 - Make it required
 Use `<REQUIRED />` to mark the field as required.  
-```xml
-...
-  <FIELDS>
-    <FIELD name="Title" refname="System.Title" type="String" reportable="dimension">
-      <REQUIRED />
-    </FIELD>
-  </FIELDS>
-...
-```
+`gist:ffd0888ec3067dbde6d49fc0ee05a885#5.xml`
 
 - Make it readonly
 Use `<READONLY />` to mark the field as readonly.  
-```xml
-...
-  <FIELDS>
-    <FIELD name="Closed Date" refname="Microsoft.VSTS.Common.ClosedDate" type="DateTime" reportable="dimension">
-      <REQUIRED />
-    </FIELD>
-  </FIELDS>
-...
-```
+`gist:ffd0888ec3067dbde6d49fc0ee05a885#6.xml`
 
 - Make it depend on a different field
 Use `<WHENCHANGED field="<field_name>">` or `<WHENNOTCHANGED field="<field_name>">` 
 to make the field depend on the presence or abscense of another field's value.  
-```xml
-...
-  <FIELDS>
-    <FIELD name="State Change Date" refname="Microsoft.VSTS.Common.StateChangeDate" type="DateTime">
-      <!-- Set the current time when State changes -->
-      <WHENCHANGED field="System.State">
-        <SERVERDEFAULT from="clock" />
-      </WHENCHANGED>
-
-      <!-- Make the field readonly if State hasn't changed from the original value -->
-      <WHENNOTCHANGED field="System.State">
-        <READONLY />
-      </WHENNOTCHANGED>
-    </FIELD>
-  </FIELDS>
-...
-```
+`gist:ffd0888ec3067dbde6d49fc0ee05a885#7.xml`
 
 #### Updating the workflows
 
@@ -212,24 +147,7 @@ A `state` describes the characteristics of the item at a particular point in tim
 It's mostly used to calculate field values and apply validations (make a field 
 readonly or required).  
 
-```xml
-...
-  <STATE value="Done">
-    <FIELDS>
-      <!-- Clears the Remaining Work field when the state is Done -->
-      <FIELD refname="Microsoft.VSTS.Scheduling.RemainingWork">
-        <EMPTY />
-      </FIELD>
-      
-      <!-- Marks Closed Date as required and sets the value to the current date/time -->
-      <FIELD refname="Microsoft.VSTS.Common.ClosedDate">
-        <REQUIRED />
-        <SERVERDEFAULT from="clock" />
-      </FIELD>
-    </FIELDS>
-  </STATE>
-...
-```
+`gist:ffd0888ec3067dbde6d49fc0ee05a885#8.xml`
 
 A `transition` describes the actions taken when an item transitions from one state 
 to another. It's used mostly to update field values (i.e. populate lists based on 
@@ -237,50 +155,11 @@ the state of the item), but can be also be used to calculate field values, altho
 this is usually done at the state level, because of the number of transitions that 
 could lead to a particular state.
 
-```xml
-...
-  <TRANSITION from="" value="New">
-    <REASONS>
-      <REASON value="Build Failure">
-      <DEFAULTREASON value="New defect reported" />
-    </REASONS>
-  </STATE>
-...
-```
+`gist:ffd0888ec3067dbde6d49fc0ee05a885#9.xml`
 
 So, if I would like to add a new state, I would do something like:  
 
-```xml
-...
-  <WORKFLOW>
-    ...
-    <STATE value="Waiting Verification">
-      <!-- Updates the value of the Activity field to Testing -->
-      <FIELD refname="Microsoft.VSTS.Common.Activity">
-        <COPY from="value" value="Testing">
-      </FIELD>
-    </STATE>
-    ...
-    <TRANSITIONS>
-      <TRANSITION from="In Progress" to="Waiting Verification">
-        <REASONS>
-          <DEFAULTREASON value="Development finished" />
-        </REASONS>
-      </TRANSITION>
-      <TRANSITION from="Waiting Verification" to="In Progress">
-        <REASONS>
-          <DEFAULTREASON value="Needs fixing" />
-        </REASONS>
-      </TRANSITION>
-      <TRANSITION from="Waiting Verification" to="Done">
-        <REASONS>
-          <DEFAULTREASON value="Reviewed" />
-        </REASONS>
-      </TRANSITION>
-    </TRANSITIONS>
-  </WORKFLOW>
-...
-```
+`gist:ffd0888ec3067dbde6d49fc0ee05a885#10.xml`
 
 #### Updating the UI
 
@@ -311,14 +190,10 @@ a few links in the references that explain how this whole section works.
 
 1. Open a PowerShell prompt.
 2. Load the required tooling (`witadmin`) by adding the Team Explorer folder to your `Path`.
-```powershell
-$env:Path += "$env:Path;${env:ProgramFiles(x86)}\Microsoft Visual Studio\2017\Enterprise\Common7\IDE\CommonExtensions\Microsoft\TeamFoundation\Team Explorer"
-```
+`gist:ffd0888ec3067dbde6d49fc0ee05a885#11.ps1`
 
 3. Export the type definition you want to update.
-```powershell
-witadmin importwitd /collection:"<your_collection>" /p:"<your_project>" /f:"<you_local_path_to_file>"
-```
+`gist:ffd0888ec3067dbde6d49fc0ee05a885#12.ps1`
 
 ### References
 [All FORM XML elements reference](https://docs.microsoft.com/en-us/vsts/work/customize/reference/all-form-xml-elements-reference)  

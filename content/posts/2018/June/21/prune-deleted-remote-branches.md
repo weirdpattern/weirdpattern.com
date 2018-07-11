@@ -20,9 +20,7 @@ tags:
 
 ### Syntax
 
-```
-git fetch [remote] [-p | --prune]
-```
+`gist:f39924ff57eddaff03483aaa2956da79#syntax.text`
 
 | Option | Description                                 |
 | ------ | ------------------------------------------- |
@@ -32,19 +30,7 @@ git fetch [remote] [-p | --prune]
 
 ### Example
 
-```bash
-# prunes the remote repository origin
-git fetch --prune
-
-# same as above
-git fetch -p
-
-# prunes the remote repository upstream
-git fetch upstream --prune
-
-# same as above
-git fetch upstream -p
-```
+`gist:f39924ff57eddaff03483aaa2956da79#example.sh`
 
 ### References
 [git-fetch](https://git-scm.com/docs/git-fetch) 

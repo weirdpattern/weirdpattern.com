@@ -34,9 +34,7 @@ tags:
 
 ### Syntax
 
-```
-DBCC CHECKIDENT (<table>, RESEED, <value>)
-```
+`gist:eee4931dfb21c394c93ae6fd6ea00793#syntax.text`
 
 | Option    | Description                        |
 | --------- | ---------------------------------- |
@@ -47,9 +45,7 @@ DBCC CHECKIDENT (<table>, RESEED, <value>)
 
 ### Example
 
-```sql
-DBCC CHECKIDENT ('Employee', RESEED, 1)
-```
+`gist:eee4931dfb21c394c93ae6fd6ea00793#example.sql`
 
 ### References
 [DBCC CHECKIDENT &#40;Transact-SQL&#41;](https://docs.microsoft.com/en-us/sql/t-sql/database-console-commands/dbcc-checkident-transact-sql?view=sql-server-2017) 

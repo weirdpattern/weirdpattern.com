@@ -19,9 +19,7 @@ tags:
 
 ### Syntax
 
-```
-git branch <[-D | -d | --delete]> <branch> 
-```
+`gist:4e0d8c535d879df6d02248c4e30fa9bf#syntax.text`
 
 | Option     | Description                     |
 | ---------- | ------------------------------- |
@@ -37,16 +35,7 @@ Note: valid options are:
 
 ### Example
 
-```bash
-# deletes local branch "my-branch"
-git branch --delete my-branch
-
-# same as above
-git branch -d my-branch
-
-# forces the deletion of the local branch "my-branch"
-git branch -D my-branch
-```
+`gist:4e0d8c535d879df6d02248c4e30fa9bf#example.sh`
 
 ### References
 [git-branch](https://git-scm.com/docs/git-branch) 

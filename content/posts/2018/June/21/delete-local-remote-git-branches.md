@@ -20,9 +20,7 @@ tags:
 
 ### Syntax
 
-```
-git branch <[-dr | --delete --remotes]> <remote>/<branch> 
-```
+`gist:58eaf37ccd9dd54f455de53174e1a131#syntax.text`
 
 | Option     | Description                      |
 | ---------- | -------------------------------- |
@@ -38,13 +36,7 @@ Note: valid options are:
 
 ### Example
 
-```bash
-# deletes remote and local branch "my-branch"
-git branch --delete --remotes origin/my-branch
-
-# same as above
-git branch -dr origin/my-branch
-```
+`gist:58eaf37ccd9dd54f455de53174e1a131#example.sh`
 
 ### References
 [git-branch](https://git-scm.com/docs/git-branch) 
