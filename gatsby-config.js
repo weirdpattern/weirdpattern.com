@@ -44,8 +44,7 @@ module.exports = {
             options: {
               username: "weirdpattern"
             }
-          },
-          "gatsby-remark-prismjs"
+          }
         ]
       }
     },
