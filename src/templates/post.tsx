@@ -47,6 +47,15 @@ export default class PostTemplate extends React.Component<Props, {}> {
   /** @inheritdoc */
   public componentDidMount(): void {
     window.addEventListener("scroll", this.scrollHandler);
+    window.addEventListener("load", () => {
+      if (
+        !document
+          .querySelector(".mainpanel")
+          .children[0].classList.contains("post")
+      ) {
+        document.querySelector(".mainpanel").children[0].classList.add("post");
+      }
+    });
   }
 
   /** @inheritdoc */
