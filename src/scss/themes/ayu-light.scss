@@ -12,6 +12,10 @@ body {
         td {
           border: 0;
           background-color: #FAFAFA !important;
+
+          &.highlighted {
+            background-color: #F0EEE4 !important;
+          }
         }
       }
     }

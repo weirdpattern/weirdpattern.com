@@ -1,6 +1,5 @@
 import "../scss/main.scss";
 import "../scss/themes/ayu-light.scss";
-import "../scss/themes/prism-ayu-light.scss";
 
 import * as React from "react";
 

@@ -5,7 +5,7 @@ import Img from "gatsby-image";
 import * as data from "../../content/data.json";
 import SEO from "../components/SEO";
 import Share from "../components/Share";
-import { getCommonActions, syncPrism } from "../utils";
+import { getCommonActions } from "../utils";
 import { Action, MarkdownPost, Query } from "../interfaces";
 
 const config = data as any;
@@ -46,7 +46,6 @@ export default class PostTemplate extends React.Component<Props, {}> {
 
   /** @inheritdoc */
   public componentDidMount(): void {
-    syncPrism(document);
     window.addEventListener("scroll", this.scrollHandler);
   }
 
@@ -59,7 +58,6 @@ export default class PostTemplate extends React.Component<Props, {}> {
   public render(): React.ReactNode {
     const { post } = this.props.data;
     const author = config.authors[post.content.author];
-    const bannerClasses = classNames("banner", post.content.category);
 
     return (
       <React.Fragment>
@@ -94,11 +92,6 @@ export default class PostTemplate extends React.Component<Props, {}> {
    * @method
    */
   private update(): void {
-    const distanceToBottom =
-      document.documentElement.offsetHeight -
-      window.scrollY +
-      window.innerHeight;
-
     if (document.documentElement.scrollTop > 0) {
       this.props.onUpdateActions(
         getCommonActions("scrollTop", "back", "search")

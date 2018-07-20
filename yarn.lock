@@ -4243,11 +4243,13 @@ gatsby-remark-copy-linked-files@^1.5.37:
     probe-image-size "^4.0.0"
     unist-util-visit "^1.1.1"
 
-gatsby-remark-embed-gist@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/gatsby-remark-embed-gist/-/gatsby-remark-embed-gist-1.0.1.tgz#2603bd3dfcb13a4a6a3e9c6046020d2efa840b0a"
+gatsby-remark-embed-gist@^1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/gatsby-remark-embed-gist/-/gatsby-remark-embed-gist-1.1.2.tgz#3a7daf9fb51e4d085f2b4cbb5d94f972b8f3b6be"
   dependencies:
     async-unist-util-visit "^1.0.0"
+    cheerio "^1.0.0-rc.2"
+    parse-numeric-range "^0.0.2"
     request "^2.87.0"
     request-promise "^4.2.2"
 
@@ -7523,7 +7525,7 @@ parse-latin@^4.0.0:
     unist-util-modify-children "^1.0.0"
     unist-util-visit-children "^1.0.0"
 
-parse-numeric-range@0.0.2:
+parse-numeric-range@0.0.2, parse-numeric-range@^0.0.2:
   version "0.0.2"
   resolved "https://registry.yarnpkg.com/parse-numeric-range/-/parse-numeric-range-0.0.2.tgz#b4f09d413c7adbcd987f6e9233c7b4b210c938e4"
 
