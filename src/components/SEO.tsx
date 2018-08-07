@@ -30,9 +30,10 @@ interface Props {
  */
 export default function SEO({ post }: Props): React.ReactElement<Props> {
   const url = config.url + post.fields.slug;
-  const { title, abstract, tags, category, style } = post.content;
+  const { title, abstract, tags, category, style, image } = post.content;
   const description = abstract || post.excerpt;
   const author = config.authors[post.content.author];
+  const imageUrl = config.url + image.childImageSharp.sizes.src;
 
   return (
     <Helmet>
@@ -45,16 +46,19 @@ export default function SEO({ post }: Props): React.ReactElement<Props> {
       <meta name="category" content={category} />
       <meta name="style" content={style} />
       <meta name="author" content={author.name} />
+      <meta name="image" content={imageUrl} />
 
       <meta property="og:url" content={url} />
       <meta property="og:type" content="article" />
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
+      <meta property="og:image" content={imageUrl} />
 
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:creator" content={author.networks.twitter.handler} />
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
+      <meta name="twitter:image" content={imageUrl} />
 
       <link rel="me" href={author.networks.twitter.link} />
       <link rel="canonical" href={url} />

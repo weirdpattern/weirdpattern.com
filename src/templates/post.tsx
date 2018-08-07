@@ -139,7 +139,7 @@ export const query = graphql`
         abstract
         author
         category
-        tags
+        tags        
         image {
           childImageSharp {
             sizes(maxWidth: 670) {
