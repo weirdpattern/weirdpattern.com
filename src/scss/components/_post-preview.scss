@@ -1,15 +1,24 @@
 .post-preview {
-  padding: 30px;
-  margin-bottom: 20px;
+  padding: 2em;
+  margin-bottom: 2em;
   background-color: $post-background;
 
-  h2 {
-    font-size: 26px;
-    margin-bottom: 20px;
+  p {
+    margin: 0;
+
+    &:not(:first-child) {
+      margin-top: 2em;
+    }
   }
 
   h3 {
-    font-size: 20px;
+    margin-top: 56px;
+    font-size: 26px;
+    font-weight: 600;
+
+    & + p {
+      margin-top: 8px !important;
+    }
   }
 
   h4 {
@@ -68,6 +77,8 @@
   }
 
   ol, ul {
+    margin-top: 1em;
+    
     li {
       p {
         margin: 0;
@@ -95,5 +106,67 @@
 
   &.guide {
     border-top: 10px solid #E6B673;
+  }
+
+  .caption {
+    font-size: 10px;
+    margin-top: 5px; 
+    margin-bottom: 20px;     
+  }
+
+  .box {
+    width: 100%;
+    margin: 2em 0;  
+    padding: 12px;  
+    line-height: 24px;
+
+    & > .title {
+      font-weight: bold;
+      display: block;
+      color: #FFFFFF;
+      padding: 6px 12px;
+      margin: -12px;
+      margin-bottom: 12px;      
+
+      &::before {        
+        font-family: "FontAwesome";
+        display: inline-block;
+        font-style: normal;
+        font-weight: normal;
+        line-height: 1;
+        text-decoration: inherit;
+        margin-right: 4px;
+      }
+    }
+
+    & > .body {
+      width: 100%;
+      line-height: 24px;
+      margin: 0;      
+    }
+
+    &.warning {
+      background-color: #FFEDCC;
+
+      & > .title {
+        background-color: #F0B37E;
+
+        &::before {
+          content: '\f06a';
+        }
+      }
+    }
+
+    &.best-practice {
+      background-color: #E7F2FA;
+
+      & > .title {
+        background-color: #6AB0DE;
+
+        &::before {
+          content: '\f005';
+        }
+      }
+    }
   }
 }

@@ -28,7 +28,7 @@ Unfortunately, this tool is far from perfect... so let's do something about it.
 <!-- end:abstract -->
 
 ![Role Manager](./images/role-manager.jpg)
-<center style="margin-top: -10px; margin-bottom: 20px"><span style="font-size: 10px;">Role Manager</span></center>  
+<center class="caption">Role Manager</center>  
 
 The first thing you will notice is that sorting is disabled (the cursor changing 
 from `default` to `pointer` gives it away). Perhaps this was done on purpose, trying 
@@ -42,10 +42,13 @@ Depending on the desired options, customizing the `Role Manager` will require on
 or more updates to one of the Sitecore core files (files that come with Sitecore 
 out of the box).  
 
-> **Pro Tip**
-> 
-> Messing around with core files is not recommended, so take the necessary precautions.  
-> I would recommend creating backups of all files before proceeding.  
+<div class="box warning">
+    <p class="title">Warning</p>
+    <p class="body">
+        Messing around with core files is not recommended, so take the necessary precautions.  
+        I would recommend creating backups of all files before proceeding.
+    </p>
+</div>
 
 The file in question is: `<Sitecore_Instance>\Website\sitecore\shell\Applications\Security\RoleManager\RoleManager.aspx`   
 
@@ -54,14 +57,12 @@ The file in question is: `<Sitecore_Instance>\Website\sitecore\shell\Application
 Re-enabling sorting is as easy as setting the property `AllowSorting` to `true`. 
 This property is defined independently per column and can be found in the 
 `Grid\Levels\GridLevel\Columns` node definition (see below).  
-
 `gist:301627a873e217f8900b155343e135bc?file=1.aspx&highlights=10`  
 
 ### Show/Hide the search bar
 
 Another easy one... the property `ShowSearchBox` in `Grid` will show the search box 
 when its value is set to `true` and will do the opposite when set to `false`.  
-
 `gist:301627a873e217f8900b155343e135bc?file=2.aspx&highlights=4-6`  
 
 And the end result...  
@@ -79,7 +80,6 @@ this property are `Slider` (default), `Numbered` (see image below) and `Buttons`
 (the buttons from `Slider` minus the slider). There are a bunch of other properties 
 that don't seem to have any effect on the final output, I think most of the styling 
 is controlled via the `Grid.css` stylesheet (which of course can be extended).  
-
 `gist:301627a873e217f8900b155343e135bc?file=3.aspx&highlights=4-11`  
 
 And the end result...

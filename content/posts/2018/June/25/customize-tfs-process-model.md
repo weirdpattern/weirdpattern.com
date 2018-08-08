@@ -3,7 +3,7 @@ title: "Customize a process model in TFS"
 style: "post"
 image: "../../../images/dotnet.jpg"
 abstract: "Learn how to customize a process model in TFS using the witadmin tool"
-date: "2018-06-22"
+date: "2018-06-25"
 author: "ptrevino"
 category: "infrastructure"
 tags:
@@ -33,7 +33,6 @@ editor and a simple set of commands.
 
 <!-- end:abstract -->
 
-
 ### The Process Model
 
 A process model defines all the artifacts (objects and processes) available to 
@@ -42,14 +41,14 @@ fields, and values you can use to capture requirements and track your work (time
 effort, etc).  
 
 ![Process model artifacts](./images/process_model_artifacts.png)
-<center style="margin-top: -10px; margin-bottom: 20px"><span style="font-size: 10px;">Process Model Artifacts</span></center>
+<center class="caption">Process Model Artifacts</center>
 
 TFS and VSTS support three main process models: `Agile`, `Scrum`, and `CMMI`. Other 
 process models may be created, but they all need to inherit from one of the main 
 process models.  
 
 ![Process model plugins](./images/process_model_plugins.png)
-<center style="margin-top: -10px; margin-bottom: 20px"><span style="font-size: 10px;">Process Template Plug-ins</span></center>
+<center class="caption">Process Template Plug-ins</center>
 
 In TFS, the type of items supported by each model are defined via `type definitions`, 
 and the fields and values via `layouts`. Both are stored in XML Definition Files 
@@ -62,7 +61,6 @@ the provided user interface to do changes to it. This is great for people that
 don't want to spend a lot of time customizing the process template, but still 
 would like to do changes here and tehre. It's so simple, that I'm going to 
 leave it out...  
-
 
 ### Download the entire process model definition
 
@@ -81,17 +79,19 @@ Note: This is considered a best practice.
 5. Select the template to download.   
 ![Process Template Manager Selection](./images/process_template_selection.png)
 
-
 ### ... or download just the type definition you want to update
 
 Use this approach if you want to make updates to a specific type definition. 
 With this, you are basically cherry picking the artifacts you want to change.  
 
-> **Best Practice**
-> 
-> Instead of modifying any of the pre-existing process models, create your own 
-> by means of inheritance and do your customizations there.   
-> This makes it exportable and more manageable. 
+<div class="box best-practice">
+    <p class="title">Best Practice</p>
+    <p class="body">
+        Instead of modifying any of the pre-existing process models, create your own 
+        by means of inheritance and do your customizations there.   
+        This makes it exportable and more manageable. 
+    </p>
+</div>
 
 1. Open a PowerShell prompt.
 2. Load the required tooling (`witadmin`) by adding the Team Explorer folder to your `Path`.
@@ -105,7 +105,6 @@ With this, you are basically cherry picking the artifacts you want to change.
 Type definitions are located in the `<Process_Model>\WorkItem Tracking\TypeDefinitions` 
 folder (in case you have downloaded the entire process model) and they all have the same 
 structure.  
-
 `gist:ffd0888ec3067dbde6d49fc0ee05a885#3.xml`
 
 #### Updating the fields
@@ -142,11 +141,9 @@ Items are treated as state machines. So workflows are state machine operations
 that describe the item at any specific point in time.   
 
 This section can be divided into two main sub-sections: `States` and `Transtions`.  
-
 A `state` describes the characteristics of the item at a particular point in time. 
 It's mostly used to calculate field values and apply validations (make a field 
 readonly or required).  
-
 `gist:ffd0888ec3067dbde6d49fc0ee05a885#8.xml`
 
 A `transition` describes the actions taken when an item transitions from one state 
@@ -154,11 +151,9 @@ to another. It's used mostly to update field values (i.e. populate lists based o
 the state of the item), but can be also be used to calculate field values, although 
 this is usually done at the state level, because of the number of transitions that 
 could lead to a particular state.
-
 `gist:ffd0888ec3067dbde6d49fc0ee05a885#9.xml`
 
 So, if I would like to add a new state, I would do something like:  
-
 `gist:ffd0888ec3067dbde6d49fc0ee05a885#10.xml`
 
 #### Updating the UI
@@ -168,23 +163,23 @@ will depend on the number of layouts you are planning to support (web, desktop,
 mobile, etc).  
 
 The section can be divided into two main sub-sections: `Layout` and `WebLayout`.  
-
 In `Layout`, you define the layout to be used by non-browser devices (visual 
 studio, mobile apps, etc). Before TFS 2017, this was the only available section, 
 so if you are using TFS 2015 or below, this is the section you want to update.  
 
-> **Best Practice**
-> 
-> Even if you are currently using TFS 2015 or below, it is advisable to update 
-> both sections (`Layout` and `WebLayout`), this way the type definition will
-> be compatible with all versions, making it more robust.  
+<div class="box best-practice">
+    <p class="title">Best Practice</p>
+    <p class="body">
+        Even if you are currently using TFS 2015 or below, it is advisable to update 
+        both sections (`Layout` and `WebLayout`), this way the type definition will
+        be compatible with all versions, making it more robust.
+    </p>
+</div>
 
 In `WebLayout`, you define the layout to be used by browsers (web). Support for 
-multiple browsers and device sizes is possible via the properties of the node.
-
+multiple browsers and device sizes is possible via the properties of the node. 
 This whole section looks a lot like `xaml`, so I will stop right here. I added 
 a few links in the references that explain how this whole section works.  
-
 
 ### Upload XML Definition Files
 
