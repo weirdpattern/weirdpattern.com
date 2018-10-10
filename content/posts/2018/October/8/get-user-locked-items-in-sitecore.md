@@ -1,7 +1,7 @@
 ---
 title: "Retrieve a list of all locked items for a specific user in Sitecore."
 style: "snippet"
-image: "../../../images/sitecore.jpeg"
+image: "../../../images/sitecore.jpg"
 abstract: "Learn how to retrieve a list of all locked items for a specific user in Sitecore using a fast query."
 date: "2018-10-08"
 author: "ptrevino"
