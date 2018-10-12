@@ -12,44 +12,136 @@ export interface Action {
 }
 
 /**
+ * The config.
+ * @typedef {Interface} Metadata
+ * @property {SiteMetadata} site the site configuration.
+ * @property {CopyrightMetadata} copyright the copyright configuration.
+ * @property {AuthorMetadata} author the author configuration.
+ * @property {PostsMetadata} posts the posts configuration.
+ * @property {DependenciesMetadata} dependencies the dependencies configuration.
+ *
+ * @public
+ * @interface
+ */
+export interface Metadata {
+  site: SiteMetadata;
+  copyright: CopyrightMetadata;
+  author: AuthorMetadata;
+  posts: PostsMetadata;
+  dependencies: DependenciesMetadata;
+}
+
+/**
+ * The site information.
+ * @typedef {Interface} SiteMetadata
+ * @property {string} title the title of the site.
+ * @property {string} description the description of the site.
+ * @property {copyright} copyright the copyrights information.
+ *
+ * @public
+ * @interface
+ */
+export interface SiteMetadata {
+  url: string;
+  title: string;
+  description: string;
+  keywords: Array<string>;
+}
+
+/**
  * The copyright information.
- * @typedef {Interface} Copyrights
+ * @typedef {Interface} CopyrightMetadata
  * @property {string} text the copyright text.
  * @property {string} year the copyright year.
  *
  * @public
  * @interface
  */
-export interface Copyrights {
+export interface CopyrightMetadata {
   text: string;
   year: string;
 }
 
 /**
- * The social network information.
- * @typedef {Interface} SocialNetwork
- * @property {string} name the name of the social network.
- * @property {string} link the link to the social network.
- * @property {string} handler the handler of the author in the social network.
+ * The author information.
+ * @typedef {Interface} AuthorMetadata
+ * @property {string} name the name of the author.
+ * @property {string} email the email of the author.
+ * @property {string} credentials the credentials of the author.
+ * @property {string} avatar the avatar of the author.
+ * @property {Network} networks the networks of the author.
  *
  * @public
  * @interface
  */
-export interface SocialNetwork {
+export interface AuthorMetadata {
+  name: string;
+  email: string;
+  credentials: string;
+  avatar: string;
+  networks: NetworksMetadata;
+}
+
+/**
+ * The supported social networks.
+ */
+export type SocialNetwork = "twitter" | "github" | "linkedin" | "email";
+
+/**
+ * The network information.
+ * @typedef {Interface} NetworkMetadata
+ * @property {string} name the name of the network.
+ * @property {string} link the link to the network.
+ * @property {string} handler the handler of the author in the network.
+ *
+ * @public
+ * @interface
+ */
+export interface NetworkMetadata {
   name: string;
   link: string;
   handler: string;
 }
 
 /**
- * The available social networks.
- * @typedef {Interface} SocialNetworks
+ * The available networks.
+ * @typedef {Interface} NetworksMetadata
  *
  * @public
  * @interface
  */
-export interface SocialNetworks {
-  [key: string]: SocialNetwork;
+export interface NetworksMetadata {
+  [key: SocialNetwork]: NetworkMetadata;
+}
+
+/**
+ * The posts information.
+ * @typedef {Interface} PostsMetadata
+ * @property {string} path the path to the content.
+ * @property {boolean} autoScroll a flag indicating autoscroll is enabled.
+ * @property {number} initialSize the size of the page.
+ * @property {number} incrementsBy the page size increment.
+ *
+ * @public
+ * @interface
+ */
+export interface PostsMetadata {
+  path: string;
+  autoScroll: boolean;
+  initialSize: number;
+  incrementsBy: number;
+}
+
+/**
+ * The dependency information.
+ * @typedef {Interface} DependenciesMetadata
+ * @property {string} sharethis the id of the share this module.
+ *
+ * @public
+ * @interface
+ */
+export interface DependenciesMetadata {
+  sharethis: string;
 }
 
 /**
@@ -112,13 +204,19 @@ export interface QueryPost {
 }
 
 /**
- * The posts query results.
- * @typedef {Interface} MarkdownPosts
+ * The index query props.
+ * @typedef {Interface} IndexProps
  *
  * @public
  * @interface
  */
-export interface MarkdownPosts {
+export interface IndexProps {
+  site: {
+    metadata: Metadata;
+  };
+  search: {
+    index: any;
+  };
   markdown: {
     tags: Array<ValueCount>;
     categories: Array<ValueCount>;
@@ -135,19 +233,6 @@ export interface MarkdownPosts {
  */
 export interface MarkdownPost {
   post: QueryPost;
-}
-
-/**
- * The search index.
- * @typedef {Interface} SearchIndex
- *
- * @public
- * @interface
- */
-export interface SearchIndex {
-  search: {
-    index: any;
-  };
 }
 
 /**

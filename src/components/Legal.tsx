@@ -15,15 +15,15 @@ interface Props {
 }
 
 /**
- * Social component.
+ * Legal component.
  * @param {Props} props the properties of the component.
  * @returns {React.ReactElement<Props>}
- *    the react node that represents the social.
+ *    the react node that represents the legal component.
  *
  * @public
  * @function
  */
-export default function Intro({
+export default function Legal({
   text,
   year
 }: Props): React.ReactElement<Props> {

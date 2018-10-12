@@ -2,7 +2,7 @@ import * as React from "react";
 import * as classNames from "classnames";
 import Img from "gatsby-image";
 
-import * as data from "../../content/data.json";
+import * as data from "../../config.json";
 import SEO from "../components/SEO";
 import Share from "../components/Share";
 import { getCommonActions } from "../utils";
@@ -139,7 +139,7 @@ export const query = graphql`
         abstract
         author
         category
-        tags        
+        tags
         image {
           childImageSharp {
             sizes(maxWidth: 670) {

@@ -2,8 +2,8 @@ import * as React from "react";
 
 import Helmet from "react-helmet";
 
-import * as data from "../../content/data.json";
-import { SocialNetwork, SocialNetworks, QueryPost } from "../interfaces";
+import * as data from "../../config.json";
+import { QueryPost } from "../interfaces";
 
 const config = data as any;
 

@@ -1,4 +1,4 @@
-import * as data from "../content/data.json";
+import * as data from "../config.json";
 import { Action } from "./interfaces";
 
 const config = data as any;

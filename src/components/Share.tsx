@@ -2,7 +2,7 @@ import * as React from "react";
 
 import Helmet from "react-helmet";
 
-import * as data from "../../content/data.json";
+import * as data from "../../config.json";
 const config = data as any;
 
 /**

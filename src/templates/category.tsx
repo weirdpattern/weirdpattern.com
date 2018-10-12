@@ -3,11 +3,11 @@ import * as React from "react";
 import Helmet from "react-helmet";
 import { chunk } from "lodash";
 
-import * as data from "../../content/data.json";
+import * as data from "../../config.json";
 import Totals from "../components/Totals";
 import PostPreview from "../components/PostPreview";
 import { getCommonActions } from "../utils";
-import { Action, MarkdownPosts, Query, QueryPost } from "../interfaces";
+import { Action, IndexProps, Query, QueryPost } from "../interfaces";
 
 const config = data as any;
 
@@ -20,7 +20,7 @@ const config = data as any;
  * @private
  * @interface
  */
-interface Props extends Query<MarkdownPosts> {
+interface Props extends Query<IndexProps> {
   postToShow: number;
   pathContext: { category: string };
   onUpdateActions: (actions: Array<Action>) => void;

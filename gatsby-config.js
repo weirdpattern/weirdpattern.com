@@ -1,13 +1,8 @@
-const siteConfig = require("./content/data.json");
+const config = require("./config.json");
 const regexExcludeRobots = /^(?!\/(dev-404-page|404|offline-plugin-app-shell-fallback|tags|categories)).*$/;
 
 module.exports = {
-  siteMetadata: {
-    url: siteConfig.url,
-    siteUrl: siteConfig.url,
-    name: siteConfig.name,
-    description: siteConfig.description
-  },
+  siteMetadata: config,
   plugins: [
     "gatsby-plugin-react-helmet",
     "gatsby-plugin-typescript",
@@ -17,7 +12,7 @@ module.exports = {
       resolve: "gatsby-source-filesystem",
       options: {
         name: "content",
-        path: `${__dirname}/${siteConfig.paths.content}`
+        path: `${__dirname}/${config.posts.path}`
       }
     },
     {
@@ -65,34 +60,34 @@ module.exports = {
       options: {
         output: "/sitemap.xml",
         query: `
-          {
-            site {
-              siteMetadata {
-                siteUrl
-              }
-            }
-            allSitePage(
-              filter: {
-                path: {
-                  regex: "${regexExcludeRobots}"
+            {
+              site {
+                siteMetadata {
+                  siteUrl
                 }
               }
-            ) {
-              edges {
-                node {
-                  path
+              allSitePage(
+                filter: {
+                  path: {
+                    regex: "${regexExcludeRobots}"
+                  }
+                }
+              ) {
+                edges {
+                  node {
+                    path
+                  }
                 }
               }
-            }
-        }`
+          }`
       }
     },
     {
       resolve: "gatsby-plugin-manifest",
       options: {
-        name: siteConfig.title,
-        short_name: siteConfig.title,
-        description: siteConfig.description,
+        name: config.title,
+        short_name: config.title,
+        description: config.description,
         start_url: "",
         background_color: "#FAFAFA",
         theme_color: "#FF6A00",

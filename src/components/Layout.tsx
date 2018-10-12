@@ -5,25 +5,36 @@ import * as React from "react";
 
 import { Index } from "elasticlunr";
 
-import * as data from "../../content/data.json";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
-import Search from "../components/Search";
-import Actions from "../components/Actions";
+import Header from "./Header";
+import Footer from "./Footer";
+import Search from "./Search";
+import Actions from "./Actions";
 
 import { getCommonActions } from "../utils";
-import { Action, Query, SearchIndex } from "../interfaces";
-
-const config = data as any;
+import {
+  Action,
+  SiteMetadata,
+  CopyrightMetadata,
+  AuthorMetadata
+} from "../interfaces";
 
 /**
  * Layout props.
- * @typedef {Query<SearchIndex>} Props
+ * @typedef {Interface} Props
+ * @property {*} index the index to be used.
+ * @property {SiteMetadata} site the site information.
+ * @property {CopyrightMetadata} copyright the copyright information.
+ * @property {AuthorMetadata} author the author information.
  *
  * @private
  * @interface
  */
-interface Props extends Query<SearchIndex> {}
+interface Props {
+  index: any;
+  site: SiteMetadata;
+  copyright: CopyrightMetadata;
+  author: AuthorMetadata;
+}
 
 /**
  * Header state.
@@ -48,6 +59,7 @@ interface State {
  * @function
  */
 export default class Layout extends React.PureComponent<Props, State> {
+  // the site index
   private index: any;
 
   /**
@@ -57,7 +69,7 @@ export default class Layout extends React.PureComponent<Props, State> {
   public constructor(props: Props) {
     super(props);
 
-    this.state = { actions: getCommonActions("search"), searching: false };
+    this.state = { searching: false, actions: getCommonActions("search") };
 
     this.keydownHandler = this.keydownHandler.bind(this);
     this.updateActions = this.updateActions.bind(this);
@@ -66,7 +78,7 @@ export default class Layout extends React.PureComponent<Props, State> {
 
   /** @inheritdoc */
   public componentDidMount(): void {
-    this.index = this.index || Index.load(this.props.data.search.index);
+    this.index = this.index || Index.load(this.props.index);
     window.addEventListener("keydown", this.keydownHandler);
   }
 
@@ -80,7 +92,6 @@ export default class Layout extends React.PureComponent<Props, State> {
     const instance = this;
     const { children } = this.props;
     const { actions } = this.state;
-    const author = config.authors[config.profile.author];
 
     return (
       <div className="container-fluid">
@@ -92,22 +103,19 @@ export default class Layout extends React.PureComponent<Props, State> {
           />
           <div className="sidepanel">
             <Header
-              title={config.title}
-              description={config.description}
-              name={author.name}
-              email={author.email}
-              credentials={author.credentials}
-              avatar={author.avatar}
+              title={this.props.site.title}
+              description={this.props.site.description}
+              name={this.props.author.name}
+              email={this.props.author.email}
+              credentials={this.props.author.credentials}
+              avatar={this.props.author.avatar}
             />
-            <Footer networks={author.networks} copyright={config.copyright} />
+            <Footer
+              networks={this.props.author.networks}
+              copyright={this.props.copyright}
+            />
           </div>
-          <div className="mainpanel">
-            {children({
-              ...this.props,
-              postToShow: config.posts.postToShow,
-              onUpdateActions: this.updateActions
-            })}
-          </div>
+          <div className="mainpanel">{children}</div>
           <Actions
             actions={actions.map((action: Action) => {
               action.callback = action.callback.bind(instance);
@@ -165,11 +173,3 @@ export default class Layout extends React.PureComponent<Props, State> {
     this.setState({ searching: false });
   }
 }
-
-export const query = graphql`
-  query SearchIndexQuery {
-    search: siteSearchIndex {
-      index
-    }
-  }
-`;

@@ -1,0 +1,54 @@
+{
+  "site": {
+    "url": "https://www.weirdpattern.com",
+    "title": "WeirdPattern",
+    "description": "Patricio Treviño's personal blog",
+    "keywords": [
+      "blog",
+      "dotnet",
+      "sitecore",
+      "technology",
+      "software development"
+    ]
+  },
+  "copyright": {
+    "text": "Patricio Treviño",
+    "year": "2017-2018"
+  },
+  "author": {
+    "name": "Patricio Treviño",
+    "credentials": "Husband . Father . Developer",
+    "avatar": "./static/profile.jpg",
+    "networks": {
+      "twitter": {
+        "name": "Twitter",
+        "handler": "@weirdpattern",
+        "link": "https://twitter.com/weirdpattern"
+      },
+      "github": {
+        "name": "Github",
+        "handler": "@weirdpattern",
+        "link": "https://github.com/weirdpattern"
+      },
+      "linkedin": {
+        "name": "LinkedIn",
+        "handler": "patricio-treviño-19985833",
+        "link": "https://www.linkedin.com/in/patricio-trevi%C3%B1o-19985833/"
+      },
+      "email": {
+        "name": "Email",
+        "handler": "patricio.trevino@weirdpattern.com",
+        "link": "mailto:patricio.trevino@weirdpattern.com"
+      }
+    }
+  },
+  "posts": {
+    "path": "content",
+    "autoScroll": true,
+    "initialSize": 10,
+    "incrementsBy": 10
+  },
+  "dependencies": {
+    "sharethis": "5b0d925460e2e90011e28804"
+  }
+}
