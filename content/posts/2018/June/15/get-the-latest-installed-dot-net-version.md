@@ -13,11 +13,10 @@ tags:
 ---
 
 <div class="tldr" markdown="true">
+  <!-- start:abstract -->
 
   Question, what is the first thing you check before deploying to a production 
-  environment?  
-
-  If your answer was "What's the latest supported .Net version on the server?", 
+  environment? If your answer was "What's the latest supported .Net version on the server?", 
   then congrats!!, you are on track and you can stop reading now!!   
   
   But if it wasn't, then keep reading...  
@@ -25,18 +24,15 @@ tags:
   If your team doesn't have full control over the production servers you use 
   (which, in my experience, is 90% of the time), then you have probably seen 
   this issue before. Your code is x number of versions ahead of the latest .Net version 
-  installed on the server...  Bummer...
-
-  Of course by the time you realize this, it's already too late... your code is live 
-  and users of your app are already getting a nice `500 Internal Server Error` message...  
+  installed on the server...  Bummer... Of course by the time you realize this, 
+  it's already too late... your code is live and users of your app are already 
+  getting a nice `500 Internal Server Error` message...  
 
   So, how can you avoid this? Check the latest supported .Net version on the server 
   and update the target framework version on your solution...
 
-
+  <!-- end:abstract -->
 </div>
-
-<!-- start:abstract -->
 
 ### Steps
 1. Hit `Ctrl + R`
@@ -47,10 +43,8 @@ tags:
     &emsp;&emsp;4.1.1. Open the entry `v4\Full`  
     &emsp;&emsp;4.1.2. Check for a DWORD value named Release. If it exists, then 
     .NET Framework 4.5 or newer has been installed on that computer.
-
   4.2. Anything else
     4.2.1. Open the corresponding .Net Framework version. (see references for more details)
 
 ### References
-[How to: Determine which .NET Framework versions are installed](https://docs.microsoft.com/en-us/dotnet/framework/migration-guide/how-to-determine-which-versions-are-installed) 
-
+[How to: Determine which .NET Framework versions are installed](https://docs.microsoft.com/en-us/dotnet/framework/migration-guide/how-to-determine-which-versions-are-installed)
