@@ -50,13 +50,6 @@ module.exports = {
     },
     "gatsby-plugin-netlify",
     {
-      resolve: "gatsby-plugin-google-analytics",
-      options: {
-        trackingId: siteConfig.ids.google,
-        head: true
-      }
-    },
-    {
       resolve: "gatsby-plugin-nprogress",
       options: {
         color: "#55B4D4"
