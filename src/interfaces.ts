@@ -106,19 +106,26 @@ export interface NetworkMetadata {
 /**
  * The available networks.
  * @typedef {Interface} NetworksMetadata
+ * @property {NetworkMetadata} twitter the twitter handler.
+ * @property {NetworkMetadata} github the github handler.
+ * @property {NetworkMetadata} linkedin the linked in handler.
+ * @property {NetworkMetadata} email the email handler.
  *
  * @public
  * @interface
  */
 export interface NetworksMetadata {
-  [key: SocialNetwork]: NetworkMetadata;
+  twitter: NetworkMetadata;
+  github: NetworkMetadata;
+  linkedin: NetworkMetadata;
+  email: NetworkMetadata;
 }
 
 /**
  * The posts information.
  * @typedef {Interface} PostsMetadata
  * @property {string} path the path to the content.
- * @property {boolean} autoScroll a flag indicating autoscroll is enabled.
+ * @property {boolean} loadOnScroll a flag indicating load on scroll is enabled.
  * @property {number} initialSize the size of the page.
  * @property {number} incrementsBy the page size increment.
  *
@@ -127,7 +134,7 @@ export interface NetworksMetadata {
  */
 export interface PostsMetadata {
   path: string;
-  autoScroll: boolean;
+  loadOnScroll: boolean;
   initialSize: number;
   incrementsBy: number;
 }
@@ -220,7 +227,7 @@ export interface IndexProps {
   markdown: {
     tags: Array<ValueCount>;
     categories: Array<ValueCount>;
-    posts: Array<{ post: QueryPost }>;
+    entries: Array<{ post: QueryPost }>;
   };
 }
 

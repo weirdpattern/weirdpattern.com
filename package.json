@@ -34,7 +34,6 @@
     "gatsby-image": "^2.0.13",
     "gatsby-link": "^2.0.4",
     "gatsby-plugin-catch-links": "^2.0.4",
-    "gatsby-plugin-copy-files": "^1.0.1",
     "gatsby-plugin-lodash": "^3.0.1",
     "gatsby-plugin-manifest": "^2.0.5",
     "gatsby-plugin-netlify": "^2.0.1",
@@ -65,8 +64,7 @@
   },
   "scripts": {
     "build": "gatsby build --prefix-paths",
-    "develop": "gatsby develop && npm run copy-public",
-    "copy-public": "copyfiles -f ./static/* ./public && copyfiles -f ./static/media/* ./public/static",
+    "develop": "gatsby develop",
     "lint": "eslint --ext .ts,.tsx src/",
     "format": "prettier --parser typescript --write \"src/**/*.ts*\""
   },

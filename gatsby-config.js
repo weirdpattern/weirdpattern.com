@@ -123,20 +123,6 @@ module.exports = {
           }
         }
       }
-    },
-    {
-      resolve: "gatsby-plugin-copy-files",
-      options: {
-        source: `${__dirname}/static/media`,
-        destination: "/static"
-      }
-    },
-    {
-      resolve: "gatsby-plugin-copy-files",
-      options: {
-        source: `${__dirname}/static`,
-        destination: "/"
-      }
     }
     /*
     {
