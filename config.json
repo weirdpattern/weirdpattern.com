@@ -46,7 +46,7 @@
     "path": "content",
     "loadOnScroll": true,
     "initialSize": 10,
-    "incrementsBy": 10
+    "incrementsBy": 5
   },
   "dependencies": {
     "sharethis": "5b0d925460e2e90011e28804"

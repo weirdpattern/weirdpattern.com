@@ -2,6 +2,7 @@ import * as React from "react";
 
 import Helmet from "react-helmet";
 import { chunk } from "lodash";
+import { graphql } from "gatsby";
 
 import * as data from "../../config.json";
 import Totals from "../components/Totals";
@@ -193,7 +194,7 @@ export default class TagTemplate extends React.PureComponent<Props, State> {
 }
 
 export const query = graphql`
-  query TagTemplateQuery($tag: String) {
+  query($tag: String) {
     markdown: allMarkdownRemark(
       sort: { fields: [frontmatter___date, frontmatter___title], order: DESC }
       filter: { frontmatter: { tags: { in: [$tag] } } }

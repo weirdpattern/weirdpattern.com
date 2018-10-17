@@ -9,17 +9,17 @@ import Header from "./Header";
 import Footer from "./Footer";
 import Search from "./Search";
 import Actions from "./Actions";
-
-import { getCommonActions } from "../utils";
 import { Action, Metadata } from "../interfaces";
+import { getCommonActions } from "../utils";
 
 /**
  * Layout props.
  * @typedef {Interface} Props
  * @property {*} index the index to be used.
  * @property {Metadata} metadata the site metadata.
- * @property {Array<Action>} actions
- *    the actions to be used in the quick action button.
+ * @property {Array<string>} supportedActions
+ *    the supported actions to be used in the quick action button.
+ * @property {Function} onScroll the scroll handler.
  *
  * @private
  * @interface
@@ -27,19 +27,23 @@ import { Action, Metadata } from "../interfaces";
 interface Props {
   index: any;
   metadata: Metadata;
-  actions: Array<Action>;
+  supportedActions: Array<string>;
+  onScroll: (scrolled: boolean, callback: () => void) => void;
 }
 
 /**
  * Header state.
  * @typedef {Interface} State
  * @property {boolean} searching a flag indicating the user is searching.
+ * @property {Array<Action>} actions
+ *    the actions to be used in the quick action button.
  *
  * @private
  * @interface
  */
 interface State {
   searching: boolean;
+  actions: Array<Action>;
 }
 
 /**
@@ -54,6 +58,9 @@ export default class Layout extends React.PureComponent<Props, State> {
   // the site index
   private index: any;
 
+  // control variable
+  private ticking: boolean = false;
+
   /**
    * Class constructor.
    * @param {Props} props the properties of the layout.
@@ -62,10 +69,15 @@ export default class Layout extends React.PureComponent<Props, State> {
     super(props);
 
     this.state = {
-      searching: false
+      searching: false,
+      actions: getCommonActions(
+        this.props.metadata,
+        ...this.props.supportedActions
+      )
     };
 
     this.keydownHandler = this.keydownHandler.bind(this);
+    this.scrollHandler = this.scrollHandler.bind(this);
     this.closeSearch = this.closeSearch.bind(this);
   }
 
@@ -73,17 +85,18 @@ export default class Layout extends React.PureComponent<Props, State> {
   public componentDidMount(): void {
     this.index = this.index || Index.load(this.props.index);
     window.addEventListener("keydown", this.keydownHandler);
+    window.addEventListener("scroll", this.scrollHandler);
   }
 
   /** @inheritdoc */
   public componentWillUnmount(): void {
-    window.addEventListener("keydown", this.keydownHandler);
+    window.removeEventListener("keydown", this.keydownHandler);
+    window.removeEventListener("scroll", this.scrollHandler);
   }
 
   /** @inheritdoc */
   public render(): React.ReactNode {
     const instance = this;
-    const { children, actions } = this.props;
 
     return (
       <div className="container-fluid">
@@ -107,9 +120,9 @@ export default class Layout extends React.PureComponent<Props, State> {
               copyright={this.props.metadata.copyright}
             />
           </div>
-          <div className="mainpanel">{children}</div>
+          <div className="mainpanel">{this.props.children}</div>
           <Actions
-            actions={actions.map((action: Action) => {
+            actions={this.state.actions.map((action: Action) => {
               action.callback = action.callback.bind(instance);
               return action;
             })}
@@ -139,6 +152,37 @@ export default class Layout extends React.PureComponent<Props, State> {
       event.cancelBubble = true;
     } else if (event.key === "Escape" || event.keyCode === 27) {
       this.setState({ searching: false });
+    }
+  }
+
+  /**
+   * Handles the scroll events.
+   * @returns {void}.
+   *
+   * @private
+   * @method
+   */
+  private scrollHandler(): void {
+    if (!this.ticking) {
+      this.ticking = true;
+      const scrolled = document.documentElement.scrollTop > 0;
+      requestAnimationFrame(() => {
+        this.props.onScroll(scrolled, () => {
+          const actions = scrolled
+            ? getCommonActions(
+                this.props.metadata,
+                "scrollTop",
+                ...this.props.supportedActions
+              )
+            : getCommonActions(
+                this.props.metadata,
+                ...this.props.supportedActions
+              );
+
+          this.setState({ actions });
+          this.ticking = false;
+        });
+      });
     }
   }
 

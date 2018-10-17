@@ -5,9 +5,8 @@ import { graphql } from "gatsby";
 
 import Layout from "../components/Layout";
 import Totals from "../components/Totals";
-import ScrollablePanel from "../components/ScrollablePanel";
-import { Action, Query, IndexProps } from "../interfaces";
-import { getCommonActions } from "../utils";
+import Entries from "../components/Entries";
+import { Query, IndexProps } from "../interfaces";
 
 /**
  * Properties of the index page.
@@ -22,15 +21,15 @@ interface Props extends Query<IndexProps> {}
  * State of the index page.
  * @typedef {Interface} State
  * @property {boolean} scrolled a flag indicating the page has been scrolled.
- * @property {Array<Action>} actions
- *    the actions to be displayed in the quick action button.
+ * @property {number} checkProgressiveLoad
+ *    a flag indicating progressive load can be triggered.
  *
  * @private
  * @interface
  */
 interface State {
   scrolled: boolean;
-  actions: Array<Action>;
+  checkProgressiveLoad: boolean;
 }
 
 /**
@@ -46,13 +45,9 @@ export default class Index extends React.PureComponent<Props, State> {
    */
   public constructor(props: Props) {
     super(props);
-    this.state = {
-      scrolled: false,
-      actions: getCommonActions(this.props.data.site.metadata, "search")
-    };
 
+    this.state = { scrolled: false, checkProgressiveLoad: false };
     this.scrollHandler = this.scrollHandler.bind(this);
-    this.actionRefreshHandler = this.actionRefreshHandler.bind(this);
   }
 
   /** @inheritdoc */
@@ -64,7 +59,8 @@ export default class Index extends React.PureComponent<Props, State> {
       <Layout
         index={this.props.data.search.index}
         metadata={this.props.data.site.metadata}
-        actions={this.state.actions}
+        supportedActions={["search"]}
+        onScroll={this.scrollHandler}
       >
         <Helmet>
           <title>Dashboard | {site.title}</title>
@@ -77,11 +73,10 @@ export default class Index extends React.PureComponent<Props, State> {
           categories={categories}
           styling={this.state.scrolled ? "dark" : "light"}
         />
-        <ScrollablePanel
+        <Entries
           entries={entries}
           metadata={this.props.data.site.metadata}
-          onScroll={this.scrollHandler}
-          onActionRefresh={this.actionRefreshHandler}
+          checkProgressiveLoad={this.state.checkProgressiveLoad}
         />
       </Layout>
     );
@@ -90,30 +85,25 @@ export default class Index extends React.PureComponent<Props, State> {
   /**
    * Updates the scrolled state.
    * @param {boolean} scrolled a flag indicating the scroll state.
+   * @param {Function} callback the callback to be used after completion.
    * @returns {void}
    *
    * @private
    * @function
    */
-  private scrollHandler(scrolled: boolean): void {
-    this.setState({ scrolled });
-  }
+  private scrollHandler(scrolled: boolean, callback: () => void): void {
+    const distanceToBottom =
+      document.documentElement.offsetHeight -
+      window.innerHeight -
+      window.scrollY;
 
-  /**
-   * Updates the actions state.
-   * @param {Array<Action>} actions the actions to be used.
-   * @returns {void}
-   *
-   * @private
-   * @function
-   */
-  private actionRefreshHandler(actions: Array<Action>): void {
-    this.setState({ actions });
+    this.setState({ scrolled, checkProgressiveLoad: distanceToBottom < 50 });
+    callback();
   }
 }
 
 export const query = graphql`
-  query IndexQuery {
+  {
     site {
       metadata: siteMetadata {
         site {

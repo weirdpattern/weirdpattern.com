@@ -1,5 +1,8 @@
 import * as React from "react";
 
+import { chunk } from "lodash";
+
+import PostPreview from "./PostPreview";
 import { getCommonActions } from "../utils";
 import { Action, QueryPost, Metadata } from "../interfaces";
 
@@ -8,8 +11,8 @@ import { Action, QueryPost, Metadata } from "../interfaces";
  * @typedef {Interface} Props
  * @property {Array<{ post: QueryPost }>} entries the entries to be displayed.
  * @property {Metadata} metadata the site metadata.
- * @property {Function} onScroll the scroll handler.
- * @property {Function} onActionRefresh the action refresh handler.
+ * @property {boolean} checkProgressiveLoad
+ *    a flag indicating the component needs to check for progressive load.
  *
  * @private
  * @interface
@@ -17,8 +20,7 @@ import { Action, QueryPost, Metadata } from "../interfaces";
 interface Props {
   entries: Array<{ post: QueryPost }>;
   metadata: Metadata;
-  onScroll: (scrolled: boolean) => void;
-  onActionRefresh: (actions: Array<Action>) => void;
+  checkProgressiveLoad: boolean;
 }
 
 /**
@@ -38,17 +40,14 @@ interface State {
 }
 
 /**
- * Scrollabel panel component.
+ * Entries component.
  *
  * @public
  * @class
  */
-export default class ScollablePanel extends React.PureComponent<Props, State> {
-  // control variable
-  private ticking: boolean = false;
-
+export default class Entries extends React.PureComponent<Props, State> {
   // the page size
-  private incrementsBy: number = 10;
+  private incrementsBy: number = 5;
 
   /**
    * Class constructor.
@@ -67,64 +66,55 @@ export default class ScollablePanel extends React.PureComponent<Props, State> {
       progressiveLoad: false
     };
 
-    this.scrollHandler = this.scrollHandler.bind(this);
     this.loadMoreHandler = this.loadMoreHandler.bind(this);
   }
 
   /** @inheritdoc */
-  public componentDidMount(): void {
-    window.addEventListener("scroll", this.scrollHandler);
+  public static getDerivedStateFromProps(
+    nextProps: Props,
+    prevState: State
+  ): State | null {
+    if (prevState.progressiveLoad && nextProps.checkProgressiveLoad) {
+      const incrementsBy = nextProps.metadata.posts.incrementsBy || 5;
+      return {
+        numberOfEntries: prevState.numberOfEntries + incrementsBy,
+        loadMoreVisible: !nextProps.metadata.posts.loadOnScroll,
+        progressiveLoad: nextProps.metadata.posts.loadOnScroll
+      };
+    }
+
+    return null;
   }
 
   /** @inheritdoc */
-  public componentWillUnmount(): void {
-    window.removeEventListener("scroll", this.scrollHandler);
-  }
-
-  /**
-   * Updates the existing list.
-   * @returns {void}.
-   *
-   * @private
-   * @method
-   */
-  private update(): void {
-    const distanceToBottom =
-      document.documentElement.offsetHeight -
-      window.scrollY +
-      window.innerHeight;
-
-    if (this.state.progressiveLoad && distanceToBottom < 100) {
-      this.loadMoreHandler();
-    }
-
-    if (document.documentElement.scrollTop > 0) {
-      this.props.onScroll(true);
-      this.props.onActionRefresh(
-        getCommonActions(this.props.metadata, "scrollTop", "search")
-      );
-    } else {
-      this.props.onScroll(false);
-      this.props.onActionRefresh(
-        getCommonActions(this.props.metadata, "search")
-      );
-    }
-
-    this.ticking = false;
-  }
-
-  /**
-   * Handles the scroll events.
-   * @returns {void}.
-   *
-   * @private
-   * @method
-   */
-  private scrollHandler(): void {
-    if (!this.ticking) {
-      this.ticking = true;
-      requestAnimationFrame(() => this.update());
-    }
+  public render(): React.ReactNode {
+    return (
+      <React.Fragment>
+        <div className="post-list">
+          {chunk(
+            this.props.entries.slice(0, this.state.numberOfEntries),
+            this.incrementsBy
+          ).map((piece: Array<{ post: QueryPost }>, index: number) => {
+            return (
+              <React.Fragment key={index}>
+                {piece.map((data: { post: QueryPost }) => {
+                  return (
+                    <PostPreview key={data.post.fields.slug} data={data.post} />
+                  );
+                })}
+              </React.Fragment>
+            );
+          })}
+        </div>
+        {this.state.loadMoreVisible && (
+          <div className="load-container">
+            <button className="load-more" onClick={this.loadMoreHandler}>
+              Load More
+            </button>
+          </div>
+        )}
+      </React.Fragment>
+    );
   }
 
   /**

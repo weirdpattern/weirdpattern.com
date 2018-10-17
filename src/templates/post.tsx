@@ -1,27 +1,32 @@
 import * as React from "react";
-import * as classNames from "classnames";
-import Img from "gatsby-image";
 
-import * as data from "../../config.json";
+import Img from "gatsby-image";
+import { graphql } from "gatsby";
+
 import SEO from "../components/SEO";
 import Share from "../components/Share";
-import { getCommonActions } from "../utils";
-import { Action, MarkdownPost, Query } from "../interfaces";
-
-const config = data as any;
+import Layout from "../components/Layout";
+import { PostProps, Query } from "../interfaces";
 
 /**
- * Properties of the PostTemplate.
- * @typedef {Interface} Props
- * @property {string} location the location of this article.
- * @property {Function} onUpdateActions a callback for scroll events.
+ * Properties of the post page.
+ * @typedef {Query<PostProps>} Props
  *
  * @private
  * @interface
  */
-interface Props extends Query<MarkdownPost> {
-  location: string;
-  onUpdateActions: (actions: Array<Action>) => void;
+interface Props extends Query<PostProps> {}
+
+/**
+ * State of the index page.
+ * @typedef {Interface} State
+ * @property {boolean} scrolled a flag indicating the page has been scrolled.
+ *
+ * @private
+ * @interface
+ */
+interface State {
+  scrolled: boolean;
 }
 
 /**
@@ -30,9 +35,7 @@ interface Props extends Query<MarkdownPost> {
  * @public
  * @class
  */
-export default class PostTemplate extends React.Component<Props, {}> {
-  private ticking: boolean = false;
-
+export default class PostTemplate extends React.Component<Props, State> {
   /**
    * Class constructor.
    * @param {Props} props the properties of the index page.
@@ -40,40 +43,24 @@ export default class PostTemplate extends React.Component<Props, {}> {
   public constructor(props: Props) {
     super(props);
 
-    this.props.onUpdateActions(getCommonActions("back", "search"));
+    this.state = { scrolled: false };
     this.scrollHandler = this.scrollHandler.bind(this);
   }
 
   /** @inheritdoc */
-  public componentDidMount(): void {
-    window.addEventListener("scroll", this.scrollHandler);
-    window.addEventListener("load", () => {
-      if (
-        !document
-          .querySelector(".mainpanel")
-          .children[0].classList.contains("post")
-      ) {
-        document.querySelector(".mainpanel").children[0].classList.add("post");
-      }
-    });
-  }
-
-  /** @inheritdoc */
-  public componentWillUnmount(): void {
-    window.removeEventListener("scroll", this.scrollHandler);
-  }
-
-  /** @inheritdoc */
   public render(): React.ReactNode {
-    const { post } = this.props.data;
-    const author = config.authors[post.content.author];
-
+    const { site, post } = this.props.data;
     return (
-      <React.Fragment>
+      <Layout
+        index={this.props.data.search.index}
+        metadata={this.props.data.site.metadata}
+        supportedActions={["search"]}
+        onScroll={this.scrollHandler}
+      >
         <SEO post={post} />
         <div className="post">
           <div className="compact-metadata">
-            {author.name} {" · "} {post.content.date}
+            {site.metadata.author.name} {" · "} {post.content.date}
             {" · "} {post.timeToRead} min read
           </div>
           <h1>{post.content.title}</h1>
@@ -82,53 +69,82 @@ export default class PostTemplate extends React.Component<Props, {}> {
             className="banner"
             title="Post image"
             alt={post.content.title}
-            sizes={this.props.data.post.content.image.childImageSharp.sizes}
+            fluid={this.props.data.post.content.image.childImageSharp.fluid}
           />
           <div
             className="post-preview"
             dangerouslySetInnerHTML={{ __html: post.html }}
           />
         </div>
-      </React.Fragment>
+      </Layout>
     );
   }
 
   /**
-   * Updates the existing list.
-   * @returns {void}.
+   * Updates the scrolled state.
+   * @param {boolean} scrolled a flag indicating the scroll state.
+   * @param {Function} callback the callback to be used after completion.
+   * @returns {void}
    *
    * @private
-   * @method
+   * @function
    */
-  private update(): void {
-    if (document.documentElement.scrollTop > 0) {
-      this.props.onUpdateActions(
-        getCommonActions("scrollTop", "back", "search")
-      );
-    } else {
-      this.props.onUpdateActions(getCommonActions("back", "search"));
-    }
-
-    this.ticking = false;
-  }
-
-  /**
-   * Handles the scroll events.
-   * @returns {void}.
-   *
-   * @private
-   * @method
-   */
-  private scrollHandler(): void {
-    if (!this.ticking) {
-      this.ticking = true;
-      requestAnimationFrame(() => this.update());
-    }
+  private scrollHandler(scrolled: boolean, callback: () => void): void {
+    this.setState({ scrolled });
+    callback();
   }
 }
 
 export const query = graphql`
-  query BlogPostBySlug($slug: String!) {
+  query($slug: String!) {
+    site {
+      metadata: siteMetadata {
+        site {
+          title
+          description
+          keywords
+        }
+        copyright {
+          text
+          year
+        }
+        author {
+          avatar
+          name
+          credentials
+          networks {
+            twitter {
+              name
+              handler
+              link
+            }
+            github {
+              name
+              handler
+              link
+            }
+            linkedin {
+              name
+              handler
+              link
+            }
+            email {
+              name
+              handler
+              link
+            }
+          }
+        }
+        posts {
+          loadOnScroll
+          initialSize
+          incrementsBy
+        }
+      }
+    }
+    search: siteSearchIndex {
+      index
+    }
     post: markdownRemark(fields: { slug: { eq: $slug } }) {
       html
       timeToRead
@@ -142,8 +158,8 @@ export const query = graphql`
         tags
         image {
           childImageSharp {
-            sizes(maxWidth: 670) {
-              ...GatsbyImageSharpSizes
+            fluid(maxWidth: 670) {
+              ...GatsbyImageSharpFluid_tracedSVG
             }
           }
         }

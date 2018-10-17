@@ -2,6 +2,7 @@ import * as React from "react";
 
 import Helmet from "react-helmet";
 import { chunk } from "lodash";
+import { graphql } from "gatsby";
 
 import * as data from "../../config.json";
 import Totals from "../components/Totals";
@@ -196,7 +197,7 @@ export default class CategoryTemplate extends React.PureComponent<
 }
 
 export const query = graphql`
-  query CategoryTemplateQuery($category: String) {
+  query($category: String) {
     markdown: allMarkdownRemark(
       sort: { fields: [frontmatter___date, frontmatter___title], order: DESC }
       filter: { frontmatter: { category: { eq: $category } } }

@@ -211,19 +211,29 @@ export interface QueryPost {
 }
 
 /**
- * The index query props.
- * @typedef {Interface} IndexProps
+ * The layout query props.
+ * @typedef {Interface} LayoutProps
  *
  * @public
  * @interface
  */
-export interface IndexProps {
+export interface LayoutProps {
   site: {
     metadata: Metadata;
   };
   search: {
     index: any;
   };
+}
+
+/**
+ * The index query props.
+ * @typedef {Interface} IndexProps
+ *
+ * @public
+ * @interface
+ */
+export interface IndexProps extends LayoutProps {
   markdown: {
     tags: Array<ValueCount>;
     categories: Array<ValueCount>;
@@ -232,13 +242,13 @@ export interface IndexProps {
 }
 
 /**
- * The post query results.
- * @typedef {Interface} MarkdownPost
+ * The post query props.
+ * @typedef {Interface} PostProps
  *
  * @public
  * @interface
  */
-export interface MarkdownPost {
+export interface PostProps  extends LayoutProps {
   post: QueryPost;
 }
 
