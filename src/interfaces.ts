@@ -26,7 +26,8 @@ export interface Action {
 export interface Metadata {
   site: SiteMetadata;
   copyright: CopyrightMetadata;
-  author: AuthorMetadata;
+  profile: string;
+  authors: Array<AuthorMetadata>;
   posts: PostsMetadata;
   dependencies: DependenciesMetadata;
 }
@@ -65,6 +66,7 @@ export interface CopyrightMetadata {
 /**
  * The author information.
  * @typedef {Interface} AuthorMetadata
+ * @property {string} id the unique identifier of the author.
  * @property {string} name the name of the author.
  * @property {string} email the email of the author.
  * @property {string} credentials the credentials of the author.
@@ -75,21 +77,18 @@ export interface CopyrightMetadata {
  * @interface
  */
 export interface AuthorMetadata {
+  id: string;
   name: string;
   email: string;
   credentials: string;
   avatar: string;
-  networks: NetworksMetadata;
+  networks: Array<NetworkMetadata>;
 }
-
-/**
- * The supported social networks.
- */
-export type SocialNetwork = "twitter" | "github" | "linkedin" | "email";
 
 /**
  * The network information.
  * @typedef {Interface} NetworkMetadata
+ * @property {string} id the id of the network.
  * @property {string} name the name of the network.
  * @property {string} link the link to the network.
  * @property {string} handler the handler of the author in the network.
@@ -98,27 +97,10 @@ export type SocialNetwork = "twitter" | "github" | "linkedin" | "email";
  * @interface
  */
 export interface NetworkMetadata {
+  id: string;
   name: string;
   link: string;
   handler: string;
-}
-
-/**
- * The available networks.
- * @typedef {Interface} NetworksMetadata
- * @property {NetworkMetadata} twitter the twitter handler.
- * @property {NetworkMetadata} github the github handler.
- * @property {NetworkMetadata} linkedin the linked in handler.
- * @property {NetworkMetadata} email the email handler.
- *
- * @public
- * @interface
- */
-export interface NetworksMetadata {
-  twitter: NetworkMetadata;
-  github: NetworkMetadata;
-  linkedin: NetworkMetadata;
-  email: NetworkMetadata;
 }
 
 /**
@@ -164,26 +146,6 @@ export interface ValueCount {
 }
 
 /**
- * A post suggestion
- * @typedef {Interface} PostSuggestion
- * @property {string} slug the url of the post.
- * @property {string} title the title of the post.
- * @property {string} abstract the abstract of the post.
- * @property {string} image the image of the post.
- * @property {string} date the date of the post.
- *
- * @public
- * @interface
- */
-export interface PostSuggestion {
-  slug: string;
-  title: string;
-  abstract: string;
-  image: any;
-  date: string;
-}
-
-/**
  * A post entry.
  * @typedef {Interface} QueryPost
  *
@@ -193,7 +155,6 @@ export interface PostSuggestion {
 export interface QueryPost {
   fields: {
     slug: string;
-    suggestions?: Array<PostSuggestion>;
   };
   html: string;
   excerpt: string;
@@ -248,7 +209,7 @@ export interface IndexProps extends LayoutProps {
  * @public
  * @interface
  */
-export interface PostProps  extends LayoutProps {
+export interface PostProps extends LayoutProps {
   post: QueryPost;
 }
 

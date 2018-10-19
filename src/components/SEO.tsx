@@ -2,21 +2,27 @@ import * as React from "react";
 
 import Helmet from "react-helmet";
 
-import * as data from "../../config.json";
-import { QueryPost } from "../interfaces";
-
-const config = data as any;
+import {
+  AuthorMetadata,
+  NetworkMetadata,
+  QueryPost,
+  SiteMetadata
+} from "../interfaces";
 
 /**
  * Properties for the SEO component.
  * @typedef {Interface} Props
+ * @property {SiteMetadata} site the site metadata.
  * @property {QueryPost} post the post information.
+ * @property {AuthorMetadata} author the author metadata.
  *
  * @private
  * @interface
  */
 interface Props {
+  site: SiteMetadata;
   post: QueryPost;
+  author: AuthorMetadata;
 }
 
 /**
@@ -28,17 +34,23 @@ interface Props {
  * @public
  * @function
  */
-export default function SEO({ post }: Props): React.ReactElement<Props> {
-  const url = config.url + post.fields.slug;
+export default function SEO({
+  site,
+  post,
+  author
+}: Props): React.ReactElement<Props> {
+  const url = site.url + post.fields.slug;
   const { title, abstract, tags, category, style, image } = post.content;
   const description = abstract || post.excerpt;
-  const author = config.authors[post.content.author];
-  const imageUrl = config.url + image.childImageSharp.sizes.src;
+  const imageUrl = site.url + image.childImageSharp.fluid.src;
+  const twitter = author.networks.find(
+    (network: NetworkMetadata) => network.id === "twitter"
+  );
 
   return (
     <Helmet>
       <title>
-        {title} | {config.title}
+        {title} | {site.title}
       </title>
       <meta name="description" content={description} />
       <meta name="keywords" content={tags.join(",")} />
@@ -54,13 +66,13 @@ export default function SEO({ post }: Props): React.ReactElement<Props> {
       <meta property="og:description" content={description} />
       <meta property="og:image" content={imageUrl} />
 
-      <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:creator" content={author.networks.twitter.handler} />
-      <meta name="twitter:title" content={title} />
-      <meta name="twitter:description" content={description} />
-      <meta name="twitter:image" content={imageUrl} />
+      {twitter && <meta name="twitter:card" content="summary_large_image" />}
+      {twitter && <meta name="twitter:creator" content={twitter.handler} />}
+      {twitter && <meta name="twitter:title" content={title} />}
+      {twitter && <meta name="twitter:description" content={description} />}
+      {twitter && <meta name="twitter:image" content={imageUrl} />}
+      {twitter && <link rel="me" href={twitter.link} />}
 
-      <link rel="me" href={author.networks.twitter.link} />
       <link rel="canonical" href={url} />
     </Helmet>
   );

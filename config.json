@@ -15,33 +15,41 @@
     "text": "Patricio Treviño",
     "year": "2017-2018"
   },
-  "author": {
-    "name": "Patricio Treviño",
-    "credentials": "Husband . Father . Developer",
-    "avatar": "./static/profile.jpg",
-    "networks": {
-      "twitter": {
-        "name": "Twitter",
-        "handler": "@weirdpattern",
-        "link": "https://twitter.com/weirdpattern"
-      },
-      "github": {
-        "name": "Github",
-        "handler": "@weirdpattern",
-        "link": "https://github.com/weirdpattern"
-      },
-      "linkedin": {
-        "name": "LinkedIn",
-        "handler": "patricio-treviño-19985833",
-        "link": "https://www.linkedin.com/in/patricio-trevi%C3%B1o-19985833/"
-      },
-      "email": {
-        "name": "Email",
-        "handler": "patricio.trevino@weirdpattern.com",
-        "link": "mailto:patricio.trevino@weirdpattern.com"
-      }
+  "profile": "ptrevino",
+  "authors": [
+    {
+      "id": "ptrevino",
+      "name": "Patricio Treviño",
+      "credentials": "Husband . Father . Developer",
+      "avatar": "/static/profile.jpg",
+      "networks": [
+        {
+          "id": "twitter",
+          "name": "Twitter",
+          "handler": "@weirdpattern",
+          "link": "https://twitter.com/weirdpattern"
+        },
+        {
+          "id": "github",
+          "name": "Github",
+          "handler": "@weirdpattern",
+          "link": "https://github.com/weirdpattern"
+        },
+        {
+          "id": "linkedin",
+          "name": "LinkedIn",
+          "handler": "patricio-treviño-19985833",
+          "link": "https://www.linkedin.com/in/patricio-trevi%C3%B1o-19985833/"
+        },
+        {
+          "id": "email",
+          "name": "Email",
+          "handler": "patricio.trevino@weirdpattern.com",
+          "link": "mailto:patricio.trevino@weirdpattern.com"
+        }
+      ]
     }
-  },
+  ],
   "posts": {
     "path": "content",
     "loadOnScroll": true,

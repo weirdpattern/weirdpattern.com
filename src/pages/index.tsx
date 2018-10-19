@@ -105,49 +105,7 @@ export default class Index extends React.PureComponent<Props, State> {
 export const query = graphql`
   {
     site {
-      metadata: siteMetadata {
-        site {
-          title
-          description
-          keywords
-        }
-        copyright {
-          text
-          year
-        }
-        author {
-          avatar
-          name
-          credentials
-          networks {
-            twitter {
-              name
-              handler
-              link
-            }
-            github {
-              name
-              handler
-              link
-            }
-            linkedin {
-              name
-              handler
-              link
-            }
-            email {
-              name
-              handler
-              link
-            }
-          }
-        }
-        posts {
-          loadOnScroll
-          initialSize
-          incrementsBy
-        }
-      }
+      ...SiteMetadataFragment
     }
     search: siteSearchIndex {
       index
@@ -155,33 +113,7 @@ export const query = graphql`
     markdown: allMarkdownRemark(
       sort: { fields: [frontmatter___date, frontmatter___title], order: DESC }
     ) {
-      tags: group(field: frontmatter___tags) {
-        fieldValue
-        totalCount
-      }
-      categories: group(field: frontmatter___category) {
-        fieldValue
-        totalCount
-      }
-      entries: edges {
-        post: node {
-          html
-          excerpt
-          timeToRead
-          content: frontmatter {
-            title
-            style
-            abstract
-            author
-            tags
-            category
-            date(formatString: "DD MMMM, YYYY")
-          }
-          fields {
-            slug
-          }
-        }
-      }
+      ...AllMarkdownRemarkFragment
     }
   }
 `;

@@ -2,8 +2,18 @@ import * as React from "react";
 
 import Helmet from "react-helmet";
 
-import * as data from "../../config.json";
-const config = data as any;
+import { DependenciesMetadata } from "../interfaces";
+
+/**
+ * Properties for the Share component.
+ * @property {DependenciesMetadata} dependencies the dependencies to be used.
+ *
+ * @private
+ * @interface
+ */
+interface Props {
+  dependencies: DependenciesMetadata;
+}
 
 /**
  * Share component.
@@ -14,13 +24,13 @@ const config = data as any;
  * @public
  * @function
  */
-export default function Share(): React.ReactElement<{}> {
+export default function Share(props: Props): React.ReactElement<{}> {
   return (
     <React.Fragment>
       <Helmet>
         <script
           src={`https://platform-api.sharethis.com/js/sharethis.js#property=${
-            config.ids.sharethis
+            props.dependencies.sharethis
           }&product=inline-share-buttons`}
         />
       </Helmet>

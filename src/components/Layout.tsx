@@ -9,7 +9,7 @@ import Header from "./Header";
 import Footer from "./Footer";
 import Search from "./Search";
 import Actions from "./Actions";
-import { Action, Metadata } from "../interfaces";
+import { Action, AuthorMetadata, Metadata } from "../interfaces";
 import { getCommonActions } from "../utils";
 
 /**
@@ -97,6 +97,9 @@ export default class Layout extends React.PureComponent<Props, State> {
   /** @inheritdoc */
   public render(): React.ReactNode {
     const instance = this;
+    const author = this.props.metadata.authors.find(
+      (current: AuthorMetadata) => current.id === this.props.metadata.profile
+    );
 
     return (
       <div className="container-fluid">
@@ -110,13 +113,13 @@ export default class Layout extends React.PureComponent<Props, State> {
             <Header
               title={this.props.metadata.site.title}
               description={this.props.metadata.site.description}
-              name={this.props.metadata.author.name}
-              email={this.props.metadata.author.email}
-              credentials={this.props.metadata.author.credentials}
-              avatar={this.props.metadata.author.avatar}
+              name={author.name}
+              email={author.email}
+              credentials={author.credentials}
+              avatar={this.props.metadata.site.url + author.avatar}
             />
             <Footer
-              networks={this.props.metadata.author.networks}
+              networks={author.networks}
               copyright={this.props.metadata.copyright}
             />
           </div>

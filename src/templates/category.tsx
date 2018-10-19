@@ -1,48 +1,37 @@
 import * as React from "react";
 
 import Helmet from "react-helmet";
-import { chunk } from "lodash";
 import { graphql } from "gatsby";
 
-import * as data from "../../config.json";
+import Layout from "../components/Layout";
 import Totals from "../components/Totals";
-import PostPreview from "../components/PostPreview";
-import { getCommonActions } from "../utils";
-import { Action, IndexProps, Query, QueryPost } from "../interfaces";
-
-const config = data as any;
+import Entries from "../components/Entries";
+import { IndexProps, Query } from "../interfaces";
 
 /**
- * Properties of the CategoryTemplate.
- * @typedef {Query<MarkdownPost>} Props
- * @property {number} postToShow the number of post to show.
- * @property {Function} onUpdateActions a callback for scroll events.
+ * Properties of the category template.
+ * @typedef {Query<IndexProps>} Props
  *
  * @private
  * @interface
  */
 interface Props extends Query<IndexProps> {
-  postToShow: number;
   pathContext: { category: string };
-  onUpdateActions: (actions: Array<Action>) => void;
 }
 
 /**
- * State of the CategoryTemplate.
+ * State of the category template.
  * @typedef {Interface} State
- * @property {boolean} scrolled a flag indicating the page was scrolled.
- * @property {number} numberOfPost
- *    the number of posts to be displayed every time.
- * @property {boolean} showLoadMore
- *    a flag indicating if the load more button should be visible.
+ * @property {boolean} scrolled a flag indicating the page has been scrolled.
+ * @property {number} checkProgressiveLoad
+ *    a flag indicating progressive load can be triggered.
  *
  * @private
  * @interface
  */
 interface State {
   scrolled: boolean;
-  numberOfPosts: number;
-  showLoadMore: boolean;
+  checkProgressiveLoad: boolean;
 }
 
 /**
@@ -55,8 +44,7 @@ export default class CategoryTemplate extends React.PureComponent<
   Props,
   State
 > {
-  private ticking: boolean = false;
-  private chunkSize: number = 10;
+  // the path context
   private pathContext: string;
 
   /**
@@ -66,169 +54,76 @@ export default class CategoryTemplate extends React.PureComponent<
   public constructor(props: Props) {
     super(props);
 
+    this.state = { scrolled: false, checkProgressiveLoad: false };
     this.pathContext = this.props.pathContext.category;
-    const postToShow = this.props.postToShow || this.chunkSize;
-
-    this.state = {
-      scrolled: false,
-      numberOfPosts: postToShow,
-      showLoadMore: this.props.data.markdown.posts.length > postToShow
-    };
-
-    this.props.onUpdateActions(getCommonActions("back", "search"));
     this.scrollHandler = this.scrollHandler.bind(this);
-    this.loadMoreHandler = this.loadMoreHandler.bind(this);
-  }
-
-  /** @inheritdoc */
-  public componentDidMount(): void {
-    window.addEventListener("scroll", this.scrollHandler);
-  }
-
-  /** @inheritdoc */
-  public componentWillUnmount(): void {
-    window.removeEventListener("scroll", this.scrollHandler);
   }
 
   /** @inheritdoc */
   public render(): React.ReactNode {
-    const { tags, categories, posts } = this.props.data.markdown;
+    const { entries, categories, tags } = this.props.data.markdown;
+    const { site } = this.props.data.site.metadata;
 
     return (
-      <React.Fragment>
+      <Layout
+        index={this.props.data.search.index}
+        metadata={this.props.data.site.metadata}
+        supportedActions={["back", "search"]}
+        onScroll={this.scrollHandler}
+      >
         <Helmet>
-          <title>Tags | {config.title}</title>
-          <meta name="description" content={config.description} />
+          <title>Tags | {site.title}</title>
+          <meta name="description" content={site.description} />
         </Helmet>
         <Totals
-          total={posts.length}
+          total={entries.length}
           categories={categories}
           tags={tags}
           styling={this.state.scrolled ? "dark" : "light"}
           location={this.pathContext}
         />
-        <div className="post-list">
-          <h1>Category: {this.pathContext}</h1>
-          {chunk(posts.slice(0, this.state.numberOfPosts), this.chunkSize).map(
-            (chunk: Array<{ post: QueryPost }>, index: number) => {
-              return (
-                <React.Fragment key={index}>
-                  {chunk.map((data: { post: QueryPost }) => {
-                    return (
-                      <PostPreview
-                        key={data.post.fields.slug}
-                        data={data.post}
-                      />
-                    );
-                  })}
-                </React.Fragment>
-              );
-            }
-          )}
-        </div>
-        {this.state.showLoadMore && (
-          <div className="load-container">
-            <button className="load-more" onClick={this.loadMoreHandler}>
-              Load More
-            </button>
-          </div>
-        )}
-      </React.Fragment>
+        <Entries
+          entries={entries}
+          metadata={this.props.data.site.metadata}
+          checkProgressiveLoad={this.state.checkProgressiveLoad}
+        />
+      </Layout>
     );
   }
 
   /**
-   * Updates the existing list.
-   * @returns {void}.
-   *
-   * @private
-   * @method
-   */
-  private update(): void {
-    const distanceToBottom =
-      document.documentElement.offsetHeight -
-      window.scrollY +
-      window.innerHeight;
-
-    if (!this.state.showLoadMore && distanceToBottom < 100) {
-      this.loadMoreHandler();
-    }
-
-    if (document.documentElement.scrollTop > 0) {
-      this.setState({ scrolled: true });
-      this.props.onUpdateActions(
-        getCommonActions("scrollTop", "back", "search")
-      );
-    } else {
-      this.setState({ scrolled: false });
-      this.props.onUpdateActions(getCommonActions("back", "search"));
-    }
-
-    this.ticking = false;
-  }
-
-  /**
-   * Handles the scroll events.
-   * @returns {void}.
-   *
-   * @private
-   * @method
-   */
-  private scrollHandler(): void {
-    if (!this.ticking) {
-      this.ticking = true;
-      requestAnimationFrame(() => this.update());
-    }
-  }
-
-  /**
-   * Handles the load more events.
+   * Updates the scrolled state.
+   * @param {boolean} scrolled a flag indicating the scroll state.
+   * @param {Function} callback the callback to be used after completion.
    * @returns {void}
    *
    * @private
-   * @method
+   * @function
    */
-  private loadMoreHandler(): void {
-    this.setState({
-      numberOfPosts: this.state.numberOfPosts + this.chunkSize,
-      showLoadMore: false
-    });
+  private scrollHandler(scrolled: boolean, callback: () => void): void {
+    const distanceToBottom =
+      document.documentElement.offsetHeight -
+      window.innerHeight -
+      window.scrollY;
+
+    this.setState({ scrolled, checkProgressiveLoad: distanceToBottom < 50 });
+    callback();
   }
 }
 
 export const query = graphql`
   query($category: String) {
+    site {
+      ...SiteMetadataFragment
+    }
+    search: siteSearchIndex {
+      index
+    }
     markdown: allMarkdownRemark(
       sort: { fields: [frontmatter___date, frontmatter___title], order: DESC }
       filter: { frontmatter: { category: { eq: $category } } }
     ) {
-      tags: group(field: frontmatter___tags) {
-        fieldValue
-        totalCount
-      }
-      categories: group(field: frontmatter___category) {
-        fieldValue
-        totalCount
-      }
-      posts: edges {
-        post: node {
-          html
-          excerpt
-          timeToRead
-          content: frontmatter {
-            title
-            style
-            abstract
-            author
-            tags
-            category
-            date(formatString: "DD MMMM, YYYY")
-          }
-          fields {
-            slug
-          }
-        }
-      }
+      ...AllMarkdownRemarkFragment
     }
   }
 `;

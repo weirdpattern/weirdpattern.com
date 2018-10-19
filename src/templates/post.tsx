@@ -6,7 +6,7 @@ import { graphql } from "gatsby";
 import SEO from "../components/SEO";
 import Share from "../components/Share";
 import Layout from "../components/Layout";
-import { PostProps, Query } from "../interfaces";
+import { AuthorMetadata, PostProps, Query } from "../interfaces";
 
 /**
  * Properties of the post page.
@@ -50,21 +50,29 @@ export default class PostTemplate extends React.Component<Props, State> {
   /** @inheritdoc */
   public render(): React.ReactNode {
     const { site, post } = this.props.data;
+    const author = site.metadata.authors.find(
+      (current: AuthorMetadata) => current.id == post.content.author
+    );
+
     return (
       <Layout
         index={this.props.data.search.index}
         metadata={this.props.data.site.metadata}
-        supportedActions={["search"]}
+        supportedActions={["back", "search"]}
         onScroll={this.scrollHandler}
       >
-        <SEO post={post} />
+        <SEO
+          site={this.props.data.site.metadata.site}
+          post={post}
+          author={author}
+        />
         <div className="post">
           <div className="compact-metadata">
-            {site.metadata.author.name} {" · "} {post.content.date}
+            {author.name} {" · "} {post.content.date}
             {" · "} {post.timeToRead} min read
           </div>
           <h1>{post.content.title}</h1>
-          <Share />
+          <Share dependencies={this.props.data.site.metadata.dependencies} />
           <Img
             className="banner"
             title="Post image"
@@ -98,49 +106,7 @@ export default class PostTemplate extends React.Component<Props, State> {
 export const query = graphql`
   query($slug: String!) {
     site {
-      metadata: siteMetadata {
-        site {
-          title
-          description
-          keywords
-        }
-        copyright {
-          text
-          year
-        }
-        author {
-          avatar
-          name
-          credentials
-          networks {
-            twitter {
-              name
-              handler
-              link
-            }
-            github {
-              name
-              handler
-              link
-            }
-            linkedin {
-              name
-              handler
-              link
-            }
-            email {
-              name
-              handler
-              link
-            }
-          }
-        }
-        posts {
-          loadOnScroll
-          initialSize
-          incrementsBy
-        }
-      }
+      ...SiteMetadataFragment
     }
     search: siteSearchIndex {
       index

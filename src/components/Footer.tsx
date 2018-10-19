@@ -3,20 +3,20 @@ import * as React from "react";
 import Legal from "./Legal";
 import Social from "./Social";
 
-import { CopyrightMetadata, NetworksMetadata } from "../interfaces";
+import { CopyrightMetadata, NetworkMetadata } from "../interfaces";
 
 /**
  * Properties for the Header component.
  * @typedef {Interface} Props
  * @property {CopyrightMetadata} [copyright] the copyright information.
- * @property {NetworksMetadata} [networks] the networks of the author.
+ * @property {Array<NetworkMetadata>} [networks] the networks of the author.
  *
  * @private
  * @interface
  */
 interface Props {
   copyright?: CopyrightMetadata;
-  networks?: NetworksMetadata;
+  networks?: Array<NetworkMetadata>;
 }
 
 /**

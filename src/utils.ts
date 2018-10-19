@@ -1,4 +1,4 @@
-import { Action, Metadata } from "./interfaces";
+import { Action, AuthorMetadata, Metadata } from "./interfaces";
 
 /**
  * Generate callbacks based on the provided metadata.
@@ -9,6 +9,10 @@ import { Action, Metadata } from "./interfaces";
  * @function
  */
 function getCallbacks(metadata: Metadata): { [key: string]: Function } {
+  const author = metadata.authors.find(
+    (current: AuthorMetadata) => current.id == metadata.profile
+  );
+
   return {
     search: function() {
       this.setState({ searching: true });
@@ -24,7 +28,7 @@ function getCallbacks(metadata: Metadata): { [key: string]: Function } {
     },
     report: function() {
       window.location.href = `${
-        metadata.author.email.link
+        author.email.link
       }?subject=Page not found&body=The following page was not found: ${
         document.referrer
       }`;

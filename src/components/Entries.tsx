@@ -56,13 +56,15 @@ export default class Entries extends React.PureComponent<Props, State> {
   public constructor(props: Props) {
     super(props);
 
+    const initialSize =
+      this.props.metadata.posts.initialSize || this.incrementsBy;
+
     this.incrementsBy =
       this.props.metadata.posts.incrementsBy || this.incrementsBy;
 
     this.state = {
-      numberOfEntries:
-        this.props.metadata.posts.initialSize || this.incrementsBy,
-      loadMoreVisible: this.props.entries.length > this.incrementsBy,
+      numberOfEntries: initialSize,
+      loadMoreVisible: this.props.entries.length > initialSize,
       progressiveLoad: false
     };
 
