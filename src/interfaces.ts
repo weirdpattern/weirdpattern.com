@@ -12,44 +12,125 @@ export interface Action {
 }
 
 /**
+ * The config.
+ * @typedef {Interface} Metadata
+ * @property {SiteMetadata} site the site configuration.
+ * @property {CopyrightMetadata} copyright the copyright configuration.
+ * @property {AuthorMetadata} author the author configuration.
+ * @property {PostsMetadata} posts the posts configuration.
+ * @property {DependenciesMetadata} dependencies the dependencies configuration.
+ *
+ * @public
+ * @interface
+ */
+export interface Metadata {
+  site: SiteMetadata;
+  copyright: CopyrightMetadata;
+  profile: string;
+  authors: Array<AuthorMetadata>;
+  posts: PostsMetadata;
+  dependencies: DependenciesMetadata;
+}
+
+/**
+ * The site information.
+ * @typedef {Interface} SiteMetadata
+ * @property {string} title the title of the site.
+ * @property {string} description the description of the site.
+ * @property {copyright} copyright the copyrights information.
+ *
+ * @public
+ * @interface
+ */
+export interface SiteMetadata {
+  url: string;
+  title: string;
+  description: string;
+  keywords: Array<string>;
+}
+
+/**
  * The copyright information.
- * @typedef {Interface} Copyrights
+ * @typedef {Interface} CopyrightMetadata
  * @property {string} text the copyright text.
  * @property {string} year the copyright year.
  *
  * @public
  * @interface
  */
-export interface Copyrights {
+export interface CopyrightMetadata {
   text: string;
   year: string;
 }
 
 /**
- * The social network information.
- * @typedef {Interface} SocialNetwork
- * @property {string} name the name of the social network.
- * @property {string} link the link to the social network.
- * @property {string} handler the handler of the author in the social network.
+ * The author information.
+ * @typedef {Interface} AuthorMetadata
+ * @property {string} id the unique identifier of the author.
+ * @property {string} name the name of the author.
+ * @property {string} email the email of the author.
+ * @property {string} credentials the credentials of the author.
+ * @property {string} avatar the avatar of the author.
+ * @property {Network} networks the networks of the author.
  *
  * @public
  * @interface
  */
-export interface SocialNetwork {
+export interface AuthorMetadata {
+  id: string;
+  name: string;
+  email: string;
+  credentials: string;
+  avatar: string;
+  networks: Array<NetworkMetadata>;
+}
+
+/**
+ * The network information.
+ * @typedef {Interface} NetworkMetadata
+ * @property {string} id the id of the network.
+ * @property {string} name the name of the network.
+ * @property {string} link the link to the network.
+ * @property {string} handler the handler of the author in the network.
+ *
+ * @public
+ * @interface
+ */
+export interface NetworkMetadata {
+  id: string;
   name: string;
   link: string;
   handler: string;
 }
 
 /**
- * The available social networks.
- * @typedef {Interface} SocialNetworks
+ * The posts information.
+ * @typedef {Interface} PostsMetadata
+ * @property {string} path the path to the content.
+ * @property {boolean} loadOnScroll a flag indicating load on scroll is enabled.
+ * @property {number} initialSize the size of the page.
+ * @property {number} incrementsBy the page size increment.
  *
  * @public
  * @interface
  */
-export interface SocialNetworks {
-  [key: string]: SocialNetwork;
+export interface PostsMetadata {
+  path: string;
+  loadOnScroll: boolean;
+  initialSize: number;
+  incrementsBy: number;
+}
+
+/**
+ * The dependency information.
+ * @typedef {Interface} DependenciesMetadata
+ * @property {string} sharethis the id of the share this module.
+ *
+ * @public
+ * @interface
+ */
+export interface DependenciesMetadata {
+  sharethis: string;
 }
 
 /**
@@ -65,26 +146,6 @@ export interface ValueCount {
 }
 
 /**
- * A post suggestion
- * @typedef {Interface} PostSuggestion
- * @property {string} slug the url of the post.
- * @property {string} title the title of the post.
- * @property {string} abstract the abstract of the post.
- * @property {string} image the image of the post.
- * @property {string} date the date of the post.
- *
- * @public
- * @interface
- */
-export interface PostSuggestion {
-  slug: string;
-  title: string;
-  abstract: string;
-  image: any;
-  date: string;
-}
-
-/**
  * A post entry.
  * @typedef {Interface} QueryPost
  *
@@ -94,7 +155,6 @@ export interface PostSuggestion {
 export interface QueryPost {
   fields: {
     slug: string;
-    suggestions?: Array<PostSuggestion>;
   };
   html: string;
   excerpt: string;
@@ -112,42 +172,45 @@ export interface QueryPost {
 }
 
 /**
- * The posts query results.
- * @typedef {Interface} MarkdownPosts
+ * The layout query props.
+ * @typedef {Interface} LayoutProps
  *
  * @public
  * @interface
  */
-export interface MarkdownPosts {
-  markdown: {
-    tags: Array<ValueCount>;
-    categories: Array<ValueCount>;
-    posts: Array<{ post: QueryPost }>;
+export interface LayoutProps {
+  site: {
+    metadata: Metadata;
   };
-}
-
-/**
- * The post query results.
- * @typedef {Interface} MarkdownPost
- *
- * @public
- * @interface
- */
-export interface MarkdownPost {
-  post: QueryPost;
-}
-
-/**
- * The search index.
- * @typedef {Interface} SearchIndex
- *
- * @public
- * @interface
- */
-export interface SearchIndex {
   search: {
     index: any;
   };
+}
+
+/**
+ * The index query props.
+ * @typedef {Interface} IndexProps
+ *
+ * @public
+ * @interface
+ */
+export interface IndexProps extends LayoutProps {
+  markdown: {
+    tags: Array<ValueCount>;
+    categories: Array<ValueCount>;
+    entries: Array<{ post: QueryPost }>;
+  };
+}
+
+/**
+ * The post query props.
+ * @typedef {Interface} PostProps
+ *
+ * @public
+ * @interface
+ */
+export interface PostProps extends LayoutProps {
+  post: QueryPost;
 }
 
 /**

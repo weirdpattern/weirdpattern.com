@@ -1,13 +1,8 @@
-const siteConfig = require("./content/data.json");
+const config = require("./config.json");
 const regexExcludeRobots = /^(?!\/(dev-404-page|404|offline-plugin-app-shell-fallback|tags|categories)).*$/;
 
 module.exports = {
-  siteMetadata: {
-    url: siteConfig.url,
-    siteUrl: siteConfig.url,
-    name: siteConfig.name,
-    description: siteConfig.description
-  },
+  siteMetadata: config,
   plugins: [
     "gatsby-plugin-react-helmet",
     "gatsby-plugin-typescript",
@@ -17,7 +12,7 @@ module.exports = {
       resolve: "gatsby-source-filesystem",
       options: {
         name: "content",
-        path: `${__dirname}/${siteConfig.paths.content}`
+        path: `${__dirname}/${config.posts.path}`
       }
     },
     {
@@ -65,55 +60,44 @@ module.exports = {
       options: {
         output: "/sitemap.xml",
         query: `
-          {
-            site {
-              siteMetadata {
-                siteUrl
-              }
-            }
-            allSitePage(
-              filter: {
-                path: {
-                  regex: "${regexExcludeRobots}"
+            {
+              site {
+                siteMetadata {
+                  siteUrl
                 }
               }
-            ) {
-              edges {
-                node {
-                  path
+              allSitePage(
+                filter: {
+                  path: {
+                    regex: "${regexExcludeRobots}"
+                  }
+                }
+              ) {
+                edges {
+                  node {
+                    path
+                  }
                 }
               }
-            }
-        }`
+          }`
       }
     },
     {
       resolve: "gatsby-plugin-manifest",
       options: {
-        name: siteConfig.title,
-        short_name: siteConfig.title,
-        description: siteConfig.description,
+        name: config.title,
+        short_name: config.title,
+        description: config.description,
         start_url: "",
         background_color: "#FAFAFA",
         theme_color: "#FF6A00",
         display: "minimal-ui",
-        icons: [
-          {
-            src: "/logos/logo-192.png",
-            sizes: "192x192",
-            type: "image/png"
-          },
-          {
-            src: "/logos/logo-512.png",
-            sizes: "512x512",
-            type: "image/png"
-          }
-        ]
+        icon: "static/logos/favicon.png"
       }
     },
     "gatsby-plugin-offline",
     {
-      resolve: "@andrew-codes/gatsby-plugin-elasticlunr-search",
+      resolve: "@gatsby-contrib/gatsby-plugin-elasticlunr-search",
       options: {
         fields: ["title", "category", "tags"],
         resolvers: {
@@ -127,20 +111,6 @@ module.exports = {
             tags: node => node.frontmatter.tags
           }
         }
-      }
-    },
-    {
-      resolve: "gatsby-plugin-copy-files",
-      options: {
-        source: `${__dirname}/content/public/static`,
-        destination: "/static"
-      }
-    },
-    {
-      resolve: "gatsby-plugin-copy-files",
-      options: {
-        source: `${__dirname}/content/public`,
-        destination: "/"
       }
     }
     /*

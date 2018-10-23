@@ -1,22 +1,22 @@
 import * as React from "react";
 
+import Legal from "./Legal";
 import Social from "./Social";
-import Copyright from "./Copyright";
 
-import { Copyrights, SocialNetworks } from "../interfaces";
+import { CopyrightMetadata, NetworkMetadata } from "../interfaces";
 
 /**
  * Properties for the Header component.
  * @typedef {Interface} Props
- * @property {SocialNetworks} [networks] the social networks of the author.
- * @property {string} [copyright] the copyright information.
+ * @property {CopyrightMetadata} [copyright] the copyright information.
+ * @property {Array<NetworkMetadata>} [networks] the networks of the author.
  *
  * @private
  * @interface
  */
 interface Props {
-  networks?: SocialNetworks;
-  copyright?: Copyrights;
+  copyright?: CopyrightMetadata;
+  networks?: Array<NetworkMetadata>;
 }
 
 /**
@@ -28,11 +28,13 @@ interface Props {
  * @public
  * @function
  */
-export default function Header(props: Props): React.ReactElement<Props> {
+export default function Footer(props: Props): React.ReactElement<Props> {
   return (
     <footer className="footer">
       {props.networks && <Social networks={props.networks} />}
-      <Copyright text={props.copyright.text} year={props.copyright.year} />
+      {props.copyright && (
+        <Legal text={props.copyright.text} year={props.copyright.year} />
+      )}
     </footer>
   );
 }

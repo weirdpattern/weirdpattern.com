@@ -1,17 +1,17 @@
 import * as React from "react";
 
-import { SocialNetwork, SocialNetworks } from "../interfaces";
+import { NetworkMetadata } from "../interfaces";
 
 /**
  * Properties for the Social component.
  * @typedef {Interface} Props
- * @property {string} networks the networks of the author.
+ * @property {Array<NetworkMetadata>} networks the networks of the author.
  *
  * @private
  * @interface
  */
 interface Props {
-  networks: SocialNetworks;
+  networks: Array<NetworkMetadata>;
 }
 
 /**
@@ -26,16 +26,14 @@ interface Props {
 export default function Social({ networks }: Props): React.ReactElement<Props> {
   return (
     <ul className="social">
-      {Object.keys(networks).map((name: string, index: number) => {
-        const network: SocialNetwork = networks[name];
-        return (
+      {networks.length &&
+        networks.map((network: NetworkMetadata, index: number) => (
           <li key={index}>
-            <a href={network.link} className={name}>
+            <a href={network.link} className={network.id}>
               <span className="label">{network.name}</span>
             </a>
           </li>
-        );
-      })}
+        ))}
     </ul>
   );
 }

@@ -56,13 +56,11 @@ export default function PostMetadata({
         <i />
         {data.content.tags.map((tag: string, index: number) => {
           return (
-            <React.Fragment key={index}>
-              <span>
-                <Link to={"/tags/" + encodeURIComponent(kebabCase(tag))}>
-                  {tag}
-                </Link>
-              </span>
-            </React.Fragment>
+            <span key={index}>
+              <Link to={"/tags/" + encodeURIComponent(kebabCase(tag))}>
+                {tag}
+              </Link>
+            </span>
           );
         })}
       </div>

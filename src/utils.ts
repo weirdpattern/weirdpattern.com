@@ -1,30 +1,40 @@
-import * as data from "../content/data.json";
-import { Action } from "./interfaces";
+import { Action, AuthorMetadata, Metadata } from "./interfaces";
 
-const config = data as any;
+/**
+ * Generate callbacks based on the provided metadata.
+ * @param {Metadata} metadata the metadata to be used.
+ * @returns {Object} an object with callbacks.
+ *
+ * @private
+ * @function
+ */
+function getCallbacks(metadata: Metadata): { [key: string]: Function } {
+  const author = metadata.authors.find(
+    (current: AuthorMetadata) => current.id == metadata.profile
+  );
 
-// common callbacks
-// using function to facilitate binding
-const callbacks: { [key: string]: Function } = {
-  search: function() {
-    this.setState({ searching: true });
-  },
-  scrollTop: function() {
-    window.scrollTo(0, 0);
-  },
-  back: function() {
-    window.location.href = config.url;
-  },
-  home: function() {
-    window.location.href = config.url;
-  },
-  report: function() {
-    const mailTo = config.authors[config.profile.author].networks.email.link;
-    window.location.href = `${mailTo}?subject=Page not found&body=The following page was not found: ${
-      document.referrer
-    }`;
-  }
-};
+  return {
+    search: function() {
+      this.setState({ searching: true });
+    },
+    scrollTop: function() {
+      window.scrollTo(0, 0);
+    },
+    back: function() {
+      window.location.href = metadata.site.url;
+    },
+    home: function() {
+      window.location.href = metadata.site.url;
+    },
+    report: function() {
+      window.location.href = `${
+        author.email.link
+      }?subject=Page not found&body=The following page was not found: ${
+        document.referrer
+      }`;
+    }
+  };
+}
 
 /**
  * Determines if the given width falls under the mobile category.
@@ -59,13 +69,17 @@ export function copyToClipboard(text: string): void {
 
 /**
  * Gets the common actions.
+ * @param {Metadata} metadata the site information.
  * @param {Array<string>} candidates the types to be added.
  * @returns {Array<Action>} the actions.
  *
  * @public
  * @function
  */
-export function getCommonActions(...candidates: Array<string>): Array<Action> {
+export function getCommonActions(
+  metadata: Metadata,
+  ...candidates: Array<string>
+): Array<Action> {
   const actions: Array<Action> = [];
 
   let index = -1;
@@ -73,7 +87,7 @@ export function getCommonActions(...candidates: Array<string>): Array<Action> {
   while (++index < length) {
     actions.push({
       name: candidates[index],
-      callback: callbacks[candidates[index]]
+      callback: getCallbacks(metadata)[candidates[index]]
     });
   }
 
