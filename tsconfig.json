@@ -1,14 +1,14 @@
 {
-    "compilerOptions": {
-        "outDir": "./dist/",
-        "sourceMap": true,
-        "module": "commonjs",
-        "target": "esnext",
-        "jsx": "react",
-        "allowJs": false,
-        "lib": ["dom", "esnext"]
-    },
-    "include": [
-        "./src/**/*"
-    ]
+  "compilerOptions": {
+    "outDir": "./dist/",
+    "sourceMap": true,
+    "module": "commonjs",
+    "target": "esnext",
+    "jsx": "react",
+    "allowJs": false,
+    "lib": ["dom", "esnext"]
+  },
+  "include": [
+    "./src/**/*"
+  ]
 }

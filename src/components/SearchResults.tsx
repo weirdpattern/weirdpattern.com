@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import Link, { navigateTo } from "gatsby-link";
+import { Link, navigate } from "gatsby";
 
 import { SearchPost } from "../interfaces";
 
@@ -69,34 +69,29 @@ export default function SearchResults({
 
   return (
     <div className="search-results">
-      {styles.map((style: string, keyStyles: number) => {
-        return (
-          <ul key={keyStyles}>
-            {results
-              .filter((result: SearchPost) => result.style === style)
-              .sort(sort)
-              .map((result: SearchPost, keyResults: number) => {
-                const dateParts = result.date.split("-");
-                const date = new Date(
-                  Number(dateParts[0]),
-                  Number(dateParts[1]) - 1,
-                  Number(dateParts[2])
-                );
-
-                return (
-                  <li key={keyResults} className={style}>
-                    <Link
-                      to={result.url}
-                      onMouseDown={e => navigateTo(result.url)}
-                    >
-                      {result.title}
-                    </Link>
-                  </li>
-                );
-              })}
-          </ul>
-        );
-      })}
+      <div className="search-results-scroll">
+        {styles.map((style: string, keyStyles: number) => {
+          return (
+            <ul key={keyStyles}>
+              {results
+                .filter((result: SearchPost) => result.style === style)
+                .sort(sort)
+                .map((result: SearchPost, keyResults: number) => {
+                  return (
+                    <li key={keyResults} className={style}>
+                      <Link
+                        to={result.url}
+                        onMouseDown={e => navigate(result.url)}
+                      >
+                        {result.title}
+                      </Link>
+                    </li>
+                  );
+                })}
+            </ul>
+          );
+        })}
+      </div>
     </div>
   );
 }
