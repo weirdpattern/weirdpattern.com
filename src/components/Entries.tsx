@@ -3,8 +3,7 @@ import * as React from "react";
 import { chunk } from "lodash";
 
 import PostPreview from "./PostPreview";
-import { getCommonActions } from "../utils";
-import { Action, QueryPost, Metadata } from "../interfaces";
+import { QueryPost, Metadata } from "../interfaces";
 
 /**
  * Properties of the scrollable panel component.

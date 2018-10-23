@@ -41,65 +41,46 @@ interface State {
  * @public
  * @function
  */
-export default class DropdownButton extends React.PureComponent<Props, State> {
-  /**
-   * Class constructor.
-   * @param {Props} props the properties of the drppdown button.
-   */
-  public constructor(props: Props) {
-    super(props);
+export default function DropdownButton(
+  props: Props
+): React.ReactElement<Props> {
+  const { text, data } = props;
 
-    this.state = { expanded: false };
-    this.clickHandler = this.clickHandler.bind(this);
-  }
+  const sorted = data.sort(
+    (a: ValueCount, b: ValueCount): number => {
+      return b.totalCount - a.totalCount;
+    }
+  );
 
-  /** @inheritdoc */
-  public render(): React.ReactNode {
-    const { text, data } = this.props;
-
-    const sorted = data.sort(
-      (a: ValueCount, b: ValueCount): number => {
-        return b.totalCount - a.totalCount;
-      }
-    );
-
-    return (
-      <li className="dropdown">
-        <div className="dropdown-button">
-          <span className="total">{data.length}</span>
-          <span className="total-label">{text}</span>
-          <i className="arrow-down" />
+  return (
+    <li className="dropdown">
+      <div className="dropdown-button">
+        <span className="total">{data.length}</span>
+        <span className="total-label">{text}</span>
+        <i className="arrow-down" />
+      </div>
+      <div className="dropdown-list">
+        <div className="dropdown-list-scroll">
+          <ul>
+            {sorted.map((item: ValueCount, index: number) => {
+              return (
+                <li key={index}>
+                  <Link
+                    to={
+                      "/" +
+                      text +
+                      "/" +
+                      encodeURIComponent(kebabCase(item.fieldValue))
+                    }
+                  >
+                    {item.fieldValue} ({item.totalCount})
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
         </div>
-        <ul className="dropdown-list">
-          {data.map((item: ValueCount, index: number) => {
-            return (
-              <li key={index}>
-                <Link
-                  to={
-                    "/" +
-                    text +
-                    "/" +
-                    encodeURIComponent(kebabCase(item.fieldValue))
-                  }
-                >
-                  {item.fieldValue} ({item.totalCount})
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
-      </li>
-    );
-  }
-
-  /**
-   * Handles the click event.
-   * @returns {void}
-   *
-   * @private
-   * @method
-   */
-  private clickHandler(): void {
-    this.setState({ expanded: !this.state.expanded });
-  }
+      </div>
+    </li>
+  );
 }

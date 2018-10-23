@@ -53,9 +53,15 @@ export default function Totals({
         {categories.length + tags.length > 0 && (
           <ul>
             {categories.length > 0 && (
-              <DropdownButton text="categories" data={categories} />
+              <DropdownButton
+                key="categories"
+                text="categories"
+                data={categories}
+              />
             )}
-            {tags.length > 0 && <DropdownButton text="tags" data={tags} />}
+            {tags.length > 0 && (
+              <DropdownButton key="tags" text="tags" data={tags} />
+            )}
           </ul>
         )}
       </div>

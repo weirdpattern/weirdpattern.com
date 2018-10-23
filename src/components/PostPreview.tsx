@@ -56,18 +56,16 @@ export default function Post({ data }: Props): React.ReactElement<Props> {
   });
 
   return (
-    <React.Fragment>
-      <div className={postClasses}>
-        <h2>
-          <Link to={data.fields.slug}>{data.content.title}</Link>
-        </h2>
-        <PostMetadata data={data} />
-        <div
-          dangerouslySetInnerHTML={{
-            __html: getAbstract(data)
-          }}
-        />
-      </div>
-    </React.Fragment>
+    <div className={postClasses}>
+      <h2>
+        <Link to={data.fields.slug}>{data.content.title}</Link>
+      </h2>
+      <PostMetadata data={data} />
+      <div
+        dangerouslySetInnerHTML={{
+          __html: getAbstract(data)
+        }}
+      />
+    </div>
   );
 }

@@ -19,7 +19,7 @@ import { getCommonActions } from "../utils";
  * @property {Metadata} metadata the site metadata.
  * @property {Array<string>} supportedActions
  *    the supported actions to be used in the quick action button.
- * @property {Function} onScroll the scroll handler.
+ * @property {Function} [onScroll] the scroll handler.
  *
  * @private
  * @interface
@@ -28,7 +28,7 @@ interface Props {
   index: any;
   metadata: Metadata;
   supportedActions: Array<string>;
-  onScroll: (scrolled: boolean, callback: () => void) => void;
+  onScroll?: (scrolled: boolean, callback: () => void) => void;
 }
 
 /**
@@ -55,6 +55,13 @@ interface State {
  * @function
  */
 export default class Layout extends React.PureComponent<Props, State> {
+  // default properties
+  public static defaultProps = {
+    onScroll(_: boolean, callback: () => void): void {
+      callback();
+    }
+  };
+
   // the site index
   private index: any;
 
