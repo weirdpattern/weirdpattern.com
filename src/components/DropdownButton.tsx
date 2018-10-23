@@ -53,7 +53,7 @@ export default function DropdownButton(
   );
 
   return (
-    <li className="dropdown">
+    <li key={new Date().getMilliseconds()} className="dropdown">
       <div className="dropdown-button">
         <span className="total">{data.length}</span>
         <span className="total-label">{text}</span>

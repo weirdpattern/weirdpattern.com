@@ -28,7 +28,7 @@ interface Props {
  * @public
  * @function
  */
-export default function Header(props: Props): React.ReactElement<Props> {
+export default function Footer(props: Props): React.ReactElement<Props> {
   return (
     <footer className="footer">
       {props.networks && <Social networks={props.networks} />}

@@ -97,7 +97,7 @@ module.exports = {
     },
     "gatsby-plugin-offline",
     {
-      resolve: "@andrew-codes/gatsby-plugin-elasticlunr-search",
+      resolve: "@gatsby-contrib/gatsby-plugin-elasticlunr-search",
       options: {
         fields: ["title", "category", "tags"],
         resolvers: {
