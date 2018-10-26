@@ -16,7 +16,7 @@ import { IndexProps, Query } from "../interfaces";
  * @interface
  */
 interface Props extends Query<IndexProps> {
-  pathContext: { tag: string };
+  pageContext: { tag: string };
 }
 
 /**
@@ -42,7 +42,7 @@ interface State {
  */
 export default class TagTemplate extends React.PureComponent<Props, State> {
   // the path context
-  private pathContext: string;
+  private pageContext: string;
 
   /**
    * Class constructor.
@@ -52,7 +52,7 @@ export default class TagTemplate extends React.PureComponent<Props, State> {
     super(props);
 
     this.state = { scrolled: false, checkProgressiveLoad: false };
-    this.pathContext = this.props.pathContext.tag;
+    this.pageContext = this.props.pageContext.tag;
     this.scrollHandler = this.scrollHandler.bind(this);
   }
 
@@ -77,7 +77,7 @@ export default class TagTemplate extends React.PureComponent<Props, State> {
           categories={categories}
           tags={tags}
           styling={this.state.scrolled ? "dark" : "light"}
-          location={this.pathContext}
+          location={this.pageContext}
         />
         <Entries
           entries={entries}
