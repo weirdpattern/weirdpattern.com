@@ -3,7 +3,7 @@ title: "Redirecting streams to the /dev/null sink"
 style: "snippet"
 image: "../../../images/bash.png"
 abstract: "Learn the proper way of redirecting unwanted streams to /dev/null."
-date: "2016-08-31"
+date: "2018-08-31"
 author: "ptrevino"
 category: "bash"
 tags:

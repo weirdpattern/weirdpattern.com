@@ -3,7 +3,7 @@ title: "Delete a key container"
 style: "snippet"
 image: "../../../images/security.png"
 abstract: "Learn how to use ASP.NET IIS Registration Tool to delete a RSA key container."
-date: "2016-11-01"
+date: "2018-11-01"
 author: "ptrevino"
 category: "security"
 tags:

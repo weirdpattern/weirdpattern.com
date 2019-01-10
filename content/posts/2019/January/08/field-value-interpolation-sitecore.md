@@ -18,40 +18,46 @@ tags:
 
 In a previous [blog post](https://www.weirdpattern.com/dont-repeat-yourself-with-sitecore-branch-templates) 
 we talked about branch templates and how they make a content author's life a 
-little bit easier by creating complex tree structures with a single click. But, 
-unbeknownst to most, the post also introduced us to a new concept: tokens.  
+little bit easier by reducing the creation process of complex tree structures 
+to a mere click. But, unbeknownst to most, the post also introduced us to a 
+new concept: **tokens**.  
 
 <!-- end:abstract -->
 
-Let's do a quick recap, when you create a new branch template you get a special 
-item called **$name** underneath the branch template. For obvious reasons (we 
-are talking about a template that will serve *n* number of items), we cannot 
-hardcode the name of the item, instead we use a token that will be replaced with 
-the real name of the item at runtime.  
+### So, what is a token?
+
+Remember that special item **$name** underneath the branch template?  
 
 ![Special Item Name](./images/special-item-name.png)
 
-### So, what is a token?
+Well that is a *token* and it serves as a placeholder for the final name of the 
+item. This gives the content author the opportunity to choose a name that makes 
+sense for the item instead of getting a hardcoded one. 
 
-Tokens are Sitecore's answer to the question *how can I populate a field with a 
-predefined value without hardcoding it in the standard values of the template?*. 
-The technical geeky term for this is `interpolation`, but I won't bore you to 
-death with the technicalities (but in case you are interested here is a more 
-[detailed explanation](https://en.wikipedia.org/wiki/String_interpolation)).  
+To put it simply, *tokens* are Sitecore's answer to the question *how can I 
+populate a field with a predefined value without hardcoding it in the standard 
+values of the template?*. The technical geeky term for this is `interpolation`, but I won't 
+bore you to death with the technicalities (but in case you are interested here 
+is a more [detailed explanation](https://en.wikipedia.org/wiki/String_interpolation)).  
 
 Out of the box Sitecore provides support for a finite number of tokens. These 
 tokens do not require any configuration or setup, simply use one of the following 
 in any field and you should be good to go.  
+&nbsp;  
+&nbsp;  
+<center>
 
-| Token        | Description                                                      |
-| -----------: | ---------------------------------------------------------------- |
-| $name        | Expands to the name of the new item entered by the user.         |
-| $id          | Expands to the id of the new item.                               |
-| $parentid    | Expands to the id of the parent of the new item.                 |
-| $parentname  | Expands to the name of the parent of the new item.               |
-| $date        | Expands to the system date in `yyyyMMdd` format.                 |
-| $time        | Expands to the system time in `HHmmss` format.                   |
-| $now         | Expands to the system date and time in `yyyyMMdd HHmmss` format. |
+| Token        | Description                                                       |
+| -----------: | ----------------------------------------------------------------- |
+| $name        | Expands to the name of the new item entered by the content author.|
+| $id          | Expands to the id of the new item.                                |
+| $parentid    | Expands to the id of the parent of the new item.                  |
+| $parentname  | Expands to the name of the parent of the new item.                |
+| $date        | Expands to the system date in `yyyyMMdd` format.                  |
+| $time        | Expands to the system time in `HHmmss` format.                    |
+| $now         | Expands to the system date and time in `yyyyMMdd HHmmss` format.  |
+
+</center>
 
 By convention, tokens are case insensitive, so it doesn't matter if you use 
 `$ParentName` or `$PaRenTNaME`, Sitecore will know what to do with the token.  
@@ -63,19 +69,15 @@ OK, so there are two ways we can do this:
 setting `MasterVariableReplacer` with the new class.  
 2. Adding a new processor to the `expandInitialFieldValue` pipeline.  
 
-Both are equally valid, but the second approach is my personal favorite as it's 
-more in line with the Sitecore way of doing things (and, in my humble opinion, 
-the first approach feels kind of *hacky*, especially because the 
-`MasterVariablesReplacer` class has so many virtual methods that can be 
-overridden that a novice developer wouldn't even know where to start).  
+Both are valid but, in my humble opinion, the latter it's more in line with the 
+Sitecore way of doing things, whilst the former feels a little too *hacky* for my 
+taste (replacing things have never been my style, I prefer composition when possible).  
 
-### Show me the code!  
-
-I've seen many good and valid solutions online, some using the first approach, 
-some using the second... but I wasn't really convinced by any of them, mainly 
-because those using the first approach felt *hacky* and the others supported 
-only one variable per processor. So I decided to come up with my own solution 
-with openness and extensibility in mind.  
+Having said that, I've seen many good and valid solutions online, some use the 
+first approach, some prefer the second... but I wasn't really convinced by any of 
+them, mainly because those using the first approach felt *hacky* and the others 
+supported only one variable per processor. So I decided to come up with my own 
+solution with openness and extensibility in mind.  
 
 **The first step is creating the supporting classes and interfaces**.  
 This set of classes and interfaces will provide the default structure and base 
@@ -86,8 +88,8 @@ First we start with the `IVariableReplacer` interface.
 `gist:2d25e86f7519778483c21cae5ed53c73#IVariableReplacer.cs`  
 
 The interface defines two members:
-- a `Variable` property that defines the name of the variable and aliases to be 
-replaced (e.g. `$path`).  
+- a `Variables` property that defines the name of the variable and aliases to be 
+replaced (e.g. `$path`, `$contentPath`, etc).  
 - a `Replace(string, Item)` method that does the interpolation.  
 
 Next is the base class for all replacers.  
@@ -95,7 +97,7 @@ Next is the base class for all replacers.
 `gist:2d25e86f7519778483c21cae5ed53c73#VariableReplacerBase.cs`  
 
 The code speaks for itself, the only thing worth noting is the constructor that 
-sets the `Variables` property with a values established by the inheriting class.  
+sets the `Variables` property with the variables coming from the inheriting class.  
 
 **The second step is creating the processor**.  
 This is easily achieved by extending the 
@@ -109,7 +111,7 @@ that will be used in the next steps to create and store `IVariableReplacer` obje
 
 **The third step is creating specific variable replacers**.  
 For simplicity, I'm just adding a variable replacer that will expand the 
-variable `$path` to the path of the item created by the user.  
+variable `$path` to the path of the item created by the content author.  
 
 `gist:2d25e86f7519778483c21cae5ed53c73#PathVariableReplacer.cs`  
 
@@ -119,7 +121,10 @@ is available to the variable replacer object... so go nuts...
 **The last step is tying it all together via a config patch file**.  
 We are targeting the `expandInitialFieldValue` pipeline and because we want to be good 
 citizens, we add our replacer after Sitecore's own replace variable processor, that 
-way we can guarantee Sitecore's variable will be expanded before ours.  
+way we can guarantee Sitecore's out of the box variables will be expanded before ours.  
+
+Add as many replacers as needed to the `replacers` node. This maps to the `Replacers` 
+property discussed above.
 
 `gist:2d25e86f7519778483c21cae5ed53c73#replace-custom-variables.config`  
 
