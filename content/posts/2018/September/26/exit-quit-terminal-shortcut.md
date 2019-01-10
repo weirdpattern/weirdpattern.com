@@ -3,7 +3,7 @@ title: "Exit and quit terminal with a single command"
 style: "snippet"
 image: "../../../images/shortcut.jpg"
 abstract: "Use your .bash_profile to create a shortcut that will allow you to exit and quit a terminal with a single command."
-date: "2019-09-26"
+date: "2018-09-26"
 author: "ptrevino"
 category: "shortcuts"
 tags:
