@@ -32,17 +32,32 @@ tags:
 ### Output
 
 <style>
+  .support-font-size-adjust {
+      width: 22px;
+      display:inline-block; 
+    }
+
   .support-font-size-adjust:after {
     content: '\274C';
+    font-size: 12px;
   }
+  
+  .support-flexbox {
+      width: 22px;
+      display:inline-block; 
+      padding-left: 3px
+    }
+
   .support-flexbox:after {
     content: '\274C';
   }
+
   @supports(font-size-adjust) {
     .support-font-size-adjust:after {
       content: '\2713';
     }
   }
+  
   @supports(display:flex) {
     .support-flexbox:after {
       content: '\2713';
@@ -50,5 +65,5 @@ tags:
   }
 </style>
 
-<span class="support-font-size-adjust" style="display:inline-block; width: 25px"></span>Supports 'font-size-adjust'  
-<span class="support-flexbox" style="display:inline-block; width: 20px; padding-left: 5px"></span>Supports 'flexbox'
+<span class="support-font-size-adjust"></span>Supports 'font-size-adjust'  
+<span class="support-flexbox"></span>Supports 'flexbox'
