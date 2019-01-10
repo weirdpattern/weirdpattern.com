@@ -3,7 +3,7 @@ title: "Using the bang command (!)"
 style: "snippet"
 image: "../../../images/bash.png"
 abstract: "Learn how to use bash history to your advantage with the bang command"
-date: "2016-08-29"
+date: "2018-08-29"
 author: "ptrevino"
 category: "bash"
 tags:
