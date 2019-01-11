@@ -30,10 +30,8 @@ tags:
 
 For devices that support multiple input mechanisms, such as computers with 
 touchscreen support (e.g. Microsoft Surface devices), `pointer` will only 
-consider the primary input mechanism.  
-
-The `any-pointer` media feature can help in those cases as it detects all 
-input mechanisms in the device. 
+consider the primary input mechanism. The `any-pointer` media feature can help 
+in those cases as it detects all input mechanisms in the device. 
 
 ### Example
 
@@ -43,39 +41,39 @@ input mechanisms in the device.
 
 <style type="text/css">
 	.container {
-	  padding: 10px;
-	  border: 3px solid #CCC;
+	  margin-top: 0px;
 	}
 
-  @media (pointer: fine) {
-	  .container {
-	    border-color: yellow;
-	  }
+  .container > span {
+    display: block;
+  }
 
-    .container:after {
-      content: "You are using a device with high accuracy!"
+  @media (pointer: fine) {
+	  .container > span:after {
+      content: "A high accuracy device has been detected!";
     }
 	}
 
 	@media (pointer: coarse) {
-	  .container {
-	    border-color: pink;
-	  }
-
     input[type="checkbox"], 
 	  input[type="radio"] {
-			min-width:30px;
-			min-height:40px;
+			min-width:60px;
+			min-height:70px;
 			background:transparent;
 	  }
 
-    .container:after {
-      content: "You are using a device with limited accuracy!"
+    .container > span {
+      font-size: 3em;
+    }
+
+    .container > span:after {
+      content: "A limited accuracy device has been detected! Increasing size."
     }
 	}
 </style>
 
 <div class="container">
+  <span></span>
   <input type="checkbox">
   <input type="radio">
 </div>
