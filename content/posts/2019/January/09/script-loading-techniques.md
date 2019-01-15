@@ -1,6 +1,6 @@
 ---
 title: "Page loading optimization with defer and async scripts"
-style: "guide"
+style: "snippet"
 image: "../../../images/web.jpg"
 abstract: "Learn how to optimize page loading times with deferred and asynchronous scripts."
 date: "2019-01-09"

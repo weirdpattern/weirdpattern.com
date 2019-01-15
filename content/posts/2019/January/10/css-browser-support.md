@@ -1,6 +1,6 @@
 ---
 title: "Detect browser support for specific CSS features"
-style: "guide"
+style: "snippet"
 image: "../../../images/web.jpg"
 abstract: "Learn how to detect browser support for specific CSS features."
 date: "2019-01-10"

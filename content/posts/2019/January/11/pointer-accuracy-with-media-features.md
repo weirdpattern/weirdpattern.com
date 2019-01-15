@@ -1,6 +1,6 @@
 ---
 title: "Pointer accuracy detection with pointer and any-pointer media features"
-style: "guide"
+style: "snippet"
 image: "../../../images/web.jpg"
 abstract: "Learn how to use the pointer and any-pointer media features to better support devices with limited pointer accuracy."
 date: "2019-01-11"
