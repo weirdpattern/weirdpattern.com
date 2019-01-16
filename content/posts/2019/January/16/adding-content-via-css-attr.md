@@ -1,8 +1,8 @@
 ---
-title: "Adding content via css content/attr function"
+title: "Adding content via css content/attr functions"
 style: "snippet"
 image: "../../../images/web.jpg"
-abstract: "Learn how to use the attr function to extract information from the html and use it as content in css."
+abstract: "Learn how to use the content/attr functions to extract information from the html and use it in css."
 date: "2019-01-16"
 author: "ptrevino"
 category: "web"
