@@ -52,6 +52,12 @@
         background-color: $focus-color;
         border: 1px solid $focus-color;
 
+        @media screen and (max-width: $break-md) {
+          & {
+            margin: 0 !important;
+          }
+        }
+
         li {
           color: #FFFFFF;
           width: 100%;
