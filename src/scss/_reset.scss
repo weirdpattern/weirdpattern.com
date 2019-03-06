@@ -12,10 +12,6 @@ table {
   margin-bottom: 20px;
 }
 
-.gatsby-highlight {
-  margin-bottom: 20px;
-}
-
 a {
   color: $focus-color;
 
@@ -24,3 +20,12 @@ a {
     text-decoration: none;
   }
 }
+
+code {
+  font-size: 16px;
+}
+
+.gatsby-highlight {
+  margin-bottom: 20px;
+}
+
