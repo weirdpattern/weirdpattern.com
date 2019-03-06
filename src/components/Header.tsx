@@ -38,7 +38,7 @@ interface Props {
 export default function Header(props: Props): React.ReactElement<Props> {
   return (
     <header className="header">
-      <Avatar image={props.avatar} description={props.name} link="/about" />
+      <Avatar image={props.avatar} description={props.name} link="#" />
       <Intro name={props.name} credentials={props.credentials} />
     </header>
   );
