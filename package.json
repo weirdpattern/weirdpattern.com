@@ -18,18 +18,19 @@
     "@gatsby-contrib/gatsby-plugin-elasticlunr-search": "^2.1.0",
     "@types/classnames": "^2.2.4",
     "@types/lodash": "^4.14.110",
-    "@types/node": "^10.3.6",
+    "@types/node": "^11.10.4",
     "@types/react": "^16.4.2",
     "@types/react-dom": "^16.0.6",
     "@types/react-helmet": "^5.0.6",
+    "@typescript-eslint/eslint-plugin": "^1.4.2",
+    "@typescript-eslint/parser": "^1.4.2",
     "copyfiles": "^2.1.0",
     "eslint": "^5.7.0",
-    "eslint-config-prettier": "^3.1.0",
-    "eslint-config-typescript": "^1.1.0",
+    "eslint-config-prettier": "^4.1.0",
+    "eslint-config-typescript": "^2.0.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-prettier": "^3.0.0",
     "eslint-plugin-react": "^7.10.0",
-    "eslint-plugin-typescript": "^0.12.0",
     "gatsby": "^2.0.21",
     "gatsby-image": "^2.0.13",
     "gatsby-plugin-catch-links": "^2.0.4",
@@ -46,7 +47,7 @@
     "gatsby-plugin-typescript": "^2.0.0",
     "gatsby-remark-copy-linked-files": "^2.0.5",
     "gatsby-remark-embed-gist": "^1.1.6",
-    "gatsby-remark-images": "^2.0.4",
+    "gatsby-remark-images": "^3.0.6",
     "gatsby-remark-responsive-iframe": "^2.0.5",
     "gatsby-source-filesystem": "^2.0.3",
     "gatsby-transformer-json": "^2.1.4",
@@ -55,11 +56,10 @@
     "lodash-webpack-plugin": "^0.11.5",
     "node-sass": "^4.9.3",
     "prettier": "^1.13.6",
-    "typescript": "^3.0.1",
-    "typescript-eslint-parser": "^20.0.0"
+    "typescript": "^3.0.1"
   },
   "resolutions": {
-    "graphql": "^0.13.0"
+    "graphql": "14.1.1"
   },
   "scripts": {
     "build": "gatsby build --prefix-paths",
