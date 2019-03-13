@@ -29,12 +29,11 @@ interface Props {
  */
 export default function Avatar({
   image,
-  description,
-  link
+  description
 }: Props): React.ReactElement<Props> {
   return (
-    <Link to={link || "#"} className="avatar">
+    <div className="avatar">
       <img src={image} alt={description} />
-    </Link>
+    </div>
   );
 }
