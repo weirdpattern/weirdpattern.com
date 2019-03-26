@@ -21,7 +21,7 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
     }
 
     if (has(node, "frontmatter.slug")) {
-      slug = `/${_.kebabCase(node.frontmatter.slug)}`;
+      slug = `/${kebabCase(node.frontmatter.slug)}`;
     }
 
     createNodeField({ node, name: "slug", value: slug });
