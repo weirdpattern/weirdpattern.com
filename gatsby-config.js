@@ -5,7 +5,6 @@ module.exports = {
   siteMetadata: config,
   plugins: [
     "gatsby-plugin-react-helmet",
-    "gatsby-plugin-typescript",
     "gatsby-plugin-lodash",
     "gatsby-plugin-sass",
     {
@@ -37,7 +36,9 @@ module.exports = {
           {
             resolve: "gatsby-remark-embed-gist",
             options: {
-              username: "weirdpattern"
+              username: "weirdpattern",
+              gistCssPreload: true,
+              gistCssUrlAddress: "https://github.githubassets.com/assets/gist-embed-b3b573358bfc66d89e1e95dbf8319c09.css"
             }
           }
         ]
